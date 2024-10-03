@@ -175,7 +175,7 @@ public class km extends javax.swing.JFrame {
         jLabel1.setText("Quản lí khuyến mãi");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Mã Km: ");
+        jLabel2.setText("Mã Km::");
 
         jScrollPane2.setViewportView(makm);
 
