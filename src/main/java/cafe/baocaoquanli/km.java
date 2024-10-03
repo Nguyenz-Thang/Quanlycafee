@@ -632,7 +632,7 @@ public class km extends javax.swing.JFrame {
                 
                 i++;
             }
-            //Hiệu chỉnh độ rộng của cột
+            //Hiệu chỉnh độ rộng của cộttt
             for (int col = 0; col < tongsocot; col++) {
                 spreadsheet.autoSizeColumn(col);
                 spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
