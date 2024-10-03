@@ -1,0 +1,67 @@
+-- Tạo bảng loaisanpham
+CREATE TABLE loaisanpham (
+    maloai VARCHAR(10) PRIMARY KEY,
+    tenloai VARCHAR(100) NOT NULL
+);
+
+-- Tạo bảng sanpham
+CREATE TABLE sanpham (
+    masp VARCHAR(10) PRIMARY KEY,
+    tensanpham VARCHAR(100) NOT NULL,
+    maloai VARCHAR(10),
+    gia DECIMAL(10, 2) NOT NULL,
+    mota VARCHAR(255),
+    hinhanh VARCHAR(255),
+    FOREIGN KEY (maloai) REFERENCES loaisanpham(maloai)
+);
+
+-- Tạo bảng khachhang
+CREATE TABLE khachhang (
+    makh VARCHAR(10) PRIMARY KEY,
+    tenkhachhang VARCHAR(100) NOT NULL,
+    sodienthoai VARCHAR(15),
+    diachi VARCHAR(255)
+);
+
+-- Tạo bảng nhanvien
+CREATE TABLE nhanvien (
+    manv VARCHAR(10) PRIMARY KEY,
+    tennhanvien VARCHAR(100) NOT NULL,
+    chucvu VARCHAR(100),
+    sodienthoai VARCHAR(15)
+);
+
+-- Tạo bảng khuyenmai
+CREATE TABLE khuyenmai (
+    makm VARCHAR(10) PRIMARY KEY,
+    tenkhuyenmai VARCHAR(100) NOT NULL,
+    mota VARCHAR(255),
+    phantramgiam INT NOT NULL,
+    ngaybatdau DATE NOT NULL,  -- Chuyển sang kiểu DATE
+    ngayketthuc DATE NOT NULL  -- Chuyển sang kiểu DATE
+);
+
+-- Tạo bảng hoadon
+CREATE TABLE hoadon (
+    mahd VARCHAR(10) PRIMARY KEY,
+    ngaylap DATE NOT NULL,  -- Chuyển sang kiểu DATE
+    makh VARCHAR(10),
+    manv VARCHAR(10),  -- Mã nhân viên
+    tongtien DECIMAL(10, 2) NOT NULL,
+    trangthai VARCHAR(50) NOT NULL,
+    makm VARCHAR(10),
+    FOREIGN KEY (makh) REFERENCES khachhang(makh),
+    FOREIGN KEY (manv) REFERENCES nhanvien(manv),  -- Khóa ngoại tham chiếu đến bảng nhanvien
+    FOREIGN KEY (makm) REFERENCES khuyenmai(makm)
+);
+
+-- Tạo bảng chitiethoadon
+CREATE TABLE chitiethoadon (
+    machitiethd VARCHAR(10) PRIMARY KEY,
+    mahd VARCHAR(10),
+    masp VARCHAR(10),
+    soluong INT NOT NULL,
+    gia DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (mahd) REFERENCES hoadon(mahd),
+    FOREIGN KEY (masp) REFERENCES sanpham(masp)
+);
