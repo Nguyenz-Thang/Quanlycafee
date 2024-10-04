@@ -4,6 +4,7 @@ package cafe.baocaoquanli;
 
 
 import cafe.quanlikh.ConnectDB;
+import cafe.quanlikh.themkhachhang;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -346,12 +347,13 @@ public class km extends javax.swing.JFrame {
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(timkiem)
-                        .addComponent(them)
-                        .addComponent(sua)
-                        .addComponent(xoa)
-                        .addComponent(jButton11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(timkiem, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(them)
+                            .addComponent(sua)
+                            .addComponent(xoa)
+                            .addComponent(jButton11)))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -361,7 +363,9 @@ public class km extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        themkhachhang tkh = new themkhachhang();
+        tkh.show();
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
@@ -478,7 +482,7 @@ public class km extends javax.swing.JFrame {
         try {
             Connection con = ConnectDB.KetnoiDB();
             Statement st = con.createStatement();
-            String sql = "Select * from khuyenmai where makm like '%"+txt+"%' and tenkhuyenmai like N'%" + txt + "%' and phantramgiam like N'%"+txt+"%' and mota like N'%"+txt+"%'";
+            String sql = "Select * from khuyenmai where makm like '%"+txt+"%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%"+txt+"%' or mota like N'%"+txt+"%'";
             ResultSet rs = st.executeQuery(sql);
          //   tbLoaiSach.removeAll();
             String[] arr={"Mã Km","Tên Km", "Phần trăm giảm" , "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
