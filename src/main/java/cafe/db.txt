@@ -65,3 +65,12 @@ CREATE TABLE chitiethoadon (
     FOREIGN KEY (mahd) REFERENCES hoadon(mahd),
     FOREIGN KEY (masp) REFERENCES sanpham(masp)
 );
+
+CREATE TABLE TaiKhoan (
+    matk INT PRIMARY KEY AUTO_INCREMENT,
+    tk VARCHAR(50) NOT NULL UNIQUE,
+    mk VARCHAR(255) NOT NULL,
+    manv varchar(10),
+    vaitro VARCHAR(20),
+    FOREIGN KEY (manv) REFERENCES nhanvien(manv)
+);
