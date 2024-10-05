@@ -113,9 +113,11 @@ public class login extends javax.swing.JFrame {
                     tkh.show();
                     dispose();
                 }
+            }else{
+                JOptionPane.showMessageDialog(this, "Thông tin đăng nhập không đúng");
             }
             con.close();
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Thông tin đăng nhập không đúng");
             e.printStackTrace();
