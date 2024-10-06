@@ -202,7 +202,7 @@ public class km extends javax.swing.JFrame {
         jLabel7.setText("Mô tả:");
 
         timkiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        timkiem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\icon\\search.png")); // NOI18N
+        timkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
         timkiem.setText("Tìm kiếm");
         timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +211,7 @@ public class km extends javax.swing.JFrame {
         });
 
         them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        them.setIcon(new javax.swing.ImageIcon("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\icon\\plus (1).png")); // NOI18N
+        them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus (1).png"))); // NOI18N
         them.setText("Thêm");
         them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +220,7 @@ public class km extends javax.swing.JFrame {
         });
 
         sua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        sua.setIcon(new javax.swing.ImageIcon("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\icon\\wrench.png")); // NOI18N
+        sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/wrench.png"))); // NOI18N
         sua.setText("Sửa");
         sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,7 +229,7 @@ public class km extends javax.swing.JFrame {
         });
 
         xoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        xoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\icon\\trash.png")); // NOI18N
+        xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash.png"))); // NOI18N
         xoa.setText("Xóa");
         xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +238,6 @@ public class km extends javax.swing.JFrame {
         });
 
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\cafe\\baocaoquanli\\excel.jpg")); // NOI18N
         jButton11.setText("Xuất excel");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
