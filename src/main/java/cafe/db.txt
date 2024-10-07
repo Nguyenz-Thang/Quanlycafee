@@ -74,3 +74,8 @@ CREATE TABLE TaiKhoan (
     vaitro VARCHAR(20),
     FOREIGN KEY (manv) REFERENCES nhanvien(manv)
 );
+
+ALTER TABLE khachhang 
+ADD gioitinh varchar (10) , 
+ADD ngaysinh Date , 
+ADD cccd varchar (30);
