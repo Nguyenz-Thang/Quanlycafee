@@ -51,7 +51,6 @@
                       <Component id="tensp1" min="-2" pref="175" max="-2" attributes="0"/>
                       <Component id="giabansanpham1" min="-2" pref="175" max="-2" attributes="0"/>
                       <Component id="motasp1" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="donvido" min="-2" pref="175" max="-2" attributes="0"/>
                       <Component id="tennhacungcap1" min="-2" pref="175" max="-2" attributes="0"/>
                       <Component id="trangthaisp" min="-2" pref="175" max="-2" attributes="0"/>
                   </Group>
@@ -61,13 +60,6 @@
                       <Component id="motatxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
                       <Component id="tenncctxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
                       <Component id="trangthaitxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="donvitxt" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                          <Component id="datenhap" min="-2" pref="82" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jDateChooser1" min="-2" pref="158" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="anhtxt" min="-2" pref="466" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -117,46 +109,28 @@
                       <Component id="giasptxt" alignment="3" pref="33" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="motasp1" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="motatxt" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="motasp1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="motatxt" alignment="3" max="32767" attributes="0"/>
+                      <Component id="tennhacungcap1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="tenncctxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="trangthaisp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="trangthaitxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="donvido" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="jDateChooser1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tennhacungcap1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="tenncctxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="trangthaisp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="trangthaitxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="hinhanh" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="156" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="anhtxt" alignment="3" pref="189" max="32767" attributes="0"/>
-                                  <Component id="buttonluu" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="hinhanh" min="-2" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="buttonluu" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="donvitxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="datenhap" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="anhtxt" pref="211" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -251,14 +225,6 @@
             <Property name="text" type="java.lang.String" value="M&#xe3; s&#x1ea3;n ph&#x1ea9;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="donvido">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n v&#x1ecb; &#x111;o (ml)"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="tensp1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -324,13 +290,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="trangthaitxt">
         </Component>
-        <Component class="javax.swing.JSpinner" name="donvitxt">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="100" maximum="500" minimum="100" numberType="java.lang.Integer" stepSize="50" type="number"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="buttonluu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -344,16 +303,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m s&#x1ea3;n ph&#x1ea9;m"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="datenhap">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ng&#xe0;y nh&#x1ead;p"/>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
         </Component>
         <Component class="javax.swing.JLabel" name="maloai">
           <Properties>

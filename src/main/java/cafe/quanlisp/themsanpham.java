@@ -40,7 +40,6 @@ public class themsanpham extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         masp = new javax.swing.JLabel();
-        donvido = new javax.swing.JLabel();
         tensp1 = new javax.swing.JLabel();
         giabansanpham1 = new javax.swing.JLabel();
         motasp1 = new javax.swing.JLabel();
@@ -54,10 +53,7 @@ public class themsanpham extends javax.swing.JDialog {
         tensptxt = new javax.swing.JTextField();
         masptxt = new javax.swing.JTextField();
         trangthaitxt = new javax.swing.JTextField();
-        donvitxt = new javax.swing.JSpinner();
         buttonluu = new javax.swing.JButton();
-        datenhap = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         maloai = new javax.swing.JLabel();
         masptxt1 = new javax.swing.JTextField();
 
@@ -111,9 +107,6 @@ public class themsanpham extends javax.swing.JDialog {
         masp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         masp.setText("Mã sản phẩm");
 
-        donvido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        donvido.setText("Đơn vị đo (ml)");
-
         tensp1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tensp1.setText("Tên sản phẩm");
 
@@ -138,15 +131,10 @@ public class themsanpham extends javax.swing.JDialog {
             }
         });
 
-        donvitxt.setModel(new javax.swing.SpinnerNumberModel(100, 100, 500, 50));
-
         buttonluu.setBackground(new java.awt.Color(177, 151, 125));
         buttonluu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonluu.setForeground(new java.awt.Color(255, 255, 255));
         buttonluu.setText("Thêm sản phẩm");
-
-        datenhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        datenhap.setText("Ngày nhập");
 
         maloai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         maloai.setText("Mã loại");
@@ -170,7 +158,6 @@ public class themsanpham extends javax.swing.JDialog {
                     .addComponent(tensp1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(giabansanpham1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(donvido, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
@@ -179,12 +166,6 @@ public class themsanpham extends javax.swing.JDialog {
                     .addComponent(motatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenncctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(trangthaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(donvitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(datenhap, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(anhtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -224,36 +205,24 @@ public class themsanpham extends javax.swing.JDialog {
                     .addComponent(giabansanpham1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(giasptxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(motatxt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tenncctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(trangthaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(donvido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tenncctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(trangthaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(hinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 156, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(anhtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                .addComponent(buttonluu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(donvitxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(datenhap, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(hinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
+                        .addComponent(buttonluu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(anhtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -282,32 +251,7 @@ public class themsanpham extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_masptxt1ActionPerformed
  
-    //kết nối database
-    private void load_themsanpham(){
-    try {
-        
-        //B1: Kết nối đến DB
-        Connection con= ConnectDB.KetnoiDB();
-        //B2: Tạo đối tượng Statement để thực hiện câu lệnh truy cập
-        String sql = "Select * From sanpham";
-        Statement st=con.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-        String[] tieude={"Mã sản phẩm", "Tên sản phẩm","Giá bán sản phẩm","Mô tả sản phẩm", "Đơn vị đo (ml)","Tên nhà cung cấp","Trạng thái sản phẩm","Hình ảnh sản phẩm"};
-        DefaultTableModel tb=new DefaultTableModel(tieude,0);
-        while(rs.next()){
-            Vector v = new Vector();
-            v.add(rs.getString("makh"));
-            v.add(rs.getString("tenkhachhang"));
-            v.add(rs.getString("sodienthoai"));
-            v.add(rs.getString("diachi"));
-            tb.addRow(v);
-        }
-        //txtqlkh.setModel(tb);
-        con.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
+   
     /**
      * @param args the command line arguments
      */
@@ -353,13 +297,9 @@ public class themsanpham extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anhtxt;
     private javax.swing.JButton buttonluu;
-    private javax.swing.JLabel datenhap;
-    private javax.swing.JLabel donvido;
-    private javax.swing.JSpinner donvitxt;
     private javax.swing.JLabel giabansanpham1;
     private javax.swing.JTextField giasptxt;
     private javax.swing.JLabel hinhanh;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

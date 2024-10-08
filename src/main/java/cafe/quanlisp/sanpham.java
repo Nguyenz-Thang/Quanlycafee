@@ -4,6 +4,11 @@
  */
 package cafe.quanlisp;
 
+import cafe.quanlikh.ConnectDB;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +22,40 @@ public class sanpham extends javax.swing.JFrame {
      */
     public sanpham() {
         initComponents();
+        load_themsanpham();
     }
+    
+    private void load_themsanpham(){
+    try {
+        
+        //B1: Kết nối đến DB
+        Connection con= ConnectDB.KetnoiDB();
+        //B2: Tạo đối tượng Statement để thực hiện câu lệnh truy cập
+        String sql = "Select * From sanpham";
+        Statement st=con.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        String[] tieude={"Mã sản phẩm","Mã loại sản phẩm", "Tên sản phẩm","Giá bán","Mô tả","Tên nhà cc","Trạng thái"};
+        DefaultTableModel tb=new DefaultTableModel(tieude,0);
+        while(rs.next()){
+            Vector v = new Vector();
+            v.add(rs.getString("masp"));
+            v.add(rs.getString("tensanpham"));
+            v.add(rs.getString("maloai"));
+            v.add(rs.getString("gia"));
+            v.add(rs.getString("ngaynhap"));
+            v.add(rs.getString("mota"));
+            v.add(rs.getString("hinhanh"));
+            v.add(rs.getString("donvi_ml"));
+            v.add(rs.getString("trangthai"));
+            
+            tb.addRow(v);
+        }
+        tablehienthi.setModel(tb);
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,7 +178,7 @@ public class sanpham extends javax.swing.JFrame {
                     .addComponent(xuatexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(suathongtin, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Themsanpham, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
@@ -164,13 +202,13 @@ public class sanpham extends javax.swing.JFrame {
 
         tablehienthi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
             }
         ));
         tablehienthi.addMouseListener(new java.awt.event.MouseAdapter() {
