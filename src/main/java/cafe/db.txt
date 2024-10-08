@@ -79,3 +79,10 @@ ALTER TABLE khachhang
 ADD gioitinh varchar (10) , 
 ADD ngaysinh Date , 
 ADD cccd varchar (30);
+
+--thêm dữ liệu vào bảng sản phẩm
+ALTER TABLE sanpham
+ADD COLUMN donvi_ml INT NOT NULL,                    -- Đơn vị đo (ml), không được để trống
+ADD COLUMN tenncc VARCHAR(255) NOT NULL,             -- Tên nhà cung cấp, không được để trống
+ADD COLUMN trangthai ENUM('Còn hàng', 'Hết hàng', 'Ngừng bán') DEFAULT 'Còn hàng', -- Trạng thái sản phẩm
+ADD COLUMN ngaynhap DATE;                            -- Ngày nhập hàng của sản phẩm (dạng ngày tháng)
