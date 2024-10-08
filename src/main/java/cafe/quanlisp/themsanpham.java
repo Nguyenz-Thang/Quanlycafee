@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +35,7 @@ public class themsanpham extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -51,11 +53,14 @@ public class themsanpham extends javax.swing.JDialog {
         anhtxt = new javax.swing.JTextField();
         giasptxt = new javax.swing.JTextField();
         tensptxt = new javax.swing.JTextField();
-        masptxt = new javax.swing.JTextField();
+        maloaitxt = new javax.swing.JTextField();
         trangthaitxt = new javax.swing.JTextField();
         buttonluu = new javax.swing.JButton();
         maloai = new javax.swing.JLabel();
-        masptxt1 = new javax.swing.JTextField();
+        masptxt = new javax.swing.JTextField();
+        buttonluu1 = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,8 +87,9 @@ public class themsanpham extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(153, 204, 255));
 
+        jLabel2.setBackground(new java.awt.Color(153, 204, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nhập thông tin sản phẩm");
 
@@ -134,14 +140,29 @@ public class themsanpham extends javax.swing.JDialog {
         buttonluu.setBackground(new java.awt.Color(177, 151, 125));
         buttonluu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonluu.setForeground(new java.awt.Color(255, 255, 255));
-        buttonluu.setText("Thêm sản phẩm");
+        buttonluu.setText("Thêm");
+        buttonluu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonluuActionPerformed(evt);
+            }
+        });
 
         maloai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         maloai.setText("Mã loại");
 
-        masptxt1.addActionListener(new java.awt.event.ActionListener() {
+        masptxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                masptxt1ActionPerformed(evt);
+                masptxtActionPerformed(evt);
+            }
+        });
+
+        buttonluu1.setBackground(new java.awt.Color(177, 151, 125));
+        buttonluu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonluu1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonluu1.setText("Hủy");
+        buttonluu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonluu1ActionPerformed(evt);
             }
         });
 
@@ -160,7 +181,7 @@ public class themsanpham extends javax.swing.JDialog {
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 167, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(giasptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(motatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,14 +190,16 @@ public class themsanpham extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(anhtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonluu))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonluu)
+                            .addComponent(buttonluu1)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(masptxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(masptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(maloai, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(masptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(maloaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(tensptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -193,9 +216,9 @@ public class themsanpham extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(masp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(masptxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(maloaitxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(maloai, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(masptxt1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                    .addComponent(masptxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tensp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +230,7 @@ public class themsanpham extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(motatxt))
+                    .addComponent(motatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,24 +239,28 @@ public class themsanpham extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(trangthaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(hinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87)
-                        .addComponent(buttonluu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(anhtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(hinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(anhtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(buttonluu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonluu1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,13 +270,51 @@ public class themsanpham extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void motatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motatxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_motatxtActionPerformed
 
-    private void masptxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masptxt1ActionPerformed
+    private void masptxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masptxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_masptxt1ActionPerformed
+    }//GEN-LAST:event_masptxtActionPerformed
+
+    private void buttonluuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonluuActionPerformed
+        // TODO add your handling code here:
+        //phuong thuc nhan du lieu tu sanpham
+        
+        //lấy thông tin các trường nhập liệu
+        String masp = maloaitxt.getText();
+        String ml = maloaitxt.getText();
+        String tensp = tensptxt.getText();
+        String gia = giasptxt.getText();
+        String mota = motatxt.getText();
+        String trangthai = trangthaitxt.getText();
+        
+        //kiem tra du lieu cu the
+        if(masp.isEmpty() || tensp.isEmpty() || gia.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Vui lòng nhập đầy đủ thông tin!");
+            return;
+        }
+        
+        //truyền dữ liệu sản phẩm mới về form sản phẩm
+        sanpham parentform = (sanpham) this.getParent();
+        parentform.addSanPham(masp,ml,tensp,gia,mota,trangthai);
+        
+        //dong form them san pham sau khi luu thanh cong
+        this.dispose();
+        
+    }//GEN-LAST:event_buttonluuActionPerformed
+
+    private void buttonluu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonluu1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        
+        //mo lai form san pham 
+        sanpham sp = new sanpham();
+        sp.setVisible(true);
+    }//GEN-LAST:event_buttonluu1ActionPerformed
  
    
     /**
@@ -297,18 +362,20 @@ public class themsanpham extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anhtxt;
     private javax.swing.JButton buttonluu;
+    private javax.swing.JButton buttonluu1;
     private javax.swing.JLabel giabansanpham1;
     private javax.swing.JTextField giasptxt;
     private javax.swing.JLabel hinhanh;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel maloai;
+    private javax.swing.JTextField maloaitxt;
     private javax.swing.JLabel masp;
     private javax.swing.JTextField masptxt;
-    private javax.swing.JTextField masptxt1;
     private javax.swing.JLabel motasp1;
     private javax.swing.JTextField motatxt;
     private javax.swing.JTextField tenncctxt;
