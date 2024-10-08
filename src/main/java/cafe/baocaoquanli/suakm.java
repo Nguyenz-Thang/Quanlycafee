@@ -56,6 +56,7 @@ public class suakm extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         mota = new javax.swing.JTextPane();
         them = new javax.swing.JButton();
+        xoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +95,15 @@ public class suakm extends javax.swing.JFrame {
             }
         });
 
+        xoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash.png"))); // NOI18N
+        xoa.setText("Xóa");
+        xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +111,10 @@ public class suakm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(them)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(xoa)
+                        .addGap(81, 81, 81)
+                        .addComponent(them))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -158,9 +171,11 @@ public class suakm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88)
-                .addComponent(them)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(them)
+                    .addComponent(xoa))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
@@ -192,6 +207,26 @@ public class suakm extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_themActionPerformed
+
+    private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaActionPerformed
+        try {
+            String km = makm.getText().trim();
+            Connection con = ConnectDB.KetnoiDB();
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == 0) {
+                String sql = "Delete from khuyenmai where makm='" + km + "' ";
+                Statement st = con.createStatement();
+                st.executeUpdate(sql);
+                con.close();
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Xóa không thành công");
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_xoaActionPerformed
     
     public void setData(String ma, String ten, String bd, String kt, String phantram, String mot){
         makm.setText(ma);
@@ -268,5 +303,6 @@ public class suakm extends javax.swing.JFrame {
     private javax.swing.JTextPane phantg;
     private javax.swing.JTextPane tenkm;
     private javax.swing.JButton them;
+    private javax.swing.JButton xoa;
     // End of variables declaration//GEN-END:variables
 }

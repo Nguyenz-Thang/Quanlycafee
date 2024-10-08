@@ -25,4 +25,17 @@ public class ConnectDB {
         }
         return con;
     }
+//    public static Connection KetnoiDB(){
+//        Connection con = null;
+//        try {
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            String url = ("jdbc:sqlserver://localhost:1433;databaseName=quanlybancafe;encrypt=true;trustServerCertificate=true");
+//            String user = "sa";
+//            String pass  =  "12345";
+//            con = DriverManager.getConnection(url, user , pass);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return con;
+//    }
 }
