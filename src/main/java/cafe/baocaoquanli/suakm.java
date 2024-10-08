@@ -28,6 +28,7 @@ public class suakm extends javax.swing.JFrame {
     public suakm(km parent) {
         this.parentForm = parent; // Lưu tham chiếu vào biến
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -43,7 +43,7 @@ public class km extends javax.swing.JFrame {
         load_km();
         sua.setEnabled(false);
         xoa.setEnabled(false);
-
+        this.setLocationRelativeTo(null);
     }
 
     public void load_km() {
