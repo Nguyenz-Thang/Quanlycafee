@@ -34,20 +34,16 @@ public class sanpham extends javax.swing.JFrame {
         String sql = "Select * From sanpham";
         Statement st=con.createStatement();
         ResultSet rs = st.executeQuery(sql);
-        String[] tieude={"Mã sản phẩm","Mã loại sản phẩm", "Tên sản phẩm","Giá bán","Mô tả","Tên nhà cc","Trạng thái"};
+        String[] tieude={"Mã sản phẩm","Mã loại sản phẩm", "Tên sản phẩm","Giá bán","Mô tả","Trạng thái"};
         DefaultTableModel tb=new DefaultTableModel(tieude,0);
         while(rs.next()){
             Vector v = new Vector();
             v.add(rs.getString("masp"));
-            v.add(rs.getString("tensanpham"));
             v.add(rs.getString("maloai"));
+            v.add(rs.getString("tensanpham"));
             v.add(rs.getString("gia"));
-            v.add(rs.getString("ngaynhap"));
             v.add(rs.getString("mota"));
-            v.add(rs.getString("hinhanh"));
-            v.add(rs.getString("donvi_ml"));
-            v.add(rs.getString("trangthai"));
-            
+            v.add(rs.getString("trangthai"));            
             tb.addRow(v);
         }
         tablehienthi.setModel(tb);
@@ -79,6 +75,7 @@ public class sanpham extends javax.swing.JFrame {
         timkiemsp1 = new javax.swing.JLabel();
         docfile = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        buttonexit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablehienthi = new javax.swing.JTable();
 
@@ -114,7 +111,7 @@ public class sanpham extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(356, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(323, 323, 323))
         );
@@ -165,21 +162,29 @@ public class sanpham extends javax.swing.JFrame {
             .addGap(0, 37, Short.MAX_VALUE)
         );
 
+        buttonexit.setBackground(new java.awt.Color(153, 204, 255));
+        buttonexit.setText("Thoát");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(docfile, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timkiemsp1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xoasanpham1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xuatexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(suathongtin, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Themsanpham, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(docfile, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(timkiemsp1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(xoasanpham1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(xuatexcel, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(suathongtin, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(Themsanpham, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(buttonexit)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +202,9 @@ public class sanpham extends javax.swing.JFrame {
                 .addComponent(xuatexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(docfile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonexit)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         tablehienthi.setModel(new javax.swing.table.DefaultTableModel(
@@ -229,12 +236,11 @@ public class sanpham extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -248,9 +254,12 @@ public class sanpham extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,32 +283,30 @@ public class sanpham extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablehienthiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablehienthiMouseClicked
-        // TODO add your handling code here:
-       int i;
-        i =tablehienthi.getSelectedRow();
-        DefaultTableModel model= (DefaultTableModel)tablehienthi.getModel();
-        //"Mã sản phẩm", "Tên sản phẩm","Giá bán sản phẩm","Mô tả sản phẩm", 
-        //"Đơn vị đo (ml)","Tên nhà cung cấp","Trạng thái sản phẩm","Hình ảnh sản phẩm"
-        String msp= model.getValueAt(i, 0).toString();
-        String ten= model.getValueAt(i, 1).toString();
-        String gia= model.getValueAt(i,2).toString();
-        String mota= model.getValueAt(i, 3).toString();
-        String donvi= model.getValueAt(i, 4).toString();
-        String tenncc= model.getValueAt(i, 5).toString();
-        String trangthai= model.getValueAt(i, 6).toString();
-        String hinhanh= model.getValueAt(i, 7).toString();
-        
-        themsanpham tsp= new themsanpham(this, true);
-     //   tsp.setData(msp,ten,gia,mota,donvi,tenncc,trangthai);
-        tsp.setVisible(true);
+
     }//GEN-LAST:event_tablehienthiMouseClicked
 
     private void ThemsanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThemsanphamMouseClicked
         themsanpham themsp = new themsanpham(this,true);
-        themsp.show();
-        dispose();
+        //themsp.show();
+        this.setVisible(false);//an form sanpham
+        themsp.setVisible(true);//hien thi form them san pham
     }//GEN-LAST:event_ThemsanphamMouseClicked
 
+    //phuong thuc de them san pham moi vao bang
+    public void addSanPham(String masp, String maloai, String tensp, String gia, String mota, String trangthai){
+        DefaultTableModel model = (DefaultTableModel) tablehienthi.getModel();
+        Vector<String> row = new Vector<>();
+        row.add(masp);
+        row.add(maloai);
+        row.add(tensp);
+        row.add(gia);
+        row.add(mota);
+        row.add(trangthai);
+        
+        //them dong moi vao bang
+        model.addRow(row);
+    }
     /**
      * @param args the command line arguments
      */
@@ -337,6 +344,7 @@ public class sanpham extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Themsanpham;
+    private javax.swing.JButton buttonexit;
     private javax.swing.JLabel daidien1;
     private javax.swing.JLabel docfile;
     private javax.swing.JLabel jLabel2;
