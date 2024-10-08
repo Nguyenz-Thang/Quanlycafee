@@ -1,7 +1,7 @@
 package cafe.baocaoquanli;
 
 import cafe.quanlikh.ConnectDB;
-import cafe.quanlikh.themkhachhang;
+import cafe.quanlikh.suakh;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -360,7 +360,7 @@ public class km extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        themkhachhang tkh = new themkhachhang();
+        suakh tkh = new suakh();
         tkh.show();
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed

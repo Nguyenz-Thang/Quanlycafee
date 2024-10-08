@@ -6,7 +6,7 @@ package cafe;
 
 import cafe.baocaoquanli.bao;
 import cafe.quanlikh.ConnectDB;
-import cafe.quanlikh.themkhachhang;
+import cafe.quanlikh.suakh;
 import cafe.quanlinhanvien.nv;
 import java.sql.Connection;
 import java.sql.ResultSet;
