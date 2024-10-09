@@ -338,6 +338,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a th&#xf4;ng tin"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonsuaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonhuy">
           <Properties>
