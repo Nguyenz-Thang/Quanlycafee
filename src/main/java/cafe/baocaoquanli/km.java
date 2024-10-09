@@ -181,9 +181,9 @@ public class km extends javax.swing.JFrame {
         taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         taik.setForeground(new java.awt.Color(255, 255, 255));
         taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
+        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
         taik.setText("  ");
-        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 180, -1));
+        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -209,7 +209,7 @@ public class km extends javax.swing.JFrame {
         vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         vaitro.setForeground(new java.awt.Color(255, 255, 255));
         vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 150, 30));
+        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
