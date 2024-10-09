@@ -111,11 +111,12 @@ public class login extends javax.swing.JFrame {
         String mkk = mk.getText().trim();
         try {
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "select vaitro from taikhoan where tk='" + tkk + "' and mk='" + mkk + "'";
+            String sql = "select chucvu,tennhanvien from nhanvien where taikhoan='" + tkk + "' and matkhau='" + mkk + "'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
-                String vaitro = rs.getString("vaitro");
+                String vaitro = rs.getString("chucvu");
+                String ten = rs.getString("tennhanvien");
                 if (vaitro.equals("Admin")) {
                     nv tkh = new nv();
                     tkh.show();
@@ -125,7 +126,7 @@ public class login extends javax.swing.JFrame {
 //                    tkh.show();
 //                    dispose();
                     km k = new km();
-                    k.user(tkk,vaitro);
+                    k.user(ten,vaitro);
                     k.show();
                     dispose();
                     
@@ -136,7 +137,6 @@ public class login extends javax.swing.JFrame {
             con.close();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thông tin đăng nhập không đúng");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
