@@ -131,6 +131,11 @@ public class suathongtin extends javax.swing.JDialog {
 
         buttonsua.setBackground(new java.awt.Color(153, 204, 255));
         buttonsua.setText("Sửa thông tin");
+        buttonsua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonsuaActionPerformed(evt);
+            }
+        });
 
         buttonhuy.setBackground(new java.awt.Color(153, 204, 255));
         buttonhuy.setText("Hủy");
@@ -260,6 +265,10 @@ public class suathongtin extends javax.swing.JDialog {
     private void mttxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mttxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mttxtActionPerformed
+
+    private void buttonsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonsuaActionPerformed
 
     /**
      * @param args the command line arguments
