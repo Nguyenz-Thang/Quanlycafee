@@ -1,20 +1,33 @@
 package cafe.baocaoquanli;
 
+import cafe.login;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.suakh;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -23,6 +36,7 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -43,7 +57,10 @@ public class km extends javax.swing.JFrame {
         load_km();
         this.setLocationRelativeTo(null);
     }
-
+    public void user(String tk, String vaitroo){
+        taik.setText(tk);
+        vaitro.setText(vaitroo);
+    }
     public void load_km() {
         try {
             Connection con;
@@ -83,19 +100,26 @@ public class km extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         km = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        timkiem = new javax.swing.JButton();
-        them = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        txttimkiem = new javax.swing.JTextPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        so = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        taik = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        vaitro = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        them = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txttimkiem = new javax.swing.JTextPane();
+        timkiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -120,26 +144,9 @@ public class km extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(51, 153, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/campaign.png"))); // NOI18N
         jLabel1.setText("Quản lí khuyến mãi");
-
-        timkiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        timkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
-        timkiem.setText("Tìm kiếm");
-        timkiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timkiemActionPerformed(evt);
-            }
-        });
-
-        them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus (1).png"))); // NOI18N
-        them.setText("Thêm Km");
-        them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                themActionPerformed(evt);
-            }
-        });
 
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel.jpg"))); // NOI18N
@@ -150,49 +157,160 @@ public class km extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane5.setViewportView(txttimkiem);
-
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.jpg"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 210, -1));
+        so.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        so.setForeground(new java.awt.Color(255, 255, 255));
+        so.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        so.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
+        so.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                soMouseClicked(evt);
+            }
+        });
+        jPanel1.add(so, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 210, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/new-product.png"))); // NOI18N
         jLabel9.setText("Sản phẩm");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 210, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Báo cáo");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, -1));
+        taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        taik.setForeground(new java.awt.Color(255, 255, 255));
+        taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
+        taik.setText("  ");
+        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
         jLabel11.setText("Tạo hóa đơn");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping-online.png"))); // NOI18N
         jLabel12.setText("Khuyến mãi");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 210, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/patient.png"))); // NOI18N
         jLabel13.setText("Khách hàng");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 210, -1));
 
+        vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        vaitro.setForeground(new java.awt.Color(255, 255, 255));
+        vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 150, 30));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
+        jLabel15.setText("Báo cáo");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, -1));
+
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 210, 830));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, 70));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xls.png"))); // NOI18N
+        jButton1.setText("Nhập File excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------", "Sắp xếp tăng", "Sắp xếp giảm" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
+        jButton2.setText("Xuất báo cáo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
+        them.setText("Thêm khuyến mãi");
+        them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themActionPerformed(evt);
+            }
+        });
+
+        txttimkiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txttimkiemMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(txttimkiem);
+
+        timkiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        timkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        timkiem.setText("Tìm kiếm");
+        timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timkiemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(them)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(timkiem)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(them)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(timkiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,40 +320,42 @@ public class km extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(them)
-                                .addGap(165, 165, 165)
-                                .addComponent(jButton11)
-                                .addGap(103, 103, 103)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(timkiem))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(71, Short.MAX_VALUE))))
+                                .addComponent(jButton1)
+                                .addGap(230, 230, 230)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton11))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(jLabel1)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(them)
-                        .addComponent(jButton11))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timkiem)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton11)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -243,7 +363,8 @@ public class km extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
-
+        themkm kk = new themkm(this);
+        kk.show();
     }//GEN-LAST:event_themActionPerformed
 
     private void kmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmMouseClicked
@@ -277,7 +398,7 @@ public class km extends javax.swing.JFrame {
         int i;
         i = km.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) km.getModel();
-
+//
         String ma = model.getValueAt(i, 0).toString();
         String ten = model.getValueAt(i, 1).toString();
         String bd = model.getValueAt(i, 3).toString();
@@ -287,8 +408,6 @@ public class km extends javax.swing.JFrame {
 
         suakm tk = new suakm(this);
         tk.setData(ma, ten, bd, kt, phantram, mot);
-//        tk.setVisible(true);
-        //       tk.show();
         tk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         tk.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -298,6 +417,22 @@ public class km extends javax.swing.JFrame {
         });
 // Hiển thị form suakm
         tk.setVisible(true);
+//        try {
+//            String ma = model.getValueAt(i, 0).toString();
+//            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+//            if (confirm == 0) {
+//                Connection con = ConnectDB.KetnoiDB();
+//                String sql = "Delete from khuyenmai where makm='" + ma + "' ";
+//                Statement st = con.createStatement();
+//                st.executeUpdate(sql);
+//                con.close();
+//                JOptionPane.showMessageDialog(this, "Xóa thành công");
+//                load_km();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
 
     }//GEN-LAST:event_kmMouseClicked
 
@@ -398,7 +533,14 @@ public class km extends javax.swing.JFrame {
             //Kết nối DB
 
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Select * From khuyenmai";
+            String sql = "";
+            String tc = jComboBox1.getSelectedItem().toString();
+            String txt = txttimkiem.getText().trim();
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+            }
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             //Đổ dữ liệu từ rs vào các ô trong excel
@@ -435,7 +577,7 @@ public class km extends javax.swing.JFrame {
                 //Định dạng ngày tháng trong excel
                 java.sql.Date bd = new java.sql.Date(rs.getDate("ngaybatdau").getTime());
                 CellStyle cellStyle = workbook.createCellStyle();
-                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd"));
                 cellStyle.setBorderLeft(BorderStyle.THIN);
                 cellStyle.setBorderRight(BorderStyle.THIN);
                 cellStyle.setBorderBottom(BorderStyle.THIN);
@@ -445,7 +587,7 @@ public class km extends javax.swing.JFrame {
 
                 java.sql.Date kt = new java.sql.Date(rs.getDate("ngayketthuc").getTime());
                 CellStyle cellStyle1 = workbook.createCellStyle();
-                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd"));
                 cellStyle.setBorderLeft(BorderStyle.THIN);
                 cellStyle.setBorderRight(BorderStyle.THIN);
                 cellStyle.setBorderBottom(BorderStyle.THIN);
@@ -475,6 +617,165 @@ public class km extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton11ActionPerformed
+    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
+//        Date bd = new Date();
+//        Date kt = new Date();
+        // Chuyển đổi ngày thành định dạng chuỗi SQL
+        Date sqlbd = new Date(bdau.getTime());
+        Date sqlkt = new Date(kett.getTime());
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String sql = "INSERT into khuyenmai Values('" + kmm + "',N'" + tkm + "',N'" + motaa + "','" + phtram + "','" + sqlbd + "','" + sqlkt + "')";
+
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "loi");
+        }
+    }
+
+    private void ReadExcel(String tenfilepath) {
+
+        try {
+            FileInputStream fis = new FileInputStream(tenfilepath);
+            //Tạo đối tượng Excel
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+            XSSFSheet sheet = wb.getSheetAt(0); //Lấy sheet đầu tiên của file
+            //Lấy ra các dòng bảng bảng
+            Iterator<Row> itr = sheet.iterator();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            //Đọc dữ liệu
+            if (itr.hasNext()) {
+                itr.next(); // Bỏ qua dòng đầu tiên
+            }
+            while (itr.hasNext()) {//Lặp đến hết các dòng trong excel
+                Row row = itr.next();//Lấy dòng tiếp theo
+                String kmm, tkm, motaa, bdau, kett;
+                int phtram;
+                kmm = row.getCell(0).getStringCellValue();
+                tkm = row.getCell(1).getStringCellValue();
+                motaa = row.getCell(2).getStringCellValue();
+                Cell phtramCell = row.getCell(3);
+                phtram = (int) phtramCell.getNumericCellValue();
+
+//                bdau = row.getCell(5).getStringCellValue();
+//                kett = row.getCell(6).getStringCellValue();
+//                java.util.Date bd = new Date(row.getCell(4).getDateCellValue().getTime());
+//                java.util.Date kt = new Date(row.getCell(5).getDateCellValue().getTime());
+                java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
+                java.util.Date kt = row.getCell(5).getDateCellValue(); // Ngày kết thúc
+                // In ra giá trị đọc được
+
+                JOptionPane.showMessageDialog(this, "bd " + kmm);
+                Themkm(kmm, tkm, motaa, phtram, bd, kt);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            JFileChooser fc = new JFileChooser();
+            int lc = fc.showOpenDialog(this);
+            if (lc == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+//                txtTenfile.setText(file.getPath());
+                String tenfile = file.getName();
+                if (tenfile.endsWith(".xlsx")) {    //endsWith chọn file có phần kết thúc ...
+                    ReadExcel(file.getPath());
+                    JOptionPane.showMessageDialog(this, "Nhập thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Phải chọn file excel");
+                }
+
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String tc = jComboBox1.getSelectedItem().toString();
+        String txt = txttimkiem.getText().trim();
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql;
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+            } else {
+                load_km();
+                return;
+            }
+
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("makm"));
+                v.add(rs.getString("tenkhuyenmai"));
+                v.add(rs.getString("phantramgiam"));
+                v.add(rs.getString("ngaybatdau"));
+                v.add(rs.getString("ngayketthuc"));
+                v.add(rs.getString("mota"));
+                model.addRow(v);
+            }
+            km.setModel(model);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
+
+    }//GEN-LAST:event_txttimkiemMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String tc = jComboBox1.getSelectedItem().toString();
+        String txt = txttimkiem.getText().trim();
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql;
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+            } else {
+                load_km();
+                return;
+            }
+
+            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\cafe\\baocaoquanli\\report1.jrxml");
+
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(sql);
+
+            jdesign.setQuery(updateQuery);
+            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, con);
+            JasperViewer.viewReport(jprint);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm == 0) {
+            login gg = new login();
+            gg.show();
+            dispose();
+        }
+    }//GEN-LAST:event_soMouseClicked
 
     /**
      * @param args the command line arguments
@@ -502,6 +803,9 @@ public class km extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(km.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -512,22 +816,29 @@ public class km extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable km;
     private javax.swing.JLabel nen;
+    private javax.swing.JLabel so;
+    private javax.swing.JLabel taik;
     private javax.swing.JButton them;
     private javax.swing.JButton timkiem;
     private javax.swing.JTextPane txttimkiem;
+    private javax.swing.JLabel vaitro;
     // End of variables declaration//GEN-END:variables
 
 }
