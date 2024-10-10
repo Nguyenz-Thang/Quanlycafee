@@ -2,6 +2,7 @@ package cafe.baocaoquanli;
 
 import cafe.login;
 import cafe.quanlikh.ConnectDB;
+import cafe.quanlikh.main;
 import cafe.quanlikh.suakh;
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,10 +58,12 @@ public class km extends javax.swing.JFrame {
         load_km();
         this.setLocationRelativeTo(null);
     }
-    public void user(String tk, String vaitroo){
+
+    public void user(String tk, String vaitroo) {
         taik.setText(tk);
         vaitro.setText(vaitroo);
     }
+
     public void load_km() {
         try {
             Connection con;
@@ -80,7 +83,9 @@ public class km extends javax.swing.JFrame {
                 v.add(rs.getString("ngayketthuc"));
                 v.add(rs.getString("mota"));
                 model.addRow(v);
+
             }
+
             km.setModel(model);
             con.close();
         } catch (Exception e) {
@@ -204,6 +209,11 @@ public class km extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/patient.png"))); // NOI18N
         jLabel13.setText("Khách hàng");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 210, -1));
 
         vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -269,9 +279,18 @@ public class km extends javax.swing.JFrame {
             }
         });
 
+        txttimkiem.setToolTipText("");
         txttimkiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txttimkiemMouseClicked(evt);
+            }
+        });
+        txttimkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txttimkiemKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttimkiemKeyTyped(evt);
             }
         });
         jScrollPane5.setViewportView(txttimkiem);
@@ -446,7 +465,9 @@ public class km extends javax.swing.JFrame {
             //   tbLoaiSach.removeAll();
             String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
+            int i =0;
             while (rs.next()) {
+                i=1;
                 Vector v = new Vector();
                 v.add(rs.getString("makm"));
                 v.add(rs.getString("tenkhuyenmai"));
@@ -454,6 +475,11 @@ public class km extends javax.swing.JFrame {
                 v.add(rs.getString("ngaybatdau"));
                 v.add(rs.getString("ngayketthuc"));
                 v.add(rs.getString("mota"));
+                model.addRow(v);
+            }
+            if (i==0) {
+                Vector v = new Vector();
+                v.add("Không có dữ liệuuuuuuu");
                 model.addRow(v);
             }
             km.setModel(model);
@@ -638,7 +664,7 @@ public class km extends javax.swing.JFrame {
     }
 
     private void ReadExcel(String tenfilepath) {
-        
+
         try {
             FileInputStream fis = new FileInputStream(tenfilepath);
             //Tạo đối tượng Excel
@@ -776,6 +802,20 @@ public class km extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_soMouseClicked
+
+    private void txttimkiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyPressed
+
+    }//GEN-LAST:event_txttimkiemKeyPressed
+
+    private void txttimkiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyTyped
+
+    }//GEN-LAST:event_txttimkiemKeyTyped
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        main m = new main();
+        m.show();
+        dispose();
+    }//GEN-LAST:event_jLabel13MouseClicked
 
     /**
      * @param args the command line arguments
