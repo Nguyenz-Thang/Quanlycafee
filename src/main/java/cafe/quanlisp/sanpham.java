@@ -7,14 +7,30 @@ package cafe.quanlisp;
 import cafe.quanlikh.ConnectDB;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -92,7 +108,8 @@ public class sanpham extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablehienthi = new javax.swing.JTable();
         buttontk = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        timkiemtxt = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +168,20 @@ public class sanpham extends javax.swing.JFrame {
 
         xuatexcel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         xuatexcel.setText("Xuất excel ");
+        xuatexcel.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                xuatexcelAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        xuatexcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xuatexcelMouseClicked(evt);
+            }
+        });
 
         docfile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         docfile.setText("Đọc file");
@@ -184,14 +215,14 @@ public class sanpham extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(buttonexit))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(docfile, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                             .addComponent(xuatexcel, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(Themsanpham, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(buttonexit)))
+                            .addComponent(Themsanpham, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -229,6 +260,18 @@ public class sanpham extends javax.swing.JFrame {
 
         buttontk.setBackground(new java.awt.Color(153, 204, 255));
         buttontk.setText("Tìm kiếm");
+        buttontk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttontkActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------", "Sắp xếp tăng", "Sắp xếp giảm" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -240,13 +283,19 @@ public class sanpham extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(buttontk)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(buttontk)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(timkiemtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(323, 323, 323)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,14 +314,17 @@ public class sanpham extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttontk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(timkiemtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)))
                 .addContainerGap())
         );
 
@@ -280,10 +332,7 @@ public class sanpham extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,6 +406,262 @@ public class sanpham extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonexitActionPerformed
 
+    private void buttontkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttontkActionPerformed
+        // TODO add your handling code here:
+        String txt = timkiemtxt.getText().trim();
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or mota like N'%" + txt + "%'";
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã sản phẩm", "Tên sản phẩm", "Mã loại", "Giá", "Mô tả", "Hình ảnh", "Trạng thái"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            int i = 0;
+            while (rs.next()) {
+                i = 1;
+                Vector v = new Vector();
+                v.add(rs.getString("masp"));
+                v.add(rs.getString("tensanpham"));
+                v.add(rs.getString("maloai"));
+                v.add(rs.getString("gia"));
+                v.add(rs.getString("mota"));
+                v.add(rs.getString("hinhanh"));
+                v.add(rs.getString("trangthai"));
+                model.addRow(v);
+            }
+            if (i == 0) {
+                Vector v = new Vector();
+                v.add("Không có dữ liệuuuuuuu");
+                model.addRow(v);
+            }
+            tablehienthi.setModel(model);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_buttontkActionPerformed
+
+    private void xuatexcelAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_xuatexcelAncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xuatexcelAncestorMoved
+
+    private static CellStyle DinhdangHeader(XSSFSheet sheet) {
+        // Create font
+        XSSFFont font = sheet.getWorkbook().createFont();
+        font.setFontName("Times New Roman");
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 12); // font size
+        font.setColor(IndexedColors.WHITE.getIndex()); // text color
+
+        // Create CellStyle
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        cellStyle.setFont(font);
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.TOP);
+        cellStyle.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
+        cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        cellStyle.setBorderBottom(BorderStyle.THIN);
+        cellStyle.setWrapText(true);
+        return cellStyle;
+    }
+    private void xuatexcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xuatexcelMouseClicked
+        // TODO add your handling code here:
+        try {
+
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("tacgia");
+            // register the columns you wish to track and compute the column width
+
+            CreationHelper createHelper = workbook.getCreationHelper();
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("DANH SÁCH SẢN PHẨM");
+
+            //Tạo dòng tiêu đều của bảng
+            // create CellStyle
+            CellStyle cellStyle_Head = DinhdangHeader(spreadsheet);
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("STT");
+
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mã Sản Phẩm");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Tên sản phẩm");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mã loại");
+
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Giá");
+
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mô tả");
+
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Hình ảnh");
+
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Trạng thái");
+            //Kết nối DB
+
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "";
+            String tc = jComboBox1.getSelectedItem().toString();
+            String txt = timkiemtxt.getText().trim();
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%"+ txt + "%' or hinhanh like '%"+ txt + "%'order by trangthai'%";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%"+ txt + "%' or hinhanh like '%"+ txt + "%'order by trangthai'% desc";
+            }
+            else{
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N '%"+ txt + "%'";
+
+            }
+            PreparedStatement st = con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            //Đổ dữ liệu từ rs vào các ô trong excel
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int tongsocot = rsmd.getColumnCount();
+
+            //Đinh dạng Tạo đường kẻ cho ô chứa dữ liệu
+            CellStyle cellStyle_data = spreadsheet.getWorkbook().createCellStyle();
+            cellStyle_data.setBorderLeft(BorderStyle.THIN);
+            cellStyle_data.setBorderRight(BorderStyle.THIN);
+            cellStyle_data.setBorderBottom(BorderStyle.THIN);
+
+            int i = 0;
+            while (rs.next()) {
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+
+                cell = row.createCell(0);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(i + 1);
+
+                cell = row.createCell(1);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("masp"));
+
+                cell = row.createCell(2);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("tensanpham"));
+
+                cell = row.createCell(3);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("maloai"));
+                
+                cell = row.createCell(6);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("gia"));
+
+                cell = row.createCell(6);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("mota"));
+
+                cell = row.createCell(6);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("hinhanh"));
+
+
+//                //Định dạng ngày tháng trong excel
+//                java.sql.Date bd = new java.sql.Date(rs.getDate("ngaybatdau").getTime());
+//                CellStyle cellStyle = workbook.createCellStyle();
+//                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd"));
+//                cellStyle.setBorderLeft(BorderStyle.THIN);
+//                cellStyle.setBorderRight(BorderStyle.THIN);
+//                cellStyle.setBorderBottom(BorderStyle.THIN);
+//                cell = row.createCell(4);
+//                cell.setCellValue(bd);
+//                cell.setCellStyle(cellStyle);
+//
+//                java.sql.Date kt = new java.sql.Date(rs.getDate("ngayketthuc").getTime());
+//                CellStyle cellStyle1 = workbook.createCellStyle();
+//                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd"));
+//                cellStyle.setBorderLeft(BorderStyle.THIN);
+//                cellStyle.setBorderRight(BorderStyle.THIN);
+//                cellStyle.setBorderBottom(BorderStyle.THIN);
+//                cell = row.createCell(5);
+//                cell.setCellValue(kt);
+//                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(6);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("trangthai"));
+
+                i++;
+            }
+            //Hiệu chỉnh độ rộng của cộttt
+            for (int col = 0; col < tongsocot; col++) {
+                spreadsheet.autoSizeColumn(col);
+                spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
+            }
+            String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
+            File f = new File("E:\\filesanphamxuatbaocao\\" + filename + ".xlsx");
+            FileOutputStream out = new FileOutputStream(f);
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_xuatexcelMouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String tc = jComboBox1.getSelectedItem().toString();
+        String txt = timkiemtxt.getText().trim();
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql;
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%"+ txt + "%' or hinhanh like'%"+ txt + "%'order by trangthai'%";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%"+ txt + "%' or hinhanh like'%"+ txt + "%'order by trangthai'%";
+            } else {
+                load_themsanpham();
+                return;
+            }
+
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã sản phẩm", "Tên Sản Phẩm", "Mã Loại", "Giá", "Mô tả", "Hình Ảnh","Trạng Thái"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("masp"));
+                v.add(rs.getString("tensp"));
+                v.add(rs.getString("maloai"));
+                v.add(rs.getString("gia"));
+                v.add(rs.getString("mota"));
+                v.add(rs.getString("hinhanh"));
+                v.add(getTrangThai(rs.getString("trangthai")));
+                model.addRow(v);
+            }
+            tablehienthi.setModel(model);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     //phuong thuc de them san pham moi vao bang
     public void addSanPham(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String hinhanh) {
         //kiem tra du lieu truoc khi truyen vao bang
@@ -379,6 +684,18 @@ public class sanpham extends javax.swing.JFrame {
         model.addRow(row);
     }
 
+    private String getTrangThai(String trangThaiDb) {
+    switch (trangThaiDb) {
+        case "CON_HANG":
+            return "Còn hàng";
+        case "HET_HANG":
+            return "Hết hàng";
+        case "NGUNG_BAN":
+            return "Ngừng bán";
+        default:
+            return "Không rõ";
+    }
+}
     public enum TrangThai {
         CON_HANG("Còn hàng"),
         HET_HANG("Hết hàng"),
@@ -438,6 +755,7 @@ public class sanpham extends javax.swing.JFrame {
     private javax.swing.JButton buttontk;
     private javax.swing.JLabel daidien1;
     private javax.swing.JLabel docfile;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -445,8 +763,8 @@ public class sanpham extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tablehienthi;
+    private javax.swing.JTextField timkiemtxt;
     private javax.swing.JLabel xuatexcel;
     // End of variables declaration//GEN-END:variables
 }
