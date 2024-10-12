@@ -5,10 +5,15 @@
 package cafe.quanlisp;
 
 import cafe.quanlikh.ConnectDB;
+import java.awt.Image;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,38 +25,49 @@ public class sanpham extends javax.swing.JFrame {
     /**
      * Creates new form sanpham
      */
+//    private themsanpham formthemsanpham;
+    private static JLabel labelanh;
+    private themsanpham formThemSanPham;
+
     public sanpham() {
         initComponents();
         load_themsanpham();
+        themsanpham formThemSanPham = new themsanpham(this); // Lưu tham chiếu của form themsanpham
     }
-    
-    private void load_themsanpham(){
-    try {
-        
-        //B1: Kết nối đến DB
-        Connection con= ConnectDB.KetnoiDB();
-        //B2: Tạo đối tượng Statement để thực hiện câu lệnh truy cập
-        String sql = "Select * From sanpham";
-        Statement st=con.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-        String[] tieude={"Mã sản phẩm","Mã loại sản phẩm", "Tên sản phẩm","Giá bán","Mô tả","Trạng thái"};
-        DefaultTableModel tb=new DefaultTableModel(tieude,0);
-        while(rs.next()){
-            Vector v = new Vector();
-            v.add(rs.getString("masp"));
-            v.add(rs.getString("maloai"));
-            v.add(rs.getString("tensanpham"));
-            v.add(rs.getString("gia"));
-            v.add(rs.getString("mota"));
-            v.add(rs.getString("trangthai"));            
-            tb.addRow(v);
+
+    public void load_themsanpham() {
+        try {
+
+            //B1: Kết nối đến DB
+            Connection con = ConnectDB.KetnoiDB();
+            //B2: Tạo đối tượng Statement để thực hiện câu lệnh truy cập
+            String sql = "Select * From sanpham";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            String[] tieude = {"Mã sản phẩm", "Mã loại sản phẩm", "Tên sản phẩm", "Giá bán", "Mô tả", "Trạng thái", "Hình ảnh"};
+            DefaultTableModel tb = new DefaultTableModel(tieude, 0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("masp"));
+                v.add(rs.getString("maloai"));
+                v.add(rs.getString("tensanpham"));
+                v.add(rs.getString("gia"));
+                v.add(rs.getString("mota"));
+                v.add(rs.getString("trangthai"));
+
+                //chỉ hiển thị tên ảnh 
+                String hinhanh = rs.getString("hinhanh");
+                String tenAnh = new File(hinhanh).getName();
+                v.add(tenAnh);
+
+                tb.addRow(v);
+            }
+            tablehienthi.setModel(tb);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        tablehienthi.setModel(tb);
-        con.close();
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,14 +86,13 @@ public class sanpham extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         Themsanpham = new javax.swing.JLabel();
         xuatexcel = new javax.swing.JLabel();
-        suathongtin = new javax.swing.JLabel();
-        xoasanpham1 = new javax.swing.JLabel();
-        timkiemsp1 = new javax.swing.JLabel();
         docfile = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         buttonexit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablehienthi = new javax.swing.JTable();
+        buttontk = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,15 +152,6 @@ public class sanpham extends javax.swing.JFrame {
         xuatexcel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         xuatexcel.setText("Xuất excel ");
 
-        suathongtin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        suathongtin.setText("Sửa thông tin sản phẩm");
-
-        xoasanpham1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        xoasanpham1.setText("Xóa sản phẩm");
-
-        timkiemsp1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        timkiemsp1.setText("Tìm kiếm");
-
         docfile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         docfile.setText("Đọc file");
 
@@ -164,6 +170,11 @@ public class sanpham extends javax.swing.JFrame {
 
         buttonexit.setBackground(new java.awt.Color(153, 204, 255));
         buttonexit.setText("Thoát");
+        buttonexit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonexitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -176,10 +187,7 @@ public class sanpham extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(docfile, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(timkiemsp1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(xoasanpham1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                             .addComponent(xuatexcel, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(suathongtin, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                             .addComponent(Themsanpham, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
@@ -190,21 +198,15 @@ public class sanpham extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(Themsanpham, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(Themsanpham, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(xuatexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(suathongtin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(xoasanpham1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(timkiemsp1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(xuatexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(docfile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(docfile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonexit)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(56, 56, 56))
         );
 
         tablehienthi.setModel(new javax.swing.table.DefaultTableModel(
@@ -225,6 +227,9 @@ public class sanpham extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablehienthi);
 
+        buttontk.setBackground(new java.awt.Color(153, 204, 255));
+        buttontk.setText("Tìm kiếm");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -236,7 +241,13 @@ public class sanpham extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttontk)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
@@ -255,11 +266,14 @@ public class sanpham extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttontk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -283,18 +297,74 @@ public class sanpham extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablehienthiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablehienthiMouseClicked
+        int selectedRow = tablehienthi.getSelectedRow(); // lay chi so dog duoc chon
+
+        int i;
+        i = tablehienthi.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tablehienthi.getModel();
+        String imagePath = "";
+        String ma = model.getValueAt(i, 0).toString();
+
+        try {
+            Connection con;
+            con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql = "Select hinhanh From sanpham where masp='" + ma + "'";
+            ResultSet rs = st.executeQuery(sql);
+
+            if (rs.next()) {
+                imagePath = rs.getString("hinhanh");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (selectedRow >= 0) {
+            //kkiem tra xem co dong nao duoc chon khong
+            String masp = model.getValueAt(selectedRow, 0).toString();
+            String maloai = model.getValueAt(selectedRow, 1).toString();
+            String tensp = model.getValueAt(selectedRow, 2).toString();
+            String gia = model.getValueAt(selectedRow, 3).toString();
+            String mota = model.getValueAt(selectedRow, 4).toString();
+            String trangthai = model.getValueAt(selectedRow, 5).toString();
+            String tenanh = model.getValueAt(selectedRow, 6).toString();
+
+            //hiển thị form sửa sản phẩm 
+            suathongtin formsuasanpham = new suathongtin(this);
+            formsuasanpham.setVisible(true);
+
+            // Set dữ liệu sản phẩm vào form sửa
+            formsuasanpham.setSanPhamInfo(masp, maloai, tensp, gia, mota, trangthai, imagePath);
+
+            // Hiển thị ảnh trong form sửa sản phẩm
+            formsuasanpham.showImage(imagePath);
+
+            // Khóa không cho sửa thông tin mã sản phẩm
+            formsuasanpham.lockMaSP();
+        }
 
     }//GEN-LAST:event_tablehienthiMouseClicked
 
     private void ThemsanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThemsanphamMouseClicked
-        themsanpham themsp = new themsanpham(this,true);
-        //themsp.show();
+        themsanpham themsp = new themsanpham(this);
         this.setVisible(false);//an form sanpham
         themsp.setVisible(true);//hien thi form them san pham
+
     }//GEN-LAST:event_ThemsanphamMouseClicked
 
+    private void buttonexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonexitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonexitActionPerformed
+
     //phuong thuc de them san pham moi vao bang
-    public void addSanPham(String masp, String maloai, String tensp, String gia, String mota, String trangthai){
+    public void addSanPham(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String hinhanh) {
+        //kiem tra du lieu truoc khi truyen vao bang
+        if (masp == null || maloai == null || tensp == null || gia == null || mota == null || trangthai == null || hinhanh == null) {
+            JOptionPane.showMessageDialog(this, "Thông tin sản phẩm không đầy đủ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         DefaultTableModel model = (DefaultTableModel) tablehienthi.getModel();
         Vector<String> row = new Vector<>();
         row.add(masp);
@@ -303,10 +373,29 @@ public class sanpham extends javax.swing.JFrame {
         row.add(gia);
         row.add(mota);
         row.add(trangthai);
-        
+        row.add(hinhanh);
+
         //them dong moi vao bang
         model.addRow(row);
     }
+
+    public enum TrangThai {
+        CON_HANG("Còn hàng"),
+        HET_HANG("Hết hàng"),
+        NGUNG_BAN("Ngừng bán");
+
+        private final String ten;
+
+        TrangThai(String ten) {
+            this.ten = ten;
+        }
+
+        @Override
+        public String toString() {
+            return ten; // Trả về tên hiển thị cho enum
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +427,7 @@ public class sanpham extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new sanpham().setVisible(true);
+
             }
         });
     }
@@ -345,6 +435,7 @@ public class sanpham extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Themsanpham;
     private javax.swing.JButton buttonexit;
+    private javax.swing.JButton buttontk;
     private javax.swing.JLabel daidien1;
     private javax.swing.JLabel docfile;
     private javax.swing.JLabel jLabel2;
@@ -354,10 +445,8 @@ public class sanpham extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel suathongtin;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tablehienthi;
-    private javax.swing.JLabel timkiemsp1;
-    private javax.swing.JLabel xoasanpham1;
     private javax.swing.JLabel xuatexcel;
     // End of variables declaration//GEN-END:variables
 }

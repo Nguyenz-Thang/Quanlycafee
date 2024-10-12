@@ -5,11 +5,24 @@
 package cafe.quanlisp;
 
 import cafe.quanlikh.ConnectDB;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +37,16 @@ public class themsanpham extends javax.swing.JDialog {
     public themsanpham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    private sanpham parentForm;
+
+    private File selectedFile;
+
+    public themsanpham(sanpham parentForm) {
+        this.parentForm = parentForm; // Lưu tham chiếu vào biến
+        initComponents();
+        this.setLocationRelativeTo(null);
+        loadCombobox();
     }
 
     /**
@@ -53,12 +76,14 @@ public class themsanpham extends javax.swing.JDialog {
         anhtxt = new javax.swing.JTextField();
         giasptxt = new javax.swing.JTextField();
         tensptxt = new javax.swing.JTextField();
-        maloaitxt = new javax.swing.JTextField();
-        trangthaitxt = new javax.swing.JTextField();
         buttonluu = new javax.swing.JButton();
         maloai = new javax.swing.JLabel();
         masptxt = new javax.swing.JTextField();
         buttonluu1 = new javax.swing.JButton();
+        maloaicombobox = new javax.swing.JComboBox<>();
+        chonanhbutton = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        anhlabble = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -166,6 +191,15 @@ public class themsanpham extends javax.swing.JDialog {
             }
         });
 
+        chonanhbutton.setText("Chọn ảnh");
+        chonanhbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chonanhbuttonActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn hàng", "Hết hàng", "Ngừng bán" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,27 +215,33 @@ public class themsanpham extends javax.swing.JDialog {
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 167, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chonanhbutton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(giasptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(motatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenncctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(trangthaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(anhtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonluu)
-                            .addComponent(buttonluu1)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(masptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(maloai, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(maloaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tensptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(maloaicombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tensptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(anhtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(anhlabble, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonluu)
+                            .addComponent(buttonluu1))))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -214,11 +254,14 @@ public class themsanpham extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(masp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maloaitxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(maloai, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(masptxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(masp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(maloai, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(masptxt, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(maloaicombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tensp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,30 +273,31 @@ public class themsanpham extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(motatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(motatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenncctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(trangthaitxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(hinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(anhtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(trangthaisp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(buttonluu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(buttonluu1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85))))
+                        .addGap(136, 136, 136))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(anhtxt)
+                            .addComponent(chonanhbutton)
+                            .addComponent(hinhanh, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(anhlabble, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,11 +314,59 @@ public class themsanpham extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    private void motatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motatxtActionPerformed
+    private void chonanhbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chonanhbuttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_motatxtActionPerformed
+        JFileChooser fileChooser = new JFileChooser(); //sử dụng jfileChooser để cho phép người dùng chọn ảnh
+        fileChooser.setDialogTitle("Chọn ảnh");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg", "gif"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            anhtxt.setText(path);
+
+            //hiển thị hình ảnh trong jlabel
+//            ImageIcon iconn = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH));
+//            anhlabble.setIcon(iconn);
+            ImageIcon icon = new ImageIcon(path);
+            Image img = icon.getImage();
+            Image resizedImage = img.getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH);
+            anhlabble.setIcon(new ImageIcon(resizedImage)); // Đặt ảnh đã resize lên JLabel
+        }
+    }//GEN-LAST:event_chonanhbuttonActionPerformed
+
+    public void showImage(String imagePath) {
+        if (imagePath != null && !imagePath.isEmpty()) {
+            ImageIcon icon = new ImageIcon(imagePath);
+            Image img = icon.getImage();
+            Image resizedImage = img.getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH);
+            anhlabble.setIcon(new ImageIcon(resizedImage));
+        } else {
+            anhlabble.setIcon(null); // Xóa icon nếu không có ảnh
+        }
+    }
+
+    public void setSanPhamInfo(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String imagePath) {
+    // Set các thông tin sản phẩm vào form
+    masptxt.setText(masp);
+    maloaicombobox.setSelectedItem(maloai);;
+    tensptxt.setText(tensp);
+    giasptxt.setText(gia);
+    motatxt.setText(mota);
+    jComboBox1.setSelectedItem(trangthai); // combo box trạng thái
+    
+    
+}
+
+
+    private void buttonluu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonluu1ActionPerformed
+      //   TODO add your handling code here:
+        this.dispose();
+
+        //mo lai form san pham
+        sanpham sp = new sanpham();
+        sp.setVisible(true);
+    }//GEN-LAST:event_buttonluu1ActionPerformed
 
     private void masptxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masptxtActionPerformed
         // TODO add your handling code here:
@@ -283,40 +375,112 @@ public class themsanpham extends javax.swing.JDialog {
     private void buttonluuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonluuActionPerformed
         // TODO add your handling code here:
         //phuong thuc nhan du lieu tu sanpham
-        
+
         //lấy thông tin các trường nhập liệu
-        String masp = maloaitxt.getText();
-        String ml = maloaitxt.getText();
-        String tensp = tensptxt.getText();
-        String gia = giasptxt.getText();
-        String mota = motatxt.getText();
-        String trangthai = trangthaitxt.getText();
-        
+        String masp = masptxt.getText().trim();
+        String tensp = tensptxt.getText().trim();
+        String gia = giasptxt.getText().trim();
+        String mota = motatxt.getText().trim();
+
+        //lay gia tri duoc chon trong JCOmbobox
+        String ml = (String) maloaicombobox.getSelectedItem();
+
+        String tthai = jComboBox1.getSelectedItem().toString();
+
+        //lấy đường dẫn link hình ảnh từ textfile
+        //   String ha = anhtxt.getText().trim();
         //kiem tra du lieu cu the
-        if(masp.isEmpty() || tensp.isEmpty() || gia.isEmpty()){
-            JOptionPane.showMessageDialog(this,"Vui lòng nhập đầy đủ thông tin!");
-            return;
+//       if (masp.isEmpty() || tensp.isEmpty() || gia.isEmpty() || mota.isEmpty() || ha.isEmpty()) {
+//    JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
+//    return;
+//}
+// Kiểm tra xem file đã được chọn chưa
+        if (this.selectedFile != null) {
+            // Nếu file đã được chọn, thực hiện tiếp hành động với file
+            String tenAnh = this.selectedFile.getName();
+            // Thực hiện các thao tác lưu file
+        } else {
+            // Nếu không có file nào được chọn, hiển thị thông báo lỗi
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một file hình ảnh!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        
-        //truyền dữ liệu sản phẩm mới về form sản phẩm
-        sanpham parentform = (sanpham) this.getParent();
-        parentform.addSanPham(masp,ml,tensp,gia,mota,trangthai);
-        
+        // Đường dẫn thư mục lưu ảnh trong thư mục của dự án (ví dụ: thư mục "images")
+        File destinationDir = new File("images");
+        if (!destinationDir.exists()) {
+            destinationDir.mkdir(); // Tạo thư mục nếu chưa tồn tại
+        }
+
+        // Đặt tên file đích là mã sản phẩm hoặc một tên riêng biệt
+        String newFileName = masp + "_" + selectedFile.getName();
+        File destinationFile = new File(destinationDir, newFileName);
+
+        try {
+            // Sao chép file ảnh vào thư mục "images"
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            Logger.getLogger(themsanpham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String relativePath = "images/" + newFileName; // Đường dẫn tương đối của ảnh
+
+        try {
+            Connection con1 = ConnectDB.KetnoiDB();
+            String check = "select maloai from loaisanpham";
+            Statement tt = con1.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "INSERT into sanpham Values('" + masp + "',N'" + tensp + "',N'" + ml + "','" + gia + "',N'" + mota + "','" + relativePath + "','" + tthai + "')";
+
+            Statement st = con.createStatement();
+            st.executeUpdate(sql);
+            con.close();
+            JOptionPane.showMessageDialog(this, "Thêm mới thành công !");
+            if (parentForm != null) {
+                parentForm.load_themsanpham();
+                showImage(relativePath); // Hiển thị hình ảnh vừa thêm
+            } else {
+                JOptionPane.showMessageDialog(this, "Parent form không tồn tại.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        //truyền dữ liệu sản phẩm mới về form sản phẩm
+//        if (this.getParent() instanceof sanpham) {
+//            sanpham parentform = (sanpham) this.getParent();
+//            parentform.addSanPham(masp, ml, tensp, gia, mota, tthai, ha);
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Parent form is not of type sanpham.");
+//        }
         //dong form them san pham sau khi luu thanh cong
         this.dispose();
-        
-    }//GEN-LAST:event_buttonluuActionPerformed
-
-    private void buttonluu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonluu1ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        
-        //mo lai form san pham 
         sanpham sp = new sanpham();
         sp.setVisible(true);
-    }//GEN-LAST:event_buttonluu1ActionPerformed
- 
+    }//GEN-LAST:event_buttonluuActionPerformed
+
+    private void motatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motatxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_motatxtActionPerformed
+
+    public void loadCombobox() {
+
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sqlloai = "SELECT maloai FROM loaisanpham";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sqlloai);
+            while (rs.next()) {
+                String ml = rs.getString("maloai");
+                maloaicombobox.addItem(ml); //them truc tiep ma loai vao combobox
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
    
+
     /**
      * @param args the command line arguments
      */
@@ -347,6 +511,7 @@ public class themsanpham extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 themsanpham dialog = new themsanpham(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -360,20 +525,23 @@ public class themsanpham extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel anhlabble;
     private javax.swing.JTextField anhtxt;
     private javax.swing.JButton buttonluu;
     private javax.swing.JButton buttonluu1;
+    private javax.swing.JButton chonanhbutton;
     private javax.swing.JLabel giabansanpham1;
     private javax.swing.JTextField giasptxt;
     private javax.swing.JLabel hinhanh;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel maloai;
-    private javax.swing.JTextField maloaitxt;
+    private javax.swing.JComboBox<String> maloaicombobox;
     private javax.swing.JLabel masp;
     private javax.swing.JTextField masptxt;
     private javax.swing.JLabel motasp1;
@@ -383,6 +551,5 @@ public class themsanpham extends javax.swing.JDialog {
     private javax.swing.JLabel tensp1;
     private javax.swing.JTextField tensptxt;
     private javax.swing.JLabel trangthaisp;
-    private javax.swing.JTextField trangthaitxt;
     // End of variables declaration//GEN-END:variables
 }
