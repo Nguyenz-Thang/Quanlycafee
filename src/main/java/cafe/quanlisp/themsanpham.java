@@ -37,6 +37,7 @@ public class themsanpham extends javax.swing.JDialog {
     public themsanpham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        loadCombobox();
     }
     private sanpham parentForm;
 
@@ -315,24 +316,44 @@ public class themsanpham extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chonanhbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chonanhbuttonActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser(); //sử dụng jfileChooser để cho phép người dùng chọn ảnh
-        fileChooser.setDialogTitle("Chọn ảnh");
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg", "gif"));
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            String path = selectedFile.getAbsolutePath();
-            anhtxt.setText(path);
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn ảnh sản phẩm");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-            //hiển thị hình ảnh trong jlabel
-//            ImageIcon iconn = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH));
-//            anhlabble.setIcon(iconn);
-            ImageIcon icon = new ImageIcon(path);
+// Khai báo biến để lưu đường dẫn ảnh
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile(); // Lưu file đã chọn vào biến selectedFile
+            String filePath = selectedFile.getAbsolutePath(); // Lấy đường dẫn file ảnh
+            System.out.println("File đã chọn: " + filePath);
+
+            // Hiển thị ảnh lên JLabel
+            ImageIcon icon = new ImageIcon(filePath);
             Image img = icon.getImage();
             Image resizedImage = img.getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH);
             anhlabble.setIcon(new ImageIcon(resizedImage)); // Đặt ảnh đã resize lên JLabel
         }
+        String masp = masptxt.getText().trim();
+        String newFileName = masp + "_" + selectedFile.getName();
+        anhtxt.setText(newFileName);
+// TODO add your handling code here:
+//        JFileChooser fileChooser = new JFileChooser(); //sử dụng jfileChooser để cho phép người dùng chọn ảnh
+//        fileChooser.setDialogTitle("Chọn ảnh");
+//        fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg", "gif"));
+//        int result = fileChooser.showOpenDialog(this);
+//        if (result == JFileChooser.APPROVE_OPTION) {
+//            selectedFile = fileChooser.getSelectedFile();
+//            String path = selectedFile.getAbsolutePath();
+//            anhtxt.setText(path);
+//
+//            //hiển thị hình ảnh trong jlabel
+////            ImageIcon iconn = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH));
+////            anhlabble.setIcon(iconn);
+//            ImageIcon icon = new ImageIcon(path);
+//            Image img = icon.getImage();
+//            Image resizedImage = img.getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH);
+//            anhlabble.setIcon(new ImageIcon(resizedImage)); // Đặt ảnh đã resize lên JLabel
+//        }
     }//GEN-LAST:event_chonanhbuttonActionPerformed
 
     public void showImage(String imagePath) {
@@ -347,20 +368,19 @@ public class themsanpham extends javax.swing.JDialog {
     }
 
     public void setSanPhamInfo(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String imagePath) {
-    // Set các thông tin sản phẩm vào form
-    masptxt.setText(masp);
-    maloaicombobox.setSelectedItem(maloai);;
-    tensptxt.setText(tensp);
-    giasptxt.setText(gia);
-    motatxt.setText(mota);
-    jComboBox1.setSelectedItem(trangthai); // combo box trạng thái
-    
-    
-}
+        // Set các thông tin sản phẩm vào form
+        masptxt.setText(masp);
+        maloaicombobox.setSelectedItem(maloai);;
+        tensptxt.setText(tensp);
+        giasptxt.setText(gia);
+        motatxt.setText(mota);
+        jComboBox1.setSelectedItem(trangthai); // combo box trạng thái
+
+    }
 
 
     private void buttonluu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonluu1ActionPerformed
-      //   TODO add your handling code here:
+        //   TODO add your handling code here:
         this.dispose();
 
         //mo lai form san pham
@@ -395,13 +415,17 @@ public class themsanpham extends javax.swing.JDialog {
 //    return;
 //}
 // Kiểm tra xem file đã được chọn chưa
-        if (this.selectedFile != null) {
-            // Nếu file đã được chọn, thực hiện tiếp hành động với file
-            String tenAnh = this.selectedFile.getName();
-            // Thực hiện các thao tác lưu file
-        } else {
-            // Nếu không có file nào được chọn, hiển thị thông báo lỗi
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một file hình ảnh!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//        if (this.selectedFile != null) {
+//            // Nếu file đã được chọn, thực hiện tiếp hành động với file
+//            String tenAnh = this.selectedFile.getName();
+//            // Thực hiện các thao tác lưu file
+//        } else {
+//            // Nếu không có file nào được chọn, hiển thị thông báo lỗi
+//            JOptionPane.showMessageDialog(this, "Vui lòng chọn một file hình ảnh!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//        }
+        if (selectedFile == null) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ảnh trước khi lưu!");
+            return;
         }
         // Đường dẫn thư mục lưu ảnh trong thư mục của dự án (ví dụ: thư mục "images")
         File destinationDir = new File("images");
@@ -478,8 +502,6 @@ public class themsanpham extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-
-   
 
     /**
      * @param args the command line arguments

@@ -328,7 +328,7 @@ public class sanpham extends javax.swing.JFrame {
             String gia = model.getValueAt(selectedRow, 3).toString();
             String mota = model.getValueAt(selectedRow, 4).toString();
             String trangthai = model.getValueAt(selectedRow, 5).toString();
-            String tenanh = model.getValueAt(selectedRow, 6).toString();
+            //String tenanh = model.getValueAt(selectedRow, 6).toString();
 
             //hiển thị form sửa sản phẩm 
             suathongtin formsuasanpham = new suathongtin(this);

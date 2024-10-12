@@ -5,11 +5,15 @@
 package cafe.quanlisp;
 
 import cafe.quanlikh.ConnectDB;
+import java.awt.Image;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -28,14 +32,31 @@ public class suathongtin extends javax.swing.JDialog {
     }
     private sanpham parentForm;
     private JLabel lblImage;
+    private File selectedFile;
     public suathongtin(sanpham parent) {
         this.parentForm = parent; // Lưu tham chiếu vào biến
         initComponents();
         this.setLocationRelativeTo(null);
-        lblImage =  new JLabel();
+        lblImage = new JLabel();
         add(lblImage);
+        loadCombobox();
     }
+    public void loadCombobox() {
 
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sqlloai = "SELECT maloai FROM loaisanpham";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sqlloai);
+            while (rs.next()) {
+                String ml = rs.getString("maloai");
+                comboboxmaloai.addItem(ml); //them truc tiep ma loai vao combobox
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     //phuong thức để nhận dữ liệu sản phẩm từ form sản phẩm
     public void setProductData(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String hinhanh) {
         msptxt.setText(masp);
@@ -182,8 +203,11 @@ public class suathongtin extends javax.swing.JDialog {
         comboboxtrangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn hàng", "Hết hàng", "Ngừng bán" }));
 
         buttonanh.setText("Chọn ảnh");
-
-        comboboxmaloai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        buttonanh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonanhActionPerformed(evt);
+            }
+        });
 
         buttonxoa.setBackground(new java.awt.Color(153, 204, 255));
         buttonxoa.setText("Xóa thông tin");
@@ -323,25 +347,35 @@ public class suathongtin extends javax.swing.JDialog {
     }//GEN-LAST:event_mttxtActionPerformed
 
     public void lockMaSP() {
-    msptxt.setEditable(false); // Khóa ô mã sản phẩm để không cho chỉnh sửa
-}
+        msptxt.setEditable(false); // Khóa ô mã sản phẩm để không cho chỉnh sửa
+    }
 
-     public void setSanPhamInfo(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String hinhanh) {
+    public void showImage(String imagePath) {
+//    if (imagePath != null && !imagePath.isEmpty()) {
+//        lblImage.setIcon(new ImageIcon(imagePath)); // Hiển thị ảnh trên JLabel
+//    }
+        if (imagePath != null && !imagePath.isEmpty()) {
+            ImageIcon icon = new ImageIcon(imagePath);
+            Image img = icon.getImage();
+            Image resizedImage = img.getScaledInstance(labelanh.getWidth(), labelanh.getHeight(), Image.SCALE_SMOOTH);
+            labelanh.setIcon(new ImageIcon(resizedImage));
+        } else {
+            labelanh.setIcon(null); // Nếu không có ảnh, xoá icon
+        }
+    }
+
+    public void setSanPhamInfo(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String hinhanh) {
         msptxt.setText(masp);
-        comboboxmaloai.getSelectedItem().toString();
+        comboboxmaloai.setSelectedItem(maloai);
         ttxt.setText(tensp);
         gtxt.setText(gia);
         mttxt.setText(mota);
-        comboboxtrangthai.getSelectedItem().toString();
-
-        // Lưu đường dẫn ảnh vào JTextField hoặc JLabel
+        comboboxtrangthai.setSelectedItem(trangthai);
         anhtxt.setText(hinhanh);
+        // Lưu đường dẫn ảnh vào JTextField hoặc JLabel
+        showImage(hinhanh);
     }
-     public void showImage(String imagePath) {
-    if (imagePath != null && !imagePath.isEmpty()) {
-        lblImage.setIcon(new ImageIcon(imagePath)); // Hiển thị ảnh trên JLabel
-    }
-}
+
 
     private void buttonsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsuaActionPerformed
         // TODO add your handling code here:
@@ -389,7 +423,7 @@ public class suathongtin extends javax.swing.JDialog {
 
     private void buttonxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonxoaActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             String sp = msptxt.getText().trim();
             Connection con = ConnectDB.KetnoiDB();
             int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
@@ -401,22 +435,45 @@ public class suathongtin extends javax.swing.JDialog {
                 con.close();
                 dispose();
                 if (parentForm != null) {
-                parentForm.load_themsanpham();// Gọi hàm load_km() từ form gốc
+                    parentForm.load_themsanpham();// Gọi hàm load_km() từ form gốc
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Xóa không thành công");
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_buttonxoaActionPerformed
 
     private void buttonhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonhuyActionPerformed
         // TODO add your handling code here:
-       dispose();
-       sanpham sp = new sanpham();
-       sp.setVisible(true);
+        dispose();
+        sanpham sp = new sanpham();
+        sp.setVisible(true);
     }//GEN-LAST:event_buttonhuyActionPerformed
+
+    private void buttonanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonanhActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn ảnh sản phẩm");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+// Khai báo biến để lưu đường dẫn ảnh
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile(); // Lưu file đã chọn vào biến selectedFile
+            String filePath = selectedFile.getAbsolutePath(); // Lấy đường dẫn file ảnh
+            System.out.println("File đã chọn: " + filePath);
+
+            // Hiển thị ảnh lên JLabel
+            ImageIcon icon = new ImageIcon(filePath);
+            Image img = icon.getImage();
+            Image resizedImage = img.getScaledInstance(labelanh.getWidth(), labelanh.getHeight(), Image.SCALE_SMOOTH);
+            labelanh.setIcon(new ImageIcon(resizedImage)); // Đặt ảnh đã resize lên JLabel
+        }
+        String masp = msptxt.getText().trim();
+        String newFileName = masp + "_" + selectedFile.getName();
+        anhtxt.setText(newFileName);
+    }//GEN-LAST:event_buttonanhActionPerformed
 
     /**
      * @param args the command line arguments
