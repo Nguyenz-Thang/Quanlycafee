@@ -4,14 +4,17 @@
  */
 package cafe.quanlihoadon;
 
+import cafe.baocaoquanli.km;
 import cafe.login;
 import cafe.quanlikh.ConnectDB;
 import com.mysql.cj.xdevapi.Statement;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -29,6 +32,42 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
+        load_km();
+        this.setLocationRelativeTo(null);
+    }
+
+    public void user(String tk, String vaitroo) {
+        taik.setText(tk);
+        vaitro.setText(vaitroo);
+    }
+
+    public void load_km() {
+        try {
+            Connection con;
+            con = ConnectDB.KetnoiDB();
+            java.sql.Statement st = con.createStatement();
+            String sql = "Select * From hoadon";
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("makm"));
+                v.add(rs.getString("tenkhuyenmai"));
+                v.add(rs.getString("phantramgiam"));
+                v.add(rs.getString("ngaybatdau"));
+                v.add(rs.getString("ngayketthuc"));
+                v.add(rs.getString("mota"));
+                model.addRow(v);
+
+            }
+
+            km.setModel(model);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -224,7 +263,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, -1));
 
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
-        jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 830));
+        jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, 830));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,7 +314,7 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void themHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themHoaDonActionPerformed
-        
+
     }//GEN-LAST:event_themHoaDonActionPerformed
 
     private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
@@ -283,15 +322,15 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_txttimkiemMouseClicked
 
     private void timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemActionPerformed
-        
+
     }//GEN-LAST:event_timKiemActionPerformed
 
     private void danhSachHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danhSachHoaDonMouseClicked
-        
+
     }//GEN-LAST:event_danhSachHoaDonMouseClicked
 
     private void xuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatExcelActionPerformed
-       
+
     }//GEN-LAST:event_xuatExcelActionPerformed
 
     private void nhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nhapExcelActionPerformed
@@ -315,7 +354,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_nhapExcelActionPerformed
 
     private void trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trangThaiActionPerformed
-      
+
     }//GEN-LAST:event_trangThaiActionPerformed
 
     private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
