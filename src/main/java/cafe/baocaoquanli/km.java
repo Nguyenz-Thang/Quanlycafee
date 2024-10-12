@@ -34,6 +34,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -383,6 +384,7 @@ public class km extends javax.swing.JFrame {
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         themkm kk = new themkm(this);
+        kk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         kk.show();
     }//GEN-LAST:event_themActionPerformed
 
@@ -428,14 +430,15 @@ public class km extends javax.swing.JFrame {
         suakm tk = new suakm(this);
         tk.setData(ma, ten, bd, kt, phantram, mot);
         tk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tk.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                load_km(); // Gọi hàm load_km() khi suakm đóng
-            }
-        });
-// Hiển thị form suakm
         tk.setVisible(true);
+//        tk.addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+//                load_km(); // Gọi hàm load_km() khi suakm đóng
+//            }
+//        });
+// Hiển thị form suakm
+        
 //        try {
 //            String ma = model.getValueAt(i, 0).toString();
 //            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
@@ -465,9 +468,9 @@ public class km extends javax.swing.JFrame {
             //   tbLoaiSach.removeAll();
             String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
-            int i =0;
+            int i = 0;
             while (rs.next()) {
-                i=1;
+                i = 1;
                 Vector v = new Vector();
                 v.add(rs.getString("makm"));
                 v.add(rs.getString("tenkhuyenmai"));
@@ -477,7 +480,7 @@ public class km extends javax.swing.JFrame {
                 v.add(rs.getString("mota"));
                 model.addRow(v);
             }
-            if (i==0) {
+            if (i == 0) {
                 Vector v = new Vector();
                 v.add("Không có dữ liệuuuuuuu");
                 model.addRow(v);
@@ -643,7 +646,7 @@ public class km extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton11ActionPerformed
-    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
+    private void Themkm(String kmm, String tkm, String motaa, String phtram, java.util.Date bdau, java.util.Date kett) {
 //        Date bd = new Date();
 //        Date kt = new Date();
         // Chuyển đổi ngày thành định dạng chuỗi SQL
@@ -655,53 +658,101 @@ public class km extends javax.swing.JFrame {
 
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-
+            JOptionPane.showMessageDialog(this, "Nhập thành công");
+            load_km();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "loi");
         }
     }
+    int i = 0;
+    String matontai = "";
+    private void ktmakm(String kmm) {
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String check = "select makm from khuyenmai";
+            Statement tt = conn.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+            while (rs.next()) {
+                String m = rs.getString("makm");
+                if (m.equals(kmm)) {
+                    i = 1;
+                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
+                    matontai = matontai + kmm + " + ";
+                    System.out.println("Ma ton tai" + matontai);
+                    return;
+                }else{
+                    i=0;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }
 
     private void ReadExcel(String tenfilepath) {
 
         try {
             FileInputStream fis = new FileInputStream(tenfilepath);
-            //Tạo đối tượng Excel
+            // Tạo đối tượng Excel
             XSSFWorkbook wb = new XSSFWorkbook(fis);
-            XSSFSheet sheet = wb.getSheetAt(0); //Lấy sheet đầu tiên của file
-            //Lấy ra các dòng bảng bảng
+            XSSFSheet sheet = wb.getSheetAt(0); // Lấy sheet đầu tiên của file
+            // Lấy ra các dòng trong bảng
             Iterator<Row> itr = sheet.iterator();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            //Đọc dữ liệu
+
+            // Đọc dữ liệu
             if (itr.hasNext()) {
                 itr.next(); // Bỏ qua dòng đầu tiên
             }
-            while (itr.hasNext()) {//Lặp đến hết các dòng trong excel
-                Row row = itr.next();//Lấy dòng tiếp theo
-                String kmm, tkm, motaa, bdau, kett;
-                int phtram;
-                kmm = row.getCell(0).getStringCellValue();
-                tkm = row.getCell(1).getStringCellValue();
-                motaa = row.getCell(2).getStringCellValue();
-                Cell phtramCell = row.getCell(3);
-                phtram = (int) phtramCell.getNumericCellValue();
+            
+            while (itr.hasNext()) {
+                Row row = itr.next(); // Lấy dòng tiếp theo
+                String kmm = getCellValueAsString(row.getCell(0));
+                String tkm = getCellValueAsString(row.getCell(1));
+                String motaa = getCellValueAsString(row.getCell(2));
+                String phtram = getCellValueAsString(row.getCell(3));
 
-//                bdau = row.getCell(5).getStringCellValue();
-//                kett = row.getCell(6).getStringCellValue();
-//                java.util.Date bd = new Date(row.getCell(4).getDateCellValue().getTime());
-//                java.util.Date kt = new Date(row.getCell(5).getDateCellValue().getTime());
                 java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
                 java.util.Date kt = row.getCell(5).getDateCellValue(); // Ngày kết thúc
-                // In ra giá trị đọc được
 
-                JOptionPane.showMessageDialog(this, "bd " + kmm);
-                Themkm(kmm, tkm, motaa, phtram, bd, kt);
+                
+                ktmakm(kmm);
+                if (i == 0) {
+                    Themkm(kmm, tkm, motaa, phtram, bd, kt);
+                }
+
             }
+            if (!matontai.equals("")) {
+                JOptionPane.showMessageDialog(this, "Không thêm được mã km : " + matontai + "vì mã đã tồn tại trong dữ liệu");
+                matontai = "";
+                return;
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private String getCellValueAsString(Cell cell) {
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue();
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    return sdf.format(cell.getDateCellValue());
+                } else {
+                    return String.valueOf(cell.getNumericCellValue());
+                }
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return cell.getCellFormula();
+            default:
+                return "";
+        }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
@@ -713,7 +764,7 @@ public class km extends javax.swing.JFrame {
                 String tenfile = file.getName();
                 if (tenfile.endsWith(".xlsx")) {    //endsWith chọn file có phần kết thúc ...
                     ReadExcel(file.getPath());
-                    JOptionPane.showMessageDialog(this, "Nhập thành công");
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Phải chọn file excel");
                 }
