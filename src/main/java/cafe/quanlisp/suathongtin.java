@@ -399,7 +399,7 @@ public class suathongtin extends javax.swing.JDialog {
             ResultSet rs = tt.executeQuery(check);
 
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Update sanpham Set tensanpham=N'" + tensp + "',maloai='" + maloai + "',gia='" + gia + "',mota=N'" + mota + "',hinhanh'" + hinhanh + "' where masp='" + masp + "' ";
+            String sql = "Update sanpham Set tensanpham=N'" + tensp + "',maloai='" + maloai + "',gia='" + gia + "',mota=N'" + mota + "',hinhanh='" + hinhanh + "' where masp='" + masp + "' ";
             Statement st = con.createStatement();
 
             int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
