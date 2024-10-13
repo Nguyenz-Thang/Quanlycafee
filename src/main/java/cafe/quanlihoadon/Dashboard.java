@@ -5,6 +5,7 @@
 package cafe.quanlihoadon;
 
 import cafe.baocaoquanli.km;
+import cafe.baocaoquanli.suakm;
 import cafe.login;
 import cafe.quanlikh.ConnectDB;
 import com.mysql.cj.xdevapi.Statement;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
@@ -32,7 +34,7 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
-        load_km();
+        load_hd();
         this.setLocationRelativeTo(null);
     }
 
@@ -41,7 +43,7 @@ public class Dashboard extends javax.swing.JFrame {
         vaitro.setText(vaitroo);
     }
 
-    public void load_km() {
+    public void load_hd() {
         try {
             Connection con;
             con = ConnectDB.KetnoiDB();
@@ -63,7 +65,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             }
 
-         //   km.setModel(model);
+            danhSachHoaDon.setModel(model);
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +86,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         xuatExcel = new javax.swing.JButton();
         nhapExcel = new javax.swing.JButton();
-        trangThai = new javax.swing.JComboBox<>();
+        sapXep = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         so = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -194,10 +196,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------", "Đã thanh toán", "Chưa thanh toán", "Đã hủy" }));
-        trangThai.addActionListener(new java.awt.event.ActionListener() {
+        sapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp", "sắp xếp tăng", "sắp xếp giảm" }));
+        sapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trangThaiActionPerformed(evt);
+                sapXepActionPerformed(evt);
             }
         });
 
@@ -288,7 +290,7 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(423, 423, 423)
-                        .addComponent(trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(sapXep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -299,7 +301,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sapXep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
@@ -314,7 +316,9 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void themHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themHoaDonActionPerformed
-
+        ThemHoaDon themHoaDon = new ThemHoaDon(this);
+        themHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        themHoaDon.show();
     }//GEN-LAST:event_themHoaDonActionPerformed
 
     private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
@@ -322,11 +326,55 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_txttimkiemMouseClicked
 
     private void timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemActionPerformed
-
+        String txt = txttimkiem.getText().trim();
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            java.sql.Statement st = con.createStatement();
+            String sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'";
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            int i = 0;
+            while (rs.next()) {
+                i = 1;
+                Vector v = new Vector();
+                v.add(rs.getString("makm"));
+                v.add(rs.getString("tenkhuyenmai"));
+                v.add(rs.getString("phantramgiam"));
+                v.add(rs.getString("ngaybatdau"));
+                v.add(rs.getString("ngayketthuc"));
+                v.add(rs.getString("mota"));
+                model.addRow(v);
+            }
+            if (i == 0) {
+                Vector v = new Vector();
+                v.add("Không có dữ liệuuuuuuu");
+                model.addRow(v);
+            }
+            danhSachHoaDon.setModel(model);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_timKiemActionPerformed
 
     private void danhSachHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danhSachHoaDonMouseClicked
+        int i;
+        i = danhSachHoaDon.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) danhSachHoaDon.getModel();
+//
+        String ma = model.getValueAt(i, 0).toString();
+        String ten = model.getValueAt(i, 1).toString();
+        String bd = model.getValueAt(i, 2).toString();
+        String kt = model.getValueAt(i, 3).toString();
+        String phantram = model.getValueAt(i, 4).toString();
+        String mot = model.getValueAt(i, 5).toString();
 
+        ChiTietHoaDon cthd = new ChiTietHoaDon(this);
+        cthd.setData(ma, ten, bd, kt, phantram, mot);
+        cthd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        cthd.setVisible(true);
     }//GEN-LAST:event_danhSachHoaDonMouseClicked
 
     private void xuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatExcelActionPerformed
@@ -353,9 +401,42 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nhapExcelActionPerformed
 
-    private void trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trangThaiActionPerformed
+    private void sapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sapXepActionPerformed
+        String tc = sapXep.getSelectedItem().toString();
+        String txt = txttimkiem.getText().trim();
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            java.sql.Statement st = con.createStatement();
+            String sql;
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+            } else {
+                load_hd();
+                return;
+            }
 
-    }//GEN-LAST:event_trangThaiActionPerformed
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("makm"));
+                v.add(rs.getString("tenkhuyenmai"));
+                v.add(rs.getString("phantramgiam"));
+                v.add(rs.getString("ngaybatdau"));
+                v.add(rs.getString("ngayketthuc"));
+                v.add(rs.getString("mota"));
+                model.addRow(v);
+            }
+            danhSachHoaDon.setModel(model);
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_sapXepActionPerformed
 
     private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất", "Xác nhận", JOptionPane.YES_NO_OPTION);
@@ -415,11 +496,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel nen;
     private javax.swing.JButton nhapExcel;
+    private javax.swing.JComboBox<String> sapXep;
     private javax.swing.JLabel so;
     private javax.swing.JLabel taik;
     private javax.swing.JButton themHoaDon;
     private javax.swing.JButton timKiem;
-    private javax.swing.JComboBox<String> trangThai;
     private javax.swing.JTextPane txttimkiem;
     private javax.swing.JLabel vaitro;
     private javax.swing.JButton xuatExcel;

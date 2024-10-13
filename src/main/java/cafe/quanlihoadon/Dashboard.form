@@ -47,7 +47,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="423" max="-2" attributes="0"/>
-                      <Component id="trangThai" min="-2" max="-2" attributes="0"/>
+                      <Component id="sapXep" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="164" max="32767" attributes="0"/>
@@ -62,7 +62,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="trangThai" min="-2" max="-2" attributes="0"/>
+              <Component id="sapXep" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="467" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -234,19 +234,18 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nhapExcelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="trangThai">
+    <Component class="javax.swing.JComboBox" name="sapXep">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="-----------"/>
-            <StringItem index="1" value="&#x110;&#xe3; thanh to&#xe1;n"/>
-            <StringItem index="2" value="Ch&#x1b0;a thanh to&#xe1;n"/>
-            <StringItem index="3" value="&#x110;&#xe3; h&#x1ee7;y"/>
+          <StringArray count="3">
+            <StringItem index="0" value="S&#x1eaf;p x&#x1ebf;p"/>
+            <StringItem index="1" value="s&#x1eaf;p x&#x1ebf;p t&#x103;ng"/>
+            <StringItem index="2" value="s&#x1eaf;p x&#x1ebf;p gi&#x1ea3;m"/>
           </StringArray>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trangThaiActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sapXepActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

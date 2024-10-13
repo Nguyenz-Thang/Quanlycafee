@@ -235,6 +235,9 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="ngaybd">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ngaybdMouseClicked"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane7">
           <AuxValues>
