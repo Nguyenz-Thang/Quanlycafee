@@ -48,46 +48,37 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Admin
  */
-public class sanpham extends javax.swing.JFrame {
+public class loaisanpham extends javax.swing.JFrame {
 
     /**
      * Creates new form sanpham
      */
 //    private themsanpham formthemsanpham;
-    private static JLabel labelanh;
-    private themsanpham formThemSanPham;
+   
+    private themloaisanpham formThemSanPham;
 
-    public sanpham() {
+    public loaisanpham() {
         initComponents();
-        load_themsanpham();
-        themsanpham formThemSanPham = new themsanpham(this); // Lưu tham chiếu của form themsanpham
+        load_themloaisanpham();
+        themloaisanpham formThemSanPham = new themloaisanpham(); // Lưu tham chiếu của form themsanpham
     }
 
-    public void load_themsanpham() {
+    public void load_themloaisanpham() {
         try {
 
             //B1: Kết nối đến DB
             Connection con = ConnectDB.KetnoiDB();
             //B2: Tạo đối tượng Statement để thực hiện câu lệnh truy cập
-            String sql = "Select * From sanpham";
+            String sql = "Select * From loaisanpham";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            String[] tieude = {"Mã sản phẩm", "Mã loại sản phẩm", "Tên sản phẩm", "Giá bán", "Mô tả", "Trạng thái", "Hình ảnh"};
+            String[] tieude = {"Mã loại sản phẩm", "Tên loại sản phẩm"};
             DefaultTableModel tb = new DefaultTableModel(tieude, 0);
             while (rs.next()) {
                 Vector v = new Vector();
-                v.add(rs.getString("masp"));
                 v.add(rs.getString("maloai"));
-                v.add(rs.getString("tensanpham"));
-                v.add(rs.getString("gia"));
-                v.add(rs.getString("mota"));
-                v.add(rs.getString("trangthai"));
-
-                //chỉ hiển thị tên ảnh 
-                String hinhanh = rs.getString("hinhanh");
-                String tenAnh = new File(hinhanh).getName();
-                v.add(tenAnh);
-
+                v.add(rs.getString("tenloai"));
+                
                 tb.addRow(v);
             }
             tablehienthi.setModel(tb);
@@ -119,9 +110,6 @@ public class sanpham extends javax.swing.JFrame {
         buttonexit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablehienthi = new javax.swing.JTable();
-        buttontk = new javax.swing.JButton();
-        timkiemtxt = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,7 +136,7 @@ public class sanpham extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Sản Phẩm");
+        jLabel2.setText("Loại Sản Phẩm");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -156,22 +144,22 @@ public class sanpham extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(323, 323, 323))
+                .addComponent(jLabel2)
+                .addGap(281, 281, 281))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(177, 151, 125));
 
         Themsanpham.setBackground(new java.awt.Color(200, 171, 153));
         Themsanpham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Themsanpham.setText("Thêm sản phẩm");
+        Themsanpham.setText("Thêm loại sản phẩm");
         Themsanpham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ThemsanphamMouseClicked(evt);
@@ -252,7 +240,7 @@ public class sanpham extends javax.swing.JFrame {
                 .addComponent(xuatexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(docfile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
                 .addComponent(buttonexit)
                 .addGap(56, 56, 56))
         );
@@ -275,21 +263,6 @@ public class sanpham extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablehienthi);
 
-        buttontk.setBackground(new java.awt.Color(153, 204, 255));
-        buttontk.setText("Tìm kiếm");
-        buttontk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttontkActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------", "Sắp xếp tăng", "Sắp xếp giảm" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -300,20 +273,8 @@ public class sanpham extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(buttontk)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(timkiemtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(323, 323, 323)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
@@ -333,15 +294,8 @@ public class sanpham extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttontk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timkiemtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -368,52 +322,34 @@ public class sanpham extends javax.swing.JFrame {
         int i;
         i = tablehienthi.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tablehienthi.getModel();
-        String imagePath = "";
         String ma = model.getValueAt(i, 0).toString();
 
-        try {
-            Connection con;
-            con = ConnectDB.KetnoiDB();
-            Statement st = con.createStatement();
-            String sql = "Select hinhanh From sanpham where masp='" + ma + "'";
-            ResultSet rs = st.executeQuery(sql);
-
-            if (rs.next()) {
-                imagePath = rs.getString("hinhanh");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         if (selectedRow >= 0) {
             //kkiem tra xem co dong nao duoc chon khong
-            String masp = model.getValueAt(selectedRow, 0).toString();
-            String maloai = model.getValueAt(selectedRow, 1).toString();
-            String tensp = model.getValueAt(selectedRow, 2).toString();
-            String gia = model.getValueAt(selectedRow, 3).toString();
-            String mota = model.getValueAt(selectedRow, 4).toString();
-            String trangthai = model.getValueAt(selectedRow, 5).toString();
+            String maloai = model.getValueAt(selectedRow, 0).toString();
+            String tenloai = model.getValueAt(selectedRow, 1).toString();
+           
             //String tenanh = model.getValueAt(selectedRow, 6).toString();
 
             //hiển thị form sửa sản phẩm 
-            suathongtin formsuasanpham = new suathongtin(this);
-            formsuasanpham.setVisible(true);
+            sualoaisanpham formsuasanpham = new sualoaisanpham(this,true);
+           
 
-            // Set dữ liệu sản phẩm vào form sửa
-            formsuasanpham.setSanPhamInfo(masp, maloai, tensp, gia, mota, trangthai, imagePath);
-
-            // Hiển thị ảnh trong form sửa sản phẩm
-            formsuasanpham.showImage(imagePath);
+             // Set dữ liệu sản phẩm vào form sửa
+            formsuasanpham.setLoaiSanPhamInfo(maloai, tenloai);
+            
 
             // Khóa không cho sửa thông tin mã sản phẩm
-            formsuasanpham.lockMaSP();
+            formsuasanpham.lockMaLSP();
+            
+            formsuasanpham.setVisible(true);
         }
 
     }//GEN-LAST:event_tablehienthiMouseClicked
 
     private void ThemsanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThemsanphamMouseClicked
-        themsanpham themsp = new themsanpham(this);
+        themloaisanpham themsp = new themloaisanpham(this,true);
         this.setVisible(false);//an form sanpham
         themsp.setVisible(true);//hien thi form them san pham
 
@@ -425,42 +361,6 @@ public class sanpham extends javax.swing.JFrame {
         sp sp1 = new sp();
         sp1.setVisible(true);
     }//GEN-LAST:event_buttonexitActionPerformed
-
-    private void buttontkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttontkActionPerformed
-        // TODO add your handling code here:
-        String txt = timkiemtxt.getText().trim();
-        try {
-            Connection con = ConnectDB.KetnoiDB();
-            Statement st = con.createStatement();
-            String sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or mota like N'%" + txt + "%'";
-            ResultSet rs = st.executeQuery(sql);
-            //   tbLoaiSach.removeAll();
-            String[] arr = {"Mã sản phẩm", "Tên sản phẩm", "Mã loại", "Giá", "Mô tả", "Hình ảnh", "Trạng thái"};
-            DefaultTableModel model = new DefaultTableModel(arr, 0);
-            int i = 0;
-            while (rs.next()) {
-                i = 1;
-                Vector v = new Vector();
-                v.add(rs.getString("masp"));
-                v.add(rs.getString("tensanpham"));
-                v.add(rs.getString("maloai"));
-                v.add(rs.getString("gia"));
-                v.add(rs.getString("mota"));
-                v.add(rs.getString("hinhanh"));
-                v.add(rs.getString("trangthai"));
-                model.addRow(v);
-            }
-            if (i == 0) {
-                Vector v = new Vector();
-                v.add("Không có dữ liệuuuuuuu");
-                model.addRow(v);
-            }
-            tablehienthi.setModel(model);
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_buttontkActionPerformed
 
     private void xuatexcelAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_xuatexcelAncestorMoved
         // TODO add your handling code here:
@@ -501,7 +401,7 @@ public class sanpham extends javax.swing.JFrame {
             row = spreadsheet.createRow((short) 2);
             row.setHeight((short) 500);
             cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue("DANH SÁCH SẢN PHẨM");
+            cell.setCellValue("DANH SÁCH LOẠI SẢN PHẨM");
 
             //Tạo dòng tiêu đều của bảng
             // create CellStyle
@@ -514,46 +414,18 @@ public class sanpham extends javax.swing.JFrame {
 
             cell = row.createCell(1, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Mã Sản Phẩm");
+            cell.setCellValue("Mã Loại Sản Phẩm");
 
             cell = row.createCell(2, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Tên sản phẩm");
+            cell.setCellValue("Tên Loại sản phẩm");
 
-            cell = row.createCell(3, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Mã loại");
-
-            cell = row.createCell(4, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Giá");
-
-            cell = row.createCell(5, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Mô tả");
-
-            cell = row.createCell(6, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Hình ảnh");
-
-            cell = row.createCell(7, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Trạng thái");
+            
             //Kết nối DB
 
             Connection con = ConnectDB.KetnoiDB();
             String sql = "";
-            String tc = jComboBox1.getSelectedItem().toString();
-            String txt = timkiemtxt.getText().trim();
-            if (tc == "Sắp xếp tăng") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N'%"+ txt + "%' order by trangthai'%";
-            } else if (tc == "Sắp xếp giảm") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N'%"+ txt + "%' order by trangthai'% desc";
-            }
-            else{
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%"+ txt + "%'";
-
-            }
+          
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             //Đổ dữ liệu từ rs vào các ô trong excel
@@ -577,32 +449,12 @@ public class sanpham extends javax.swing.JFrame {
 
                 cell = row.createCell(1);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("masp"));
+                cell.setCellValue(rs.getString("msloai"));
 
                 cell = row.createCell(2);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("tensanpham"));
+                cell.setCellValue(rs.getString("tenloai"));
 
-                cell = row.createCell(3);
-                cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("maloai"));
-                
-                cell = row.createCell(6);
-                cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("gia"));
-
-                cell = row.createCell(6);
-                cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("mota"));
-
-                cell = row.createCell(6);
-                cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("hinhanh"));
-
-
-                cell = row.createCell(6);
-                cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("trangthai"));
 
                 i++;
             }
@@ -623,61 +475,23 @@ public class sanpham extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_xuatexcelMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String tc = jComboBox1.getSelectedItem().toString();
-        String txt = timkiemtxt.getText().trim();
-        try {
-            Connection con = ConnectDB.KetnoiDB();
-            Statement st = con.createStatement();
-            String sql;
-            if (tc == "Sắp xếp tăng") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%"+ txt + "%' or hinhanh like'%"+ txt + "%'order by trangthai'%";
-            } else if (tc == "Sắp xếp giảm") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%"+ txt + "%' or hinhanh like'%"+ txt + "%'order by trangthai'%";
-            } else {
-                load_themsanpham();
-                return;
-            }
-
-            ResultSet rs = st.executeQuery(sql);
-            //   tbLoaiSach.removeAll();
-            String[] arr = {"Mã sản phẩm", "Tên Sản Phẩm", "Mã Loại", "Giá", "Mô tả", "Hình Ảnh","Trạng Thái"};
-            DefaultTableModel model = new DefaultTableModel(arr, 0);
-            while (rs.next()) {
-                Vector v = new Vector();
-                v.add(rs.getString("masp"));
-                v.add(rs.getString("tensp"));
-                v.add(rs.getString("maloai"));
-                v.add(rs.getString("gia"));
-                v.add(rs.getString("mota"));
-                v.add(rs.getString("hinhanh"));
-                v.add(getTrangThai(rs.getString("trangthai")));
-                model.addRow(v);
-            }
-            tablehienthi.setModel(model);
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void Themkm(String masp, String tensp, String maloai, String gia,String mota, String hinhanh, String trangthai) {
+    private void Themkm(String maloai, String tenloai) {
 //        Date bd = new Date();
 //        Date kt = new Date();
         // Chuyển đổi ngày thành định dạng chuỗi SQL
         
         try {
             Connection conn = ConnectDB.KetnoiDB();
-            String sql = "INSERT into sanpham Values('" + masp + "',N'" + tensp + "',N'" + maloai + "','" + gia + "','" + mota + "','" + hinhanh + "','"+trangthai+"')";
+            String sql = "INSERT into loaissanpham Values('" + maloai + "',N'" + tenloai + "')";
 
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
             JOptionPane.showMessageDialog(this, "Nhập thành công");
-            load_themsanpham();
+            load_themloaisanpham();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "loi");
+            JOptionPane.showMessageDialog(this, "Lỗi");
         }
     }
     
@@ -686,11 +500,11 @@ public class sanpham extends javax.swing.JFrame {
     private void ktmasp(String kmsp) {
         try {
             Connection conn = ConnectDB.KetnoiDB();
-            String check = "select masp from sanpham";
+            String check = "select maloai from loaisanpham";
             Statement tt = conn.createStatement();
             ResultSet rs = tt.executeQuery(check);
             while (rs.next()) {
-                String m = rs.getString("masp");
+                String m = rs.getString("maloai");
                 if (m.equals(kmsp)) {
                     i = 1;
                     //tbkm.setText("Mã khuyến mãi đã tồn tại");
@@ -724,18 +538,13 @@ public class sanpham extends javax.swing.JFrame {
             
             while (itr.hasNext()) {
                 Row row = itr.next(); // Lấy dòng tiếp theo
-                String masp = getCellValueAsString(row.getCell(0));
-                String tensp = getCellValueAsString(row.getCell(1));
-                String maloai = getCellValueAsString(row.getCell(2));
-                String gia = getCellValueAsString(row.getCell(3));
-                String mota = getCellValueAsString(row.getCell(4));
-                String hinhanh = getCellValueAsString(row.getCell(5));
-                String trangthai = getCellValueAsString(row.getCell(6));
-                
+                String maloai = getCellValueAsString(row.getCell(0));
+                String tenloai = getCellValueAsString(row.getCell(1));
+              
 
-                ktmasp(masp);
+                ktmasp(maloai);
                 if (i == 0) {
-                    Themkm(masp, tensp, maloai, gia, mota, hinhanh, trangthai);
+                    Themkm(maloai, tenloai);
                 }
 
             }
@@ -812,34 +621,8 @@ public class sanpham extends javax.swing.JFrame {
         model.addRow(row);
     }
 
-    private String getTrangThai(String trangThaiDb) {
-    switch (trangThaiDb) {
-        case "CON_HANG":
-            return "Còn hàng";
-        case "HET_HANG":
-            return "Hết hàng";
-        case "NGUNG_BAN":
-            return "Ngừng bán";
-        default:
-            return "Không rõ";
-    }
-}
-    public enum TrangThai {
-        CON_HANG("Còn hàng"),
-        HET_HANG("Hết hàng"),
-        NGUNG_BAN("Ngừng bán");
+    
 
-        private final String ten;
-
-        TrangThai(String ten) {
-            this.ten = ten;
-        }
-
-        @Override
-        public String toString() {
-            return ten; // Trả về tên hiển thị cho enum
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -858,20 +641,21 @@ public class sanpham extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(sanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(sanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(sanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(sanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new sanpham().setVisible(true);
+                new loaisanpham().setVisible(true);
 
             }
         });
@@ -880,10 +664,8 @@ public class sanpham extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Themsanpham;
     private javax.swing.JButton buttonexit;
-    private javax.swing.JButton buttontk;
     private javax.swing.JLabel daidien1;
     private javax.swing.JLabel docfile;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -892,7 +674,6 @@ public class sanpham extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablehienthi;
-    private javax.swing.JTextField timkiemtxt;
     private javax.swing.JLabel xuatexcel;
     // End of variables declaration//GEN-END:variables
 }
