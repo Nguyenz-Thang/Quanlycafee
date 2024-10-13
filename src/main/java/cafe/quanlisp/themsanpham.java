@@ -336,24 +336,7 @@ public class themsanpham extends javax.swing.JDialog {
         String masp = masptxt.getText().trim();
         String newFileName = masp + "_" + selectedFile.getName();
         anhtxt.setText(newFileName);
-// TODO add your handling code here:
-//        JFileChooser fileChooser = new JFileChooser(); //sử dụng jfileChooser để cho phép người dùng chọn ảnh
-//        fileChooser.setDialogTitle("Chọn ảnh");
-//        fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg", "gif"));
-//        int result = fileChooser.showOpenDialog(this);
-//        if (result == JFileChooser.APPROVE_OPTION) {
-//            selectedFile = fileChooser.getSelectedFile();
-//            String path = selectedFile.getAbsolutePath();
-//            anhtxt.setText(path);
-//
-//            //hiển thị hình ảnh trong jlabel
-////            ImageIcon iconn = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH));
-////            anhlabble.setIcon(iconn);
-//            ImageIcon icon = new ImageIcon(path);
-//            Image img = icon.getImage();
-//            Image resizedImage = img.getScaledInstance(anhlabble.getWidth(), anhlabble.getHeight(), Image.SCALE_SMOOTH);
-//            anhlabble.setIcon(new ImageIcon(resizedImage)); // Đặt ảnh đã resize lên JLabel
-//        }
+
     }//GEN-LAST:event_chonanhbuttonActionPerformed
 
     public void showImage(String imagePath) {

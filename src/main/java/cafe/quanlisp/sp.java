@@ -50,7 +50,7 @@ public class sp extends javax.swing.JFrame {
         sanphamtext1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        sanphamtext = new javax.swing.JLabel();
+        loaisanphamtext = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         sanphamtext2 = new javax.swing.JLabel();
@@ -116,6 +116,11 @@ public class sp extends javax.swing.JFrame {
 
         sanphamtext1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sanphamtext1.setText("Sản phẩm");
+        sanphamtext1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sanphamtext1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -154,9 +159,19 @@ public class sp extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(204, 204, 255));
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
-        sanphamtext.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        sanphamtext.setText("Loại sản phẩm");
+        loaisanphamtext.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        loaisanphamtext.setText("Loại sản phẩm");
+        loaisanphamtext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loaisanphamtextMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -164,14 +179,14 @@ public class sp extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(sanphamtext)
+                .addComponent(loaisanphamtext)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sanphamtext, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loaisanphamtext, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -313,6 +328,24 @@ public class sp extends javax.swing.JFrame {
         dispose();  //an trang cu
     }//GEN-LAST:event_jPanel4MouseClicked
 
+    private void sanphamtext1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sanphamtext1MouseClicked
+        // TODO add your handling code here:
+        dispose();
+        sanpham sp = new sanpham();
+        sp.setVisible(true);
+    }//GEN-LAST:event_sanphamtext1MouseClicked
+
+    private void loaisanphamtextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loaisanphamtextMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        loaisanpham sp = new loaisanpham();
+        sp.setVisible(true);
+    }//GEN-LAST:event_loaisanphamtextMouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -362,7 +395,7 @@ public class sp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel sanphamtext;
+    private javax.swing.JLabel loaisanphamtext;
     private javax.swing.JLabel sanphamtext1;
     private javax.swing.JLabel sanphamtext2;
     // End of variables declaration//GEN-END:variables
