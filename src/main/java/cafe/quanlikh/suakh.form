@@ -79,17 +79,9 @@
                       </Group>
                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jScrollPane6" pref="214" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane7" max="32767" attributes="0"/>
-                                  <Component id="txtns" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jScrollPane6" pref="214" max="32767" attributes="0"/>
+                          <Component id="jScrollPane7" max="32767" attributes="0"/>
+                          <Component id="txtns" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtgioitinh" alignment="0" pref="214" max="32767" attributes="0"/>
                           <Component id="jScrollPane8" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane9" alignment="0" max="32767" attributes="0"/>
@@ -101,6 +93,10 @@
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="226" max="32767" attributes="0"/>
           </Group>
@@ -109,13 +105,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -186,7 +181,7 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="2"/>
+          <Font name="Segoe UI" size="24" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="S&#x1eed;a kh&#xe1;ch h&#xe0;ng"/>
       </Properties>

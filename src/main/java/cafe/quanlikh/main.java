@@ -8,15 +8,19 @@ import cafe.baocaoquanli.themkm;
 import cafe.login;
 import cafe.quanlikh.suakh;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,10 +28,16 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import static org.apache.poi.ss.usermodel.CellType.BOOLEAN;
+import static org.apache.poi.ss.usermodel.CellType.FORMULA;
+import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
+import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -74,6 +84,7 @@ public class main extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,6 +107,7 @@ public class main extends javax.swing.JFrame {
         vaitro = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -218,6 +230,15 @@ public class main extends javax.swing.JFrame {
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 830));
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xls.png"))); // NOI18N
+        jButton2.setText("Nhập file Excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,35 +248,44 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(52, 52, 52)
-                        .addComponent(timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(198, 198, 198)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(252, 252, 252))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(432, 432, 432)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(202, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(timkiem))
-                .addGap(26, 26, 26)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(143, 143, 143)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -280,7 +310,7 @@ public class main extends javax.swing.JFrame {
 //        txtgioitinh.setSelectedItem(tb.getValueAt(i, 3).toString());
 //        txtsdt.setText(tb.getValueAt(i, 4).toString());
 //        txtdiachi.setText(tb.getValueAt(i, 5).toString());
-    int i;
+        int i;
         i = txtqlkh.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) txtqlkh.getModel();
 
@@ -305,8 +335,7 @@ public class main extends javax.swing.JFrame {
 // Hiển thị form suakm
         tk.setVisible(true);
 
-        
-       
+
     }//GEN-LAST:event_txtqlkhMouseClicked
     private static CellStyle DinhdangHeader(XSSFSheet sheet) {
         // Create font
@@ -327,9 +356,8 @@ public class main extends javax.swing.JFrame {
         cellStyle.setWrapText(true);
         return cellStyle;
     }
-    
-    
-    
+
+
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         try {
 
@@ -363,11 +391,11 @@ public class main extends javax.swing.JFrame {
             cell = row.createCell(2, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
             cell.setCellValue("Họ tên");
-            
+
             cell = row.createCell(3, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
             cell.setCellValue("Năm sinh");
-            
+
             cell = row.createCell(4, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
             cell.setCellValue("Giới tính");
@@ -381,7 +409,6 @@ public class main extends javax.swing.JFrame {
             cell.setCellValue("Địa chỉ");
 
             //Kết nối DB
-
             Connection con = ConnectDB.KetnoiDB();
             String sql = "Select * From khachhang";
             PreparedStatement st = con.prepareStatement(sql);
@@ -412,7 +439,7 @@ public class main extends javax.swing.JFrame {
                 cell = row.createCell(2);
                 cell.setCellStyle(cellStyle_data);
                 cell.setCellValue(rs.getString("tenkhachhang"));
-                
+
                 java.sql.Date bd = new java.sql.Date(rs.getDate("ngaysinh").getTime());
                 CellStyle cellStyle = workbook.createCellStyle();
                 cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy"));
@@ -422,7 +449,7 @@ public class main extends javax.swing.JFrame {
                 cell = row.createCell(3);
                 cell.setCellValue(bd);
                 cell.setCellStyle(cellStyle);
-                
+
                 cell = row.createCell(4);
                 cell.setCellStyle(cellStyle_data);
                 cell.setCellValue(rs.getString("gioitinh"));
@@ -443,54 +470,54 @@ public class main extends javax.swing.JFrame {
                 spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
-            File f = new File("C:\\TestJava\\"+filename+".xlsx");
-                FileOutputStream out = new FileOutputStream(f);
-                workbook.write(out);
-                out.close();
-                JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
-                e.printStackTrace();
-            }
+            File f = new File("C:\\TestJava\\" + filename + ".xlsx");
+            FileOutputStream out = new FileOutputStream(f);
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         String tk = timkiemm.getText().trim();
-        
-try {
-    Connection con = ConnectDB.KetnoiDB();
-    Statement st = con.createStatement();
-    String sql = "Select * from khachhang where makh like '%" + tk + "%' or tenkhachhang like N'%" + tk + "%' or gioitinh like '%" + tk + "%' or sodienthoai like '%" + tk + "%' or diachi like N'%" + tk + "%'";
-    ResultSet rs = st.executeQuery(sql);
-    
-    // Khởi tạo mô hình bảng
-    String[] arr = {"Mã khách hàng", "Họ tên", "Năm sinh", "Giới tính", "Điện thoại", "Địa chỉ"};
-    DefaultTableModel model = new DefaultTableModel(arr, 0);
-    
-    // Kiểm tra nếu ResultSet rỗng
-    if (!rs.isBeforeFirst()) { // Kiểm tra xem ResultSet có bất kỳ hàng nào không
-        // Hiển thị thông báo khi không có kết quả
-        JOptionPane.showMessageDialog(null, "Không có đối tượng bạn muốn tìm kiếm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        // Thêm dữ liệu vào bảng nếu có kết quả
-        while (rs.next()) {
-            Vector v = new Vector();
-            v.add(rs.getString("makh"));
-            v.add(rs.getString("tenkhachhang"));
-            v.add(rs.getString("ngaysinh"));
-            v.add(rs.getString("gioitinh"));
-            v.add(rs.getString("sodienthoai"));
-            v.add(rs.getString("diachi"));
-            model.addRow(v);
+
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql = "Select * from khachhang where makh like '%" + tk + "%' or tenkhachhang like N'%" + tk + "%' or gioitinh like '%" + tk + "%' or sodienthoai like '%" + tk + "%' or diachi like N'%" + tk + "%'";
+            ResultSet rs = st.executeQuery(sql);
+
+            // Khởi tạo mô hình bảng
+            String[] arr = {"Mã khách hàng", "Họ tên", "Năm sinh", "Giới tính", "Điện thoại", "Địa chỉ"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+
+            // Kiểm tra nếu ResultSet rỗng
+            if (!rs.isBeforeFirst()) { // Kiểm tra xem ResultSet có bất kỳ hàng nào không
+                // Hiển thị thông báo khi không có kết quả
+                JOptionPane.showMessageDialog(null, "Không có đối tượng bạn muốn tìm kiếm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // Thêm dữ liệu vào bảng nếu có kết quả
+                while (rs.next()) {
+                    Vector v = new Vector();
+                    v.add(rs.getString("makh"));
+                    v.add(rs.getString("tenkhachhang"));
+                    v.add(rs.getString("ngaysinh"));
+                    v.add(rs.getString("gioitinh"));
+                    v.add(rs.getString("sodienthoai"));
+                    v.add(rs.getString("diachi"));
+                    model.addRow(v);
+                }
+                txtqlkh.setModel(model);
+            }
+
+            // Đóng kết nối
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        txtqlkh.setModel(model);
-    }
-    
-    // Đóng kết nối
-    con.close();
-} catch (Exception e) {
-    e.printStackTrace();
-}
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -510,8 +537,146 @@ try {
     }//GEN-LAST:event_soMouseClicked
 
     private void timkiemmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timkiemmMouseClicked
-        
+
     }//GEN-LAST:event_timkiemmMouseClicked
+    int i = 0;
+    String matontai = "";
+
+    private void ktmkh(String mkh) {
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String check = "select makh from khachhang";
+            Statement tt = conn.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+            while (rs.next()) {
+                String m = rs.getString("makh");
+                if (m.equals(mkh)) {
+                    i = 1;
+                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
+                    
+                    return;
+                } else {
+                    i = 0;
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+    private void ReadExcel(String tenfilepath) {
+
+        try {
+            FileInputStream fis = new FileInputStream(tenfilepath);
+
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+            XSSFSheet sheet = wb.getSheetAt(0); //Lấy sheet đầu tiên của file
+
+            Iterator<Row> itr = sheet.iterator();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            if (itr.hasNext()) {
+                itr.next(); // Bỏ qua dòng đầu tiên
+            }
+            while (itr.hasNext()) {//Lặp đến hết các dòng trong excel
+                Row row = itr.next();//Lấy dòng tiếp theo
+
+                // Thay đổi các tên phần tử ở đây:
+                String mkh, ht, dc, gt;
+                java.util.Date ns;
+                int dt;
+
+                // Gán giá trị từ từng ô trong Excel
+                mkh = row.getCell(0).getStringCellValue(); // Mã khách hàng
+
+                ht = row.getCell(1).getStringCellValue();// Họ tên
+                ns = row.getCell(2).getDateCellValue();// Ngày sinh (kiểu Date)
+
+                Cell gtCell = row.getCell(3);
+                gt = gtCell.getStringCellValue(); // Giới tính
+                dt = (int) row.getCell(4).getNumericCellValue();  // Số điện thoại
+                dc = row.getCell(5).getStringCellValue();  // Địa chỉ
+
+                // In ra giá trị đọc được
+                // Gọi hàm xử lý thêm khách hàng (hoặc hàm khác tuỳ vào yêu cầu)
+                ktmkh(mkh);
+                if (i == 0) {
+                    themkh(mkh, ht, dt, dc, gt, ns);
+                }else{
+                    matontai = matontai + mkh + " + ";
+                    System.out.println("Ma ton tai" + matontai);
+                }
+                
+            }
+            if (!matontai.equals("")) {
+                JOptionPane.showMessageDialog(this, "Không thêm được mã km : " + matontai + "vì mã đã tồn tại trong dữ liệu");
+                matontai = "";
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private String getCellValueAsString(Cell cell) {
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue();
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    return sdf.format(cell.getDateCellValue());
+                } else {
+                    return String.valueOf(cell.getNumericCellValue());
+                }
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return cell.getCellFormula();
+            default:
+                return "";
+        }
+    }
+
+    private void themkh(String mkh, String ht, int dt, String dc, String gt, java.util.Date ns) {
+//        Date bd = new Date();
+//        Date kt = new Date();
+        // Chuyển đổi ngày thành định dạng chuỗi SQL
+        Date sqlns = new Date(ns.getTime());
+
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String sql = "INSERT into khachhang Values('" + mkh + "',N'" + ht + "',N'" + dt + "','" + dc + "','" + gt + "','" + sqlns + "')";
+
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+          //  JOptionPane.showMessageDialog(this, "Nhập thành công");
+            load_quanlybancafe();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "loi");
+        }
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            JFileChooser fc = new JFileChooser();
+            int lc = fc.showOpenDialog(this);
+            if (lc == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+//                txtTenfile.setText(file.getPath());
+                String tenfile = file.getName();
+                if (tenfile.endsWith(".xlsx")) {    //endsWith chọn file có phần kết thúc ...
+                    ReadExcel(file.getPath());
+                    JOptionPane.showMessageDialog(this, "Nhập thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Phải chọn file excel");
+                }
+
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -550,11 +715,12 @@ try {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
