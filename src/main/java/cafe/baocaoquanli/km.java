@@ -274,6 +274,11 @@ public class km extends javax.swing.JFrame {
         them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
         them.setText("Thêm khuyến mãi");
+        them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                themMouseClicked(evt);
+            }
+        });
         them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 themActionPerformed(evt);
@@ -867,6 +872,10 @@ public class km extends javax.swing.JFrame {
         m.show();
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_themMouseClicked
 
     /**
      * @param args the command line arguments

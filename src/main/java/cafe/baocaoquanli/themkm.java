@@ -93,6 +93,12 @@ public class themkm extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Mô tả:");
 
+        ngaybd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ngaybdMouseClicked(evt);
+            }
+        });
+
         jScrollPane7.setViewportView(mota);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -256,6 +262,10 @@ public class themkm extends javax.swing.JFrame {
     private void makmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_makmKeyPressed
         
     }//GEN-LAST:event_makmKeyPressed
+
+    private void ngaybdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ngaybdMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ngaybdMouseClicked
 
     /**
      * @param args the command line arguments
