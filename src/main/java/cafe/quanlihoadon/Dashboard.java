@@ -63,7 +63,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             }
 
-            km.setModel(model);
+         //   km.setModel(model);
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
