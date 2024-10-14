@@ -274,11 +274,6 @@ public class km extends javax.swing.JFrame {
         them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
         them.setText("Thêm khuyến mãi");
-        them.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                themMouseClicked(evt);
-            }
-        });
         them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 themActionPerformed(evt);
@@ -651,7 +646,7 @@ public class km extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton11ActionPerformed
-    private void Themkm(String kmm, String tkm, String motaa, String phtram, java.util.Date bdau, java.util.Date kett) {
+    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
 //        Date bd = new Date();
 //        Date kt = new Date();
         // Chuyển đổi ngày thành định dạng chuỗi SQL
@@ -714,10 +709,10 @@ public class km extends javax.swing.JFrame {
             
             while (itr.hasNext()) {
                 Row row = itr.next(); // Lấy dòng tiếp theo
-                String kmm = getCellValueAsString(row.getCell(0));
-                String tkm = getCellValueAsString(row.getCell(1));
-                String motaa = getCellValueAsString(row.getCell(2));
-                String phtram = getCellValueAsString(row.getCell(3));
+                String kmm = row.getCell(0).getStringCellValue();
+                String tkm = row.getCell(1).getStringCellValue();
+                String motaa = row.getCell(2).getStringCellValue();
+                int phtram = (int) row.getCell(3).getNumericCellValue();
 
                 java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
                 java.util.Date kt = row.getCell(5).getDateCellValue(); // Ngày kết thúc
@@ -740,25 +735,30 @@ public class km extends javax.swing.JFrame {
         }
     }
 
-    private String getCellValueAsString(Cell cell) {
-        switch (cell.getCellType()) {
-            case STRING:
-                return cell.getStringCellValue();
-            case NUMERIC:
-                if (DateUtil.isCellDateFormatted(cell)) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    return sdf.format(cell.getDateCellValue());
-                } else {
-                    return String.valueOf(cell.getNumericCellValue());
-                }
-            case BOOLEAN:
-                return String.valueOf(cell.getBooleanCellValue());
-            case FORMULA:
-                return cell.getCellFormula();
-            default:
-                return "";
-        }
-    }
+//    private String getCellValueAsString(Cell cell) {
+//        switch (cell.getCellType()) {
+//            case STRING:
+//                System.out.println("String");
+//                return cell.getStringCellValue();
+//                
+//            case NUMERIC:
+//                System.out.println("NUMeric");
+//                if (DateUtil.isCellDateFormatted(cell)) {
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                    return sdf.format(cell.getDateCellValue());
+//                } else {
+//                    return String.valueOf(cell.getNumericCellValue());
+//                }
+//            case BOOLEAN:
+//                System.out.println("boll");
+//                return String.valueOf(cell.getBooleanCellValue());
+//            case FORMULA:
+//                
+//                return cell.getCellFormula();
+//            default:
+//                return "";
+//        }
+//    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             JFileChooser fc = new JFileChooser();
@@ -873,10 +873,6 @@ public class km extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
-    private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_themMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -902,6 +898,18 @@ public class km extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(km.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
