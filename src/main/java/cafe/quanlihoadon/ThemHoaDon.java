@@ -4,14 +4,13 @@ package cafe.quanlihoadon;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 import cafe.quanlikh.ConnectDB;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.math3.stat.descriptive.summary.Product;
@@ -151,6 +150,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
         jLabel8.setText("Trạng thái");
 
         trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trạng thái", "Đã thanh toán", "Chưa thanh toán" }));
+        trangThai.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         trangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trangThaiActionPerformed(evt);
@@ -239,9 +239,9 @@ public class ThemHoaDon extends javax.swing.JFrame {
                                 .addGap(111, 111, 111)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(maNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(maKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(maNhanVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(53, 53, 53)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
@@ -254,7 +254,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
                                                 .addComponent(tbkm, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(chonSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ngayLapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(ngayLapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,7 +421,6 @@ public class ThemHoaDon extends javax.swing.JFrame {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, makhachhang); // Đặt mã khách hàng vào truy vấn
             ResultSet rs = pst.executeQuery();
-
             if (rs.next()) {
                 ten = rs.getString("tenkhachhang"); // Lấy tên khách hàng
             }
@@ -499,24 +498,54 @@ public class ThemHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            // 1. Lấy dữ liệu từ giao diện
+            // Lấy dữ liệu từ giao diện
             String maKhachHang_1 = maKhachHang.getSelectedItem().toString();
             String maNhanVien_1 = maNhanVien.getSelectedItem().toString();
-            Date ngayLapHoaDon_1 = new Date(ngayLapHoaDon.getDate().getTime());
+            java.util.Date ngayLapHoaDon_1 = ngayLapHoaDon.getDate();  // Lấy ngày từ giao diện
             String trangThai_1 = trangThai.getSelectedItem().toString();
-            double tongTienHoaDon_1 = Double.parseDouble(tongTienHoaDon.getText());
+            String tongTienText = tongTienHoaDon.getText().trim(); // Lấy và trim chuỗi tổng tiền
 
-            // 2. Kết nối với cơ sở dữ liệu
+            // Kiểm tra ràng buộc
+            if (maKhachHang_1.equals("Mã khách hàng") || maKhachHang_1.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng");
+                return;
+            }
+            if (maNhanVien_1.equals("Mã nhân viên") || maNhanVien_1.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên");
+                return;
+            }
+
+            // Kiểm tra ngày lập hóa đơn
+            if (ngayLapHoaDon_1 == null) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày lập hóa đơn");
+                return;  // Trả về nếu ngày là null
+            }
+// Chuyển đổi java.util.Date sang java.sql.Date
+            java.sql.Date sqlDate = new java.sql.Date(ngayLapHoaDon_1.getTime());
+
+            // Kiểm tra sản phẩm được chọn
+            if (sanPhamDuocChon.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn ít nhất một sản phẩm");
+                return;
+            }
+            // Chuyển đổi tổng tiền từ chuỗi sang số khi có >= 1 sản phâm được chọn 
+            double tongTienHoaDon_1 = Double.parseDouble(tongTienText);
+
+            if (trangThai_1.equals("Trạng thái") || trangThai_1.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn trạng thái");
+                return;
+            }
+            // Kết nối với cơ sở dữ liệu
             Connection con = ConnectDB.KetnoiDB();
             con.setAutoCommit(false);  // Tắt auto commit để thực hiện nhiều lệnh cùng lúc
 
-            // 3. Thêm hóa đơn vào bảng `hoadon`
+            // Thêm hóa đơn vào bảng `hoadon`
             String sqlInsertHoaDon = "INSERT INTO hoadon (makh, manv, ngaylap, tongtien, trangthai) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement psHoaDon = con.prepareStatement(sqlInsertHoaDon, Statement.RETURN_GENERATED_KEYS);
 
             psHoaDon.setString(1, maKhachHang_1);
             psHoaDon.setString(2, maNhanVien_1);
-            psHoaDon.setDate(3, new java.sql.Date(ngayLapHoaDon_1.getTime()));
+            psHoaDon.setDate(3, sqlDate); // Sử dụng java.sql.Date đã chuyển đổi
             psHoaDon.setDouble(4, tongTienHoaDon_1);
             psHoaDon.setString(5, trangThai_1);
 
@@ -530,7 +559,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 maHoaDon_1 = rs.getInt(1);  // Lấy mã hóa đơn vừa tạo
             }
 
-            // 4. Thêm từng chi tiết hóa đơn vào bảng `chitiethoadon`
+            // Thêm từng chi tiết hóa đơn vào bảng `chitiethoadon`
             String sqlInsertChiTietHD = "INSERT INTO chitiethoadon (mahd, masp, soluong, gia, machitiethd) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement psChiTietHD = con.prepareStatement(sqlInsertChiTietHD);
             for (int i = 0; i < sanPhamDuocChon.getRowCount(); i++) {
@@ -539,23 +568,22 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 int soLuong = Integer.parseInt(sanPhamDuocChon.getValueAt(i, 2).toString());  // Lấy số lượng từ cột 2
                 double gia = Double.parseDouble(sanPhamDuocChon.getValueAt(i, 3).toString());  // Lấy giá từ cột 3
 
-                psChiTietHD.setInt(1, maHoaDon_1);  // Mã hóa đơn, đảm bảo là kiểu int
+                psChiTietHD.setInt(1, maHoaDon_1);  // Mã hóa đơn
                 psChiTietHD.setString(2, maSP);  // Mã sản phẩm
                 psChiTietHD.setInt(3, soLuong);  // Số lượng
                 psChiTietHD.setDouble(4, gia);  // Giá
                 psChiTietHD.setString(5, maChiTietHoaDon);  // Mã chi tiết hóa đơn
-                psChiTietHD.addBatch();  // Thêm vào batch để thực hiện một lần
-                System.out.println("Thêm sản phẩm: " + maSP + ", số lượng: " + soLuong + ", giá: " + gia);
+                psChiTietHD.addBatch();  // Thêm vào batch
             }
 
             // Thực hiện batch
             psChiTietHD.executeBatch();
 
-            // 5. Commit transaction
+            // Commit transaction
             con.commit();
             System.out.println("Giao dịch thành công");
 
-            // 6. Hiển thị thông báo thành công
+            // Hiển thị thông báo thành công
             JOptionPane.showMessageDialog(this, "Thêm hóa đơn và chi tiết hóa đơn thành công!");
 
             // Đóng kết nối
@@ -568,11 +596,104 @@ public class ThemHoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + e.getMessage());
         }
 
+//        try {
+//            // 1. Lấy dữ liệu từ giao diện
+//            String maKhachHang_1 = maKhachHang.getSelectedItem().toString();
+//            String maNhanVien_1 = maNhanVien.getSelectedItem().toString();
+//            java.util.Date ngayLapHoaDon_1 = ngayLapHoaDon.getDate();  // Lấy ngày từ giao diện
+//
+////            Date ngayLapHoaDon_1 = new Date(ngayLapHoaDon.getDate().getTime());
+//            String trangThai_1 = trangThai.getSelectedItem().toString();
+//            double tongTienHoaDon_1 = Double.parseDouble(tongTienHoaDon.getText());
+//
+//            // Kiểm tra ràng buộc
+//            if (maKhachHang_1.equals("Mã khách hàng") || maKhachHang_1.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng");
+//                return;
+//            }
+//            if (maNhanVien_1.equals("Mã nhân viên") || maNhanVien_1.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên");
+//                return;
+//            }
+//            // Kiểm tra ngày lập hóa đơn
+//            if (ngayLapHoaDon_1 == null) {
+//                JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày lập hóa đơn");
+//                return;  // Trả về nếu ngày là null
+//            }
+//            // Chuyển đổi java.util.Date sang java.sql.Date
+//            java.sql.Date sqlDate = new java.sql.Date(ngayLapHoaDon_1.getTime());
+//
+//            // Kiểm tra sản phẩm được chọn
+//            if (sanPhamDuocChon.getRowCount() == 0) {
+//                JOptionPane.showMessageDialog(this, "Vui lòng chọn ít nhất một sản phẩm");
+//                return;
+//            }
+//            // 2. Kết nối với cơ sở dữ liệu
+//            Connection con = ConnectDB.KetnoiDB();
+//            con.setAutoCommit(false);  // Tắt auto commit để thực hiện nhiều lệnh cùng lúc
+//
+//            // 3. Thêm hóa đơn vào bảng `hoadon`
+//            String sqlInsertHoaDon = "INSERT INTO hoadon (makh, manv, ngaylap, tongtien, trangthai) VALUES (?, ?, ?, ?, ?)";
+//            PreparedStatement psHoaDon = con.prepareStatement(sqlInsertHoaDon, Statement.RETURN_GENERATED_KEYS);
+//
+//            psHoaDon.setString(1, maKhachHang_1);
+//            psHoaDon.setString(2, maNhanVien_1);
+//            psHoaDon.setDate(3, new java.sql.Date(ngayLapHoaDon_1.getTime()));
+//            psHoaDon.setDouble(4, tongTienHoaDon_1);
+//            psHoaDon.setString(5, trangThai_1);
+//
+//            // Thực hiện lệnh thêm hóa đơn
+//            psHoaDon.executeUpdate();
+//
+//            // Lấy mã hóa đơn vừa thêm (auto-increment)
+//            ResultSet rs = psHoaDon.getGeneratedKeys();
+//            int maHoaDon_1 = 0;
+//            if (rs.next()) {
+//                maHoaDon_1 = rs.getInt(1);  // Lấy mã hóa đơn vừa tạo
+//            }
+//
+//            // 4. Thêm từng chi tiết hóa đơn vào bảng `chitiethoadon`
+//            String sqlInsertChiTietHD = "INSERT INTO chitiethoadon (mahd, masp, soluong, gia, machitiethd) VALUES (?, ?, ?, ?, ?)";
+//            PreparedStatement psChiTietHD = con.prepareStatement(sqlInsertChiTietHD);
+//            for (int i = 0; i < sanPhamDuocChon.getRowCount(); i++) {
+//                String maChiTietHoaDon = "MCHD" + maHoaDon_1 + "" + (i + 1);
+//                String maSP = sanPhamDuocChon.getValueAt(i, 0).toString();  // Lấy mã sản phẩm từ cột 0
+//                int soLuong = Integer.parseInt(sanPhamDuocChon.getValueAt(i, 2).toString());  // Lấy số lượng từ cột 2
+//                double gia = Double.parseDouble(sanPhamDuocChon.getValueAt(i, 3).toString());  // Lấy giá từ cột 3
+//
+//                psChiTietHD.setInt(1, maHoaDon_1);  // Mã hóa đơn, đảm bảo là kiểu int
+//                psChiTietHD.setString(2, maSP);  // Mã sản phẩm
+//                psChiTietHD.setInt(3, soLuong);  // Số lượng
+//                psChiTietHD.setDouble(4, gia);  // Giá
+//                psChiTietHD.setString(5, maChiTietHoaDon);  // Mã chi tiết hóa đơn
+//                psChiTietHD.addBatch();  // Thêm vào batch để thực hiện một lần
+//                System.out.println("Thêm sản phẩm: " + maSP + ", số lượng: " + soLuong + ", giá: " + gia);
+//            }
+//
+//            // Thực hiện batch
+//            psChiTietHD.executeBatch();
+//
+//            // 5. Commit transaction
+//            con.commit();
+//            System.out.println("Giao dịch thành công");
+//
+//            // 6. Hiển thị thông báo thành công
+//            JOptionPane.showMessageDialog(this, "Thêm hóa đơn và chi tiết hóa đơn thành công!");
+//
+//            // Đóng kết nối
+//            psHoaDon.close();
+//            psChiTietHD.close();
+//            con.close();
+//            das.load_hd();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + e.getMessage());
+//        }
 
     }//GEN-LAST:event_themHoaDonActionPerformed
 
     private void huyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_huyHoaDonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_huyHoaDonActionPerformed
 
     private void tongTienHoaDonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tongTienHoaDonKeyPressed
