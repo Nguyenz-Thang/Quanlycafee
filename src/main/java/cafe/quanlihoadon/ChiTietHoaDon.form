@@ -103,11 +103,6 @@
                               <Component id="jScrollPane5" min="-2" pref="218" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel5" min="-2" pref="118" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="ngayLapHoaDon" min="-2" pref="218" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="xoa" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="sua" min="-2" max="-2" attributes="0"/>
@@ -121,14 +116,14 @@
                                   <Component id="jLabel6" min="-2" pref="96" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel10" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="trangThai" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane6" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane4" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane6" alignment="0" pref="218" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" alignment="0" pref="218" max="32767" attributes="0"/>
+                                  <Component id="ngayLapHoaDon" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -173,7 +168,7 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="ngayLapHoaDon" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
@@ -241,8 +236,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y l&#x1ead;p h&#xf3;a &#x111;&#x1a1;n"/>
           </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="ngayLapHoaDon">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -395,6 +388,8 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="ngayLapHoaDon">
         </Component>
       </SubComponents>
     </Container>
