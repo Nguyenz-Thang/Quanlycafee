@@ -68,6 +68,7 @@ public class suakm extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/file.png"))); // NOI18N
         jLabel1.setText(" Chi tiết khuyến mãi");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -96,6 +97,7 @@ public class suakm extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(makm);
 
+        xoa.setBackground(new java.awt.Color(255, 204, 204));
         xoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
         xoa.setText("Xóa");
@@ -105,6 +107,7 @@ public class suakm extends javax.swing.JFrame {
             }
         });
 
+        them.setBackground(new java.awt.Color(204, 255, 255));
         them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/diskette.png"))); // NOI18N
         them.setText("Lưu");
@@ -218,10 +221,38 @@ public class suakm extends javax.swing.JFrame {
         String km = makm.getText().trim();
         String tkm = tenkm.getText().trim();
         String phtram = phantg.getText().trim();
-        Date bdau = new Date(ngaybd.getDate().getTime());
-        Date kett = new Date(ngaykt.getDate().getTime());
+        Date bdau;
+        Date kett;
         String motaa = mota.getText().trim();
         try {
+            if (tkm.equals("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên khuyến mại");
+                return;
+            }
+            if (ngaybd.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Chọn ngày bắt đầu khuyến mãi");
+                return;
+            }
+            if (ngaykt.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Chọn ngày kết thúc khuyến mãi");
+                return;
+            }
+            bdau = new Date(ngaybd.getDate().getTime());
+            kett = new Date(ngaykt.getDate().getTime());
+            try {
+                if (phtram.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm");
+                    return;
+                }
+                int phtramint = Integer.parseInt(phtram);
+                if (phtramint <= 0 || phtramint > 100) {
+                    JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm (lớn hơn 0 , nhỏ hơn 100)");
+                    return;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm phải là số nguyên");
+                return;
+            }
             Connection con = ConnectDB.KetnoiDB();
             String sql = "Update khuyenmai Set tenkhuyenmai=N'"+tkm+"',phantramgiam='"+phtram+"',ngaybatdau='"+bdau+"',ngayketthuc='"+kett+"',mota=N'"+motaa+"' where makm='"+km+"' ";
             Statement st = con.createStatement();

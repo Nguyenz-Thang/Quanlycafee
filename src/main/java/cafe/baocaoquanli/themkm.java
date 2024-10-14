@@ -24,11 +24,13 @@ public class themkm extends javax.swing.JFrame {
         initComponents();
     }
     private km parentForm;
+
     public themkm(km parent) {
         this.parentForm = parent; // Lưu tham chiếu vào biến
         initComponents();
         this.setLocationRelativeTo(null);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +69,7 @@ public class themkm extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
         jLabel1.setText("Thêm khuyến mãi");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         makm.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -106,6 +109,7 @@ public class themkm extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(tenkm);
 
+        them.setBackground(new java.awt.Color(204, 255, 255));
         them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
         them.setText("Thêm");
@@ -220,11 +224,14 @@ public class themkm extends javax.swing.JFrame {
         String km = makm.getText().trim();
         String tkm = tenkm.getText().trim();
         String phtram = phantg.getText().trim();
-        Date bdau = new Date(ngaybd.getDate().getTime());
-        Date kett = new Date(ngaykt.getDate().getTime());
+
         String motaa = mota.getText().trim();
-        
+
         try {
+            if (km.equals("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khuyến mại");
+                return;
+            }
 //            if(km==null){
 //                JOptionPane.showMessageDialog(this, "Nhập mã khuyến mãi !");
 //            }
@@ -232,17 +239,44 @@ public class themkm extends javax.swing.JFrame {
             String check = "select makm from khuyenmai";
             Statement tt = conn.createStatement();
             ResultSet rs = tt.executeQuery(check);
-            while(rs.next()){
+            while (rs.next()) {
                 String m = rs.getString("makm");
-                if(m.equals(km)){
+                if (m.equals(km)) {
                     //tbkm.setText("Mã khuyến mãi đã tồn tại");
                     JOptionPane.showMessageDialog(this, "Mã khuyến mãi đã tồn tại");
                     return;
-                }else{
-                    tbkm.setText("");
                 }
+
             }
-            
+
+            if (tkm.equals("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên khuyến mại");
+                return;
+            }
+            if (ngaybd.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Chọn ngày bắt đầu khuyến mãi");
+                return;
+            }
+            if (ngaykt.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Chọn ngày kết thúc khuyến mãi");
+                return;
+            }
+            Date bdau = new Date(ngaybd.getDate().getTime());
+            Date kett = new Date(ngaykt.getDate().getTime());
+            try {
+                if (phtram.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm");
+                    return;
+                }
+                int phtramint = Integer.parseInt(phtram);
+                if (phtramint <= 0 || phtramint > 100) {
+                    JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm (lớn hơn 0 , nhỏ hơn 100)");
+                    return;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm phải là số nguyên");
+                return;
+            }
             Connection con = ConnectDB.KetnoiDB();
             String sql = "INSERT into khuyenmai Values('" + km + "',N'" + tkm + "',N'" + motaa + "','" + phtram + "','" + bdau + "','" + kett + "')";
             Statement st = con.createStatement();
@@ -251,16 +285,16 @@ public class themkm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thêm mới thành công !");
             if (parentForm != null) {
                 parentForm.load_km(); // Gọi hàm load_km() từ form gốc
-                }
+            }
             dispose();
-                
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_themActionPerformed
 
     private void makmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_makmKeyPressed
-        
+
     }//GEN-LAST:event_makmKeyPressed
 
     private void ngaybdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ngaybdMouseClicked
