@@ -43,7 +43,7 @@ CREATE TABLE khuyenmai (
 
 -- Tạo bảng hoadon
 CREATE TABLE hoadon (
-    mahd VARCHAR(10) PRIMARY KEY,
+    mahd VARCHAR(10)  PRIMARY KEY,
     ngaylap DATE NOT NULL,  -- Chuyển sang kiểu DATE
     makh VARCHAR(10),
     manv VARCHAR(10),  -- Mã nhân viên
