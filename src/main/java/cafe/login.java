@@ -6,6 +6,7 @@ package cafe;
 
 import cafe.baocaoquanli.bao;
 import cafe.baocaoquanli.km;
+import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.suakh;
 import cafe.quanlinhanvien.nv;
@@ -25,6 +26,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -125,17 +127,16 @@ public class login extends javax.swing.JFrame {
 //                    bao tkh = new bao();
 //                    tkh.show();
 //                    dispose();
-                    km k = new km();
-                    k.user(ten,vaitro);
-                    k.show();
+                    Dashboard d = new Dashboard();
+                    d.show();
                     dispose();
-                    
+
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Thông tin đăng nhập không đúng");
             }
             con.close();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
