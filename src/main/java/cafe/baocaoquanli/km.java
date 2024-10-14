@@ -438,7 +438,7 @@ public class km extends javax.swing.JFrame {
 //            }
 //        });
 // Hiển thị form suakm
-
+        
 //        try {
 //            String ma = model.getValueAt(i, 0).toString();
 //            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
@@ -454,6 +454,7 @@ public class km extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+
 
     }//GEN-LAST:event_kmMouseClicked
 
@@ -667,7 +668,6 @@ public class km extends javax.swing.JFrame {
     }
     int i = 0;
     String matontai = "";
-
     private void ktmakm(String kmm) {
         try {
             Connection conn = ConnectDB.KetnoiDB();
@@ -682,8 +682,8 @@ public class km extends javax.swing.JFrame {
                     matontai = matontai + kmm + " + ";
                     System.out.println("Ma ton tai" + matontai);
                     return;
-                } else {
-                    i = 0;
+                }else{
+                    i=0;
                 }
             }
         } catch (Exception e) {
@@ -706,7 +706,7 @@ public class km extends javax.swing.JFrame {
             if (itr.hasNext()) {
                 itr.next(); // Bỏ qua dòng đầu tiên
             }
-
+            
             while (itr.hasNext()) {
                 Row row = itr.next(); // Lấy dòng tiếp theo
                 String kmm = row.getCell(0).getStringCellValue();
@@ -717,6 +717,7 @@ public class km extends javax.swing.JFrame {
                 java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
                 java.util.Date kt = row.getCell(5).getDateCellValue(); // Ngày kết thúc
 
+                
                 ktmakm(kmm);
                 if (i == 0) {
                     Themkm(kmm, tkm, motaa, phtram, bd, kt);
@@ -728,7 +729,7 @@ public class km extends javax.swing.JFrame {
                 matontai = "";
                 return;
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
