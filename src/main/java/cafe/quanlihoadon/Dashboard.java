@@ -1,8 +1,10 @@
+package cafe.quanlihoadon;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package cafe.quanlihoadon;
+
 
 import cafe.baocaoquanli.km;
 import cafe.baocaoquanli.suakm;
@@ -48,25 +50,37 @@ public class Dashboard extends javax.swing.JFrame {
             Connection con;
             con = ConnectDB.KetnoiDB();
             java.sql.Statement st = con.createStatement();
-            String sql = "Select * From hoadon";
+
+            // Fixed the SQL query: added a space before "from hoadon hd"
+            String sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai "
+                    + "FROM hoadon hd "
+                    + "JOIN khachhang kh ON hd.makh = kh.makh "
+                    + "JOIN nhanvien nv ON hd.manv = nv.manv";
+
             ResultSet rs = st.executeQuery(sql);
-            //   tbLoaiSach.removeAll();
+
+            // Define column names for the JTable
             String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
+
+            // Populate the table model with data from the ResultSet
             while (rs.next()) {
                 Vector v = new Vector();
-                v.add(rs.getString("makm"));
-                v.add(rs.getString("tenkhuyenmai"));
-                v.add(rs.getString("phantramgiam"));
-                v.add(rs.getString("ngaybatdau"));
-                v.add(rs.getString("ngayketthuc"));
-                v.add(rs.getString("mota"));
+                v.add(rs.getString("mahd"));         // Invoice ID
+                v.add(rs.getString("tenkhachhang")); // Customer Name
+                v.add(rs.getString("tennhanvien"));  // Employee Name
+                v.add(rs.getString("ngaylap"));      // Date of invoice
+                v.add(rs.getString("tongtien"));     // Total amount
+                v.add(rs.getString("trangthai"));    // Status of the invoice
                 model.addRow(v);
-
             }
 
+            // Set the model for your JTable
             danhSachHoaDon.setModel(model);
+
+            // Close the connection
             con.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,7 +93,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         themHoaDon = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        txttimkiem = new javax.swing.JTextPane();
+        txtTimKiem = new javax.swing.JTextPane();
         timKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         danhSachHoaDon = new javax.swing.JTable();
@@ -111,12 +125,12 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        txttimkiem.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txttimkiemMouseClicked(evt);
+                txtTimKiemMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(txttimkiem);
+        jScrollPane5.setViewportView(txtTimKiem);
 
         timKiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         timKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
@@ -321,42 +335,64 @@ public class Dashboard extends javax.swing.JFrame {
         themHoaDon.show();
     }//GEN-LAST:event_themHoaDonActionPerformed
 
-    private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
+    private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
 
-    }//GEN-LAST:event_txttimkiemMouseClicked
+    }//GEN-LAST:event_txtTimKiemMouseClicked
 
     private void timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemActionPerformed
-        String txt = txttimkiem.getText().trim();
+        String txt = txtTimKiem.getText().trim();
         try {
-            Connection con = ConnectDB.KetnoiDB();
+            Connection con;
+            con = ConnectDB.KetnoiDB();
             java.sql.Statement st = con.createStatement();
-            String sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'";
+
+            // Fixed the SQL query: added a space before "from hoadon hd"
+            String sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai  "
+                    + "from hoadon hd "
+                    + "join nhanvien nv on hd.manv = nv.manv "
+                    + "join khachhang kh on hd.makh = kh.makh "
+                    + "where mahd like '%" + txt + "%' "
+                    + "or tenkhachhang like N'%" + txt + "%' "
+                    + "or tennhanvien like '%" + txt + "%' "
+                    + "or ngaylap like '%" + txt + "%' "
+                    + "or tongtien like '%" + txt + "%' "
+                    + "or trangthai like N'%" + txt + "%'";
+
             ResultSet rs = st.executeQuery(sql);
-            //   tbLoaiSach.removeAll();
-            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
+
+            // Define column names for the JTable
+            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
-            int i = 0;
+
+            // Populate the table model with data from the ResultSet
+            boolean check = true;
             while (rs.next()) {
-                i = 1;
+                check = false;
                 Vector v = new Vector();
-                v.add(rs.getString("makm"));
-                v.add(rs.getString("tenkhuyenmai"));
-                v.add(rs.getString("phantramgiam"));
-                v.add(rs.getString("ngaybatdau"));
-                v.add(rs.getString("ngayketthuc"));
-                v.add(rs.getString("mota"));
+                v.add(rs.getString("mahd"));         // Invoice ID
+                v.add(rs.getString("tenkhachhang")); // Customer Name
+                v.add(rs.getString("tennhanvien"));  // Employee Name
+                v.add(rs.getString("ngaylap"));      // Date of invoice
+                v.add(rs.getString("tongtien"));     // Total amount
+                v.add(rs.getString("trangthai"));    // Status of the invoice
                 model.addRow(v);
             }
-            if (i == 0) {
+            if (check) {
                 Vector v = new Vector();
                 v.add("Không có dữ liệuuuuuuu");
                 model.addRow(v);
             }
+            // Set the model for your JTable
             danhSachHoaDon.setModel(model);
+
+            // Close the connection
             con.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }//GEN-LAST:event_timKiemActionPerformed
 
     private void danhSachHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danhSachHoaDonMouseClicked
@@ -364,15 +400,15 @@ public class Dashboard extends javax.swing.JFrame {
         i = danhSachHoaDon.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) danhSachHoaDon.getModel();
 //
-        String ma = model.getValueAt(i, 0).toString();
-        String ten = model.getValueAt(i, 1).toString();
-        String bd = model.getValueAt(i, 2).toString();
-        String kt = model.getValueAt(i, 3).toString();
-        String phantram = model.getValueAt(i, 4).toString();
-        String mot = model.getValueAt(i, 5).toString();
+        String maHoaDon = model.getValueAt(i, 0).toString();
+        String tenKhachHang = model.getValueAt(i, 1).toString();
+        String tenNhanVien = model.getValueAt(i, 2).toString();
+        String ngayLap = model.getValueAt(i, 3).toString();
+        String tongTien = model.getValueAt(i, 4).toString();
+        String trangThai = model.getValueAt(i, 5).toString();
 
         ChiTietHoaDon cthd = new ChiTietHoaDon(this);
-        cthd.setData(ma, ten, bd, kt, phantram, mot);
+        cthd.setData(maHoaDon, tenKhachHang, tenNhanVien, ngayLap, tongTien, trangThai);
         cthd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cthd.setVisible(true);
     }//GEN-LAST:event_danhSachHoaDonMouseClicked
@@ -402,36 +438,52 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_nhapExcelActionPerformed
 
     private void sapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sapXepActionPerformed
-        String tc = sapXep.getSelectedItem().toString();
-        String txt = txttimkiem.getText().trim();
+        String tc = sapXep.getSelectedItem().toString();  // Lấy giá trị từ ComboBox
+        String txt = txtTimKiem.getText().trim();  // Lấy nội dung tìm kiếm
         try {
             Connection con = ConnectDB.KetnoiDB();
             java.sql.Statement st = con.createStatement();
             String sql;
-            if (tc == "Sắp xếp tăng") {
-                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
-            } else if (tc == "Sắp xếp giảm") {
-                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+
+            // Xây dựng câu truy vấn SQL với điều kiện sắp xếp và tìm kiếm
+            if (tc.equals("sắp xếp tăng")) {
+                sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai "
+                        + "FROM hoadon hd "
+                        + "JOIN khachhang kh ON hd.makh = kh.makh "
+                        + "JOIN nhanvien nv ON hd.manv = nv.manv "
+                        //                        
+                        + "ORDER BY hd.tongtien ASC";  // Sắp xếp tăng dần theo tổng tiền
+            } else if (tc.equals("sắp xếp giảm")) {
+                sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai "
+                        + "FROM hoadon hd "
+                        + "JOIN khachhang kh ON hd.makh = kh.makh "
+                        + "JOIN nhanvien nv ON hd.manv = nv.manv "
+                        //                       
+                        + "ORDER BY hd.tongtien DESC";  // Sắp xếp giảm dần theo tổng tiền
             } else {
-                load_hd();
+                load_hd();  // Nếu không có giá trị sắp xếp hợp lệ, tải dữ liệu bình thường
                 return;
             }
 
             ResultSet rs = st.executeQuery(sql);
-            //   tbLoaiSach.removeAll();
-            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
+
+            // Cấu trúc bảng hiển thị
+            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
+
+            // Thêm dữ liệu vào bảng
             while (rs.next()) {
                 Vector v = new Vector();
-                v.add(rs.getString("makm"));
-                v.add(rs.getString("tenkhuyenmai"));
-                v.add(rs.getString("phantramgiam"));
-                v.add(rs.getString("ngaybatdau"));
-                v.add(rs.getString("ngayketthuc"));
-                v.add(rs.getString("mota"));
+                v.add(rs.getString("mahd"));
+                v.add(rs.getString("tenkhachhang"));
+                v.add(rs.getString("tennhanvien"));
+                v.add(rs.getString("ngaylap"));
+                v.add(rs.getString("tongtien"));
+                v.add(rs.getString("trangthai"));
                 model.addRow(v);
             }
-            danhSachHoaDon.setModel(model);
+            danhSachHoaDon.setModel(model);  // Thiết lập model cho JTable
+
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -473,6 +525,7 @@ public class Dashboard extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -501,7 +554,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel taik;
     private javax.swing.JButton themHoaDon;
     private javax.swing.JButton timKiem;
-    private javax.swing.JTextPane txttimkiem;
+    private javax.swing.JTextPane txtTimKiem;
     private javax.swing.JLabel vaitro;
     private javax.swing.JButton xuatExcel;
     // End of variables declaration//GEN-END:variables
