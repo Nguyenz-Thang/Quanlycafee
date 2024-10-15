@@ -49,6 +49,10 @@ public class nv extends javax.swing.JFrame {
         load_quanlybancafe();
         this.setLocationRelativeTo(null);
     }
+    public void user(String tk, String vaitroo) {
+        taik.setText(tk);
+        vaitro.setText(vaitroo);
+    }
     public void load_quanlybancafe() {
         try {
             Connection con;
@@ -413,12 +417,18 @@ public class nv extends javax.swing.JFrame {
         Dashboard d = new Dashboard();
         d.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        d.user(tk, vt);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         main m = new main();
         m.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        m.user(tk, vt);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked

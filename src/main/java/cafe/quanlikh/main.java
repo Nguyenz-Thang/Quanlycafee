@@ -61,7 +61,10 @@ public class main extends javax.swing.JFrame {
         load_quanlybancafe();
         this.setLocationRelativeTo(null);
     }
-
+    public void user(String tk, String vaitroo) {
+        taik.setText(tk);
+        vaitro.setText(vaitroo);
+    }
     public void load_quanlybancafe() {
         try {
             Connection con;
@@ -236,7 +239,7 @@ public class main extends javax.swing.JFrame {
         vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         vaitro.setForeground(new java.awt.Color(255, 255, 255));
         vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
+        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 30));
 
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 830));
@@ -693,6 +696,9 @@ public class main extends javax.swing.JFrame {
         Dashboard d = new Dashboard();
         d.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        d.user(tk, vt);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -705,6 +711,9 @@ public class main extends javax.swing.JFrame {
         km m = new km();
         m.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        m.user(tk, vt);
     }//GEN-LAST:event_jLabel12MouseClicked
 
     /**
