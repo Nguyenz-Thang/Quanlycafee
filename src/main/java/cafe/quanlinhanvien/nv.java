@@ -501,14 +501,14 @@ public class nv extends javax.swing.JFrame {
         //
         String manv = model.getValueAt(i, 0).toString();
         String ht = model.getValueAt(i, 1).toString();
-        String cv = model.getValueAt(i, 3).toString();
-        String sdt = model.getValueAt(i, 4).toString();
-        String tk = model.getValueAt(i, 2).toString();
+        String cv = model.getValueAt(i, 2).toString();
+        String sdt = model.getValueAt(i, 3).toString();
+        String tk = model.getValueAt(i, 4).toString();
         String mk = model.getValueAt(i, 5).toString();
 
         suanv gg = new suanv(this);
         gg.setData(manv, ht, cv, sdt, tk, mk);
-        //gg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        gg.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         gg.setVisible(true);
         //        tk.addWindowListener(new java.awt.event.WindowAdapter() {
             //            @Override
@@ -605,7 +605,7 @@ public class nv extends javax.swing.JFrame {
             //Kết nối DB
 
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "";
+            String sql = "select * from nhanvien";
             //String tc = jComboBox1.getSelectedItem().toString();
             String txt = txttimkiem.getText().trim();
             PreparedStatement st = con.prepareStatement(sql);
@@ -635,7 +635,7 @@ public class nv extends javax.swing.JFrame {
 
                 cell = row.createCell(2);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("tennv"));
+                cell.setCellValue(rs.getString("tennhanvien"));
 
                 cell = row.createCell(3);
                 cell.setCellStyle(cellStyle_data);
@@ -673,9 +673,10 @@ public class nv extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         themnvv kk = new themnvv(this);
-        //kk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        kk.setVisible(true);
+        themnv k = new themnv(this);
+        k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //kk.setVisible(true);
+        k.show();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
