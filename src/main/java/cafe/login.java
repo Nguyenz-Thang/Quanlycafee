@@ -119,7 +119,7 @@ public class login extends javax.swing.JFrame {
             if (rs.next()) {
                 String vaitro = rs.getString("chucvu");
                 String ten = rs.getString("tennhanvien");
-                if (vaitro.equals("Admin")) {
+                if (vaitro.equals("Admin") || vaitro.equals("Quản lý")) {
                     nv tkh = new nv();
                     tkh.show();
                     dispose();
