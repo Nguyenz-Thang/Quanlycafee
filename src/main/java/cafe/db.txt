@@ -92,3 +92,28 @@ ALTER TABLE `sanpham`
   DROP `donvi_ml`,
   DROP `tenncc`,
   DROP `ngaynhap`;
+
+////////////////////////////////
+
+alter table sanpham
+add macongty varchar(20);
+
+CREATE TABLE nhacungcap(
+	macongty varchar(20) PRIMARY KEY,
+    tencongty varchar(50),
+    diachi varchar(200),
+    sdt varchar(10),
+    email varchar(100)
+);
+
+ALTER TABLE sanpham
+add FOREIGN KEY (macongty) REFERENCES nhacungcap(macongty)
+
+
+INSERT INTO nhacungcap (macongty, tencongty, diachi, sdt, email)
+VALUES 
+('CTY01', 'Công ty Cà phê Trung Nguyên', '82-84 Bùi Thị Xuân, Quận 1, TP.HCM', '02839296011', 'info@trungnguyen.com.vn'),
+('CTY02', 'Công ty Nestlé Việt Nam', 'Số 7 đường 17A, KCN Biên Hòa 2, Đồng Nai', '02513839388', 'contact@vn.nestle.com'),
+('CTY03', 'Công ty Annam Gourmet', '41A Thảo Điền, Quận 2, TP.HCM', '02835194109', 'info@annam-gourmet.com'),
+('CTY04', 'Công ty TNHH VinaCafe', 'Tam Phước, Biên Hòa, Đồng Nai', '02513987777', 'contact@vinacafe.com.vn'),
+('CTY05', 'Công ty Minh Long I', 'Số 333 Hương Lộ 2, Bình Tân, TP.HCM', '02837566518', 'info@minhlong.com');
