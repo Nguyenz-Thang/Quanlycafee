@@ -121,6 +121,7 @@ public class login extends javax.swing.JFrame {
                 String ten = rs.getString("tennhanvien");
                 if (vaitro.equals("Admin") || vaitro.equals("Quản lý")) {
                     nv tkh = new nv();
+                    tkh.user(tkk, vaitro);
                     tkh.show();
                     dispose();
                 } else {
@@ -129,6 +130,7 @@ public class login extends javax.swing.JFrame {
 //                    dispose();
                     Dashboard d = new Dashboard();
                     d.show();
+                    d.user(tkk, vaitro);
                     dispose();
 
                 }

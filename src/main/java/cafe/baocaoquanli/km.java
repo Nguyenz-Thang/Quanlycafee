@@ -916,12 +916,18 @@ public class km extends javax.swing.JFrame {
         main m = new main();
         m.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        m.user(tk, vt);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         Dashboard d = new Dashboard();
         d.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        d.user(tk, vt);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked

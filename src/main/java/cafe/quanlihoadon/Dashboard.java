@@ -45,6 +45,7 @@ public class Dashboard extends javax.swing.JFrame {
     public void user(String tk, String vaitroo) {
         taik.setText(tk);
         vaitro.setText(vaitroo);
+        
     }
 
     public void load_hd() {
@@ -249,7 +250,7 @@ public class Dashboard extends javax.swing.JFrame {
         taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
         taik.setText("  ");
-        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 180, -1));
+        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -285,7 +286,7 @@ public class Dashboard extends javax.swing.JFrame {
         vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         vaitro.setForeground(new java.awt.Color(255, 255, 255));
         vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
+        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 150, 30));
 
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, 830));
@@ -512,18 +513,27 @@ public class Dashboard extends javax.swing.JFrame {
         sp s = new sp();
         s.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         km m = new km();
         m.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        m.user(tk, vt);
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         main a = new main();
         a.show();
         dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        a.user(tk, vt);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     /**

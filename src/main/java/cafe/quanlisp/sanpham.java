@@ -612,7 +612,7 @@ public class sanpham extends javax.swing.JFrame {
                 spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
-            File f = new File("E:\\filesanphamxuatbaocao\\" + filename + ".xlsx");
+            File f = new File("C:\\Users\\Acer\\Desktop\\" + filename + ".xlsx");
             FileOutputStream out = new FileOutputStream(f);
             workbook.write(out);
             out.close();
