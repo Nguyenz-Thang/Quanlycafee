@@ -6,8 +6,11 @@ package cafe.quanlinhanvien;
 
 import cafe.quanlikh.ConnectDB;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -187,6 +190,19 @@ public class themnv extends javax.swing.JFrame {
         String mk = txtmk.getText().trim();
 
         try {
+            Connection conn;
+            conn = ConnectDB.KetnoiDB();
+            Statement sttk = conn.createStatement();
+            String sqltk = "Select taikhoan From nhanvien";
+            ResultSet rs = sttk.executeQuery(sqltk);
+            while (rs.next()) {
+                String tkk = rs.getString("taikhoan");
+                if(tk.equals(tkk)){
+                    JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại !");
+                    return;
+                }
+            }
+            conn.close();
             Connection con = ConnectDB.KetnoiDB();
             String sql = "Insert into nhanvien values('"+ manv +"', N'"+ ht +"','"+ cv +"', N'"+ sdt +"','"+ tk +"', N'"+ mk +"')";
             Statement st = con.createStatement();

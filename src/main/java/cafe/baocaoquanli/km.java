@@ -1,6 +1,7 @@
 package cafe.baocaoquanli;
 
 import cafe.login;
+import cafe.nhacungcap.nhacungcap;
 import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.main;
@@ -105,6 +106,7 @@ public class km extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
         so = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -117,6 +119,9 @@ public class km extends javax.swing.JFrame {
         vaitro = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        MainContent = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         them = new javax.swing.JButton();
@@ -129,8 +134,6 @@ public class km extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -229,7 +232,7 @@ public class km extends javax.swing.JFrame {
         jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
-        jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 210, 830));
+        jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 210, 840));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -243,6 +246,31 @@ public class km extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, 70));
+
+        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setBackground(new java.awt.Color(51, 153, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/campaign.png"))); // NOI18N
+        jLabel1.setText("Quản lí khuyến mãi");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(341, 341, 341)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(32, 32, 32))
+        );
 
         jPanel4.setBackground(new java.awt.Color(227, 227, 227));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -291,8 +319,8 @@ public class km extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(them)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(timkiem)
                 .addContainerGap())
@@ -401,29 +429,26 @@ public class km extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel1.setBackground(new java.awt.Color(51, 153, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/campaign.png"))); // NOI18N
-        jLabel1.setText("Quản lí khuyến mãi");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(341, 341, 341)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout MainContentLayout = new javax.swing.GroupLayout(MainContent);
+        MainContent.setLayout(MainContentLayout);
+        MainContentLayout.setHorizontalGroup(
+            MainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainContentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainContentLayout.createSequentialGroup()
+                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)))
+                .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32))
+        MainContentLayout.setVerticalGroup(
+            MainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainContentLayout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -432,136 +457,22 @@ public class km extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(MainContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MainContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
-        themkm kk = new themkm(this);
-        kk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        kk.show();
-    }//GEN-LAST:event_themActionPerformed
-
-    private void kmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmMouseClicked
-//        them.setEnabled(false);
-//        sua.setEnabled(true);
-//        xoa.setEnabled(true);
-//        int i = km.getSelectedRow();
-//        DefaultTableModel tb = (DefaultTableModel)km.getModel();
-//        makm.setText(tb.getValueAt(i, 0).toString());
-//        makm.setEnabled(false);
-//        tenkm.setText(tb.getValueAt(i, 1).toString());
-//        phantg.setText(tb.getValueAt(i, 2).toString());
-//        String ngay = tb.getValueAt(i, 3).toString();
-//        java.util.Date bd;
-//        try {
-//            bd = new SimpleDateFormat("yyyy-MM-dd").parse(ngay);
-//            ngaybd.setDate(bd);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        String ngay2 = tb.getValueAt(i, 4).toString();
-//        java.util.Date kt;
-//        try {
-//            kt = new SimpleDateFormat("yyyy-MM-dd").parse(ngay2);
-//            ngaykt.setDate(kt);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        mota.setText(tb.getValueAt(i, 5).toString());
-
-        int i;
-        i = km.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) km.getModel();
-//
-        String ma = model.getValueAt(i, 0).toString();
-        String ten = model.getValueAt(i, 1).toString();
-        String bd = model.getValueAt(i, 3).toString();
-        String kt = model.getValueAt(i, 4).toString();
-        String phantram = model.getValueAt(i, 2).toString();
-        String mot = model.getValueAt(i, 5).toString();
-
-        suakm tk = new suakm(this);
-        tk.setData(ma, ten, bd, kt, phantram, mot);
-        tk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tk.setVisible(true);
-//        tk.addWindowListener(new java.awt.event.WindowAdapter() {
-//            @Override
-//            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-//                load_km(); // Gọi hàm load_km() khi suakm đóng
-//            }
-//        });
-// Hiển thị form suakm
-
-//        try {
-//            String ma = model.getValueAt(i, 0).toString();
-//            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-//            if (confirm == 0) {
-//                Connection con = ConnectDB.KetnoiDB();
-//                String sql = "Delete from khuyenmai where makm='" + ma + "' ";
-//                Statement st = con.createStatement();
-//                st.executeUpdate(sql);
-//                con.close();
-//                JOptionPane.showMessageDialog(this, "Xóa thành công");
-//                load_km();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-    }//GEN-LAST:event_kmMouseClicked
-
-    private void timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timkiemActionPerformed
-        String txt = txttimkiem.getText().trim();
-        try {
-            Connection con = ConnectDB.KetnoiDB();
-            Statement st = con.createStatement();
-            String sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'";
-            ResultSet rs = st.executeQuery(sql);
-            //   tbLoaiSach.removeAll();
-            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
-            DefaultTableModel model = new DefaultTableModel(arr, 0);
-            int i = 0;
-            while (rs.next()) {
-                i = 1;
-                Vector v = new Vector();
-                v.add(rs.getString("makm"));
-                v.add(rs.getString("tenkhuyenmai"));
-                v.add(rs.getString("phantramgiam"));
-                v.add(rs.getString("ngaybatdau"));
-                v.add(rs.getString("ngayketthuc"));
-                v.add(rs.getString("mota"));
-                model.addRow(v);
-            }
-            if (i == 0) {
-                Vector v = new Vector();
-                v.add("Không có dữ liệuuuuuuu");
-                model.addRow(v);
-            }
-            km.setModel(model);
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_timkiemActionPerformed
     private static CellStyle DinhdangHeader(XSSFSheet sheet) {
         // Create font
         XSSFFont font = sheet.getWorkbook().createFont();
@@ -580,7 +491,141 @@ public class km extends javax.swing.JFrame {
         cellStyle.setBorderBottom(BorderStyle.THIN);
         cellStyle.setWrapText(true);
         return cellStyle;
+    }    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
+//        Date bd = new Date();
+//        Date kt = new Date();
+        // Chuyển đổi ngày thành định dạng chuỗi SQL
+        Date sqlbd = new Date(bdau.getTime());
+        Date sqlkt = new Date(kett.getTime());
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String sql = "INSERT into khuyenmai Values('" + kmm + "',N'" + tkm + "',N'" + motaa + "','" + phtram + "','" + sqlbd + "','" + sqlkt + "')";
+
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(this, "Nhập thành công");
+            load_km();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "loi");
+        }
     }
+    int i = 0;
+    String matontai = "";
+
+    private void ktmakm(String kmm) {
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String check = "select makm from khuyenmai";
+            Statement tt = conn.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+            while (rs.next()) {
+                String m = rs.getString("makm");
+                if (m.equals(kmm)) {
+                    i = 1;
+                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
+                    matontai = matontai + kmm + " + ";
+                    System.out.println("Ma ton tai" + matontai);
+                    return;
+                } else {
+                    i = 0;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void ReadExcel(String tenfilepath) {
+
+        try {
+            FileInputStream fis = new FileInputStream(tenfilepath);
+            // Tạo đối tượng Excel
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+            XSSFSheet sheet = wb.getSheetAt(0); // Lấy sheet đầu tiên của file
+            // Lấy ra các dòng trong bảng
+            Iterator<Row> itr = sheet.iterator();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Đọc dữ liệu
+            if (itr.hasNext()) {
+                itr.next(); // Bỏ qua dòng đầu tiên
+            }
+
+            while (itr.hasNext()) {
+                Row row = itr.next(); // Lấy dòng tiếp theo
+                String kmm = row.getCell(0).getStringCellValue();
+                String tkm = row.getCell(1).getStringCellValue();
+                String motaa = row.getCell(2).getStringCellValue();
+                int phtram = (int) row.getCell(3).getNumericCellValue();
+
+                java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
+                java.util.Date kt = row.getCell(5).getDateCellValue(); // Ngày kết thúc
+
+                ktmakm(kmm);
+                if (i == 0) {
+                    Themkm(kmm, tkm, motaa, phtram, bd, kt);
+                }
+
+            }
+            if (!matontai.equals("")) {
+                JOptionPane.showMessageDialog(this, "Không thêm được mã km : " + matontai + "vì mã đã tồn tại trong dữ liệu");
+                matontai = "";
+                return;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm == 0) {
+            login gg = new login();
+            gg.show();
+            dispose();
+        }
+    }//GEN-LAST:event_soMouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        main m = new main();
+        m.show();
+        dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        m.user(tk, vt);
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        Dashboard d = new Dashboard();
+        d.show();
+        dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        d.user(tk, vt);
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        sp s = new sp();
+        s.show();
+        dispose();
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        Dashboard d = new Dashboard();
+        d.show();
+        dispose();
+        String tk = taik.getText().trim();
+        String vt = vaitro.getText().trim();
+        d.user(tk, vt);
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        
+    }//GEN-LAST:event_jLabel15MouseClicked
+
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
 
@@ -708,103 +753,45 @@ public class km extends javax.swing.JFrame {
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
             File f = new File("C:\\Users\\Acer\\Desktop\\" + filename + ".xlsx");
-            FileOutputStream out = new FileOutputStream(f);
-            workbook.write(out);
-            out.close();
-            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
-            e.printStackTrace();
-        }
+                FileOutputStream out = new FileOutputStream(f);
+                workbook.write(out);
+                out.close();
+                JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
+                e.printStackTrace();
+            }
     }//GEN-LAST:event_jButton11ActionPerformed
-    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
-//        Date bd = new Date();
-//        Date kt = new Date();
-        // Chuyển đổi ngày thành định dạng chuỗi SQL
-        Date sqlbd = new Date(bdau.getTime());
-        Date sqlkt = new Date(kett.getTime());
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String tc = jComboBox1.getSelectedItem().toString();
+        String txt = txttimkiem.getText().trim();
         try {
-            Connection conn = ConnectDB.KetnoiDB();
-            String sql = "INSERT into khuyenmai Values('" + kmm + "',N'" + tkm + "',N'" + motaa + "','" + phtram + "','" + sqlbd + "','" + sqlkt + "')";
-
-            Statement st = conn.createStatement();
-            st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(this, "Nhập thành công");
-            load_km();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "loi");
-        }
-    }
-    int i = 0;
-    String matontai = "";
-
-    private void ktmakm(String kmm) {
-        try {
-            Connection conn = ConnectDB.KetnoiDB();
-            String check = "select makm from khuyenmai";
-            Statement tt = conn.createStatement();
-            ResultSet rs = tt.executeQuery(check);
-            while (rs.next()) {
-                String m = rs.getString("makm");
-                if (m.equals(kmm)) {
-                    i = 1;
-                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
-                    matontai = matontai + kmm + " + ";
-                    System.out.println("Ma ton tai" + matontai);
-                    return;
-                } else {
-                    i = 0;
-                }
-            }
-        } catch (Exception e) {
-        }
-
-    }
-
-    private void ReadExcel(String tenfilepath) {
-
-        try {
-            FileInputStream fis = new FileInputStream(tenfilepath);
-            // Tạo đối tượng Excel
-            XSSFWorkbook wb = new XSSFWorkbook(fis);
-            XSSFSheet sheet = wb.getSheetAt(0); // Lấy sheet đầu tiên của file
-            // Lấy ra các dòng trong bảng
-            Iterator<Row> itr = sheet.iterator();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            // Đọc dữ liệu
-            if (itr.hasNext()) {
-                itr.next(); // Bỏ qua dòng đầu tiên
-            }
-
-            while (itr.hasNext()) {
-                Row row = itr.next(); // Lấy dòng tiếp theo
-                String kmm = row.getCell(0).getStringCellValue();
-                String tkm = row.getCell(1).getStringCellValue();
-                String motaa = row.getCell(2).getStringCellValue();
-                int phtram = (int) row.getCell(3).getNumericCellValue();
-
-                java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
-                java.util.Date kt = row.getCell(5).getDateCellValue(); // Ngày kết thúc
-
-                ktmakm(kmm);
-                if (i == 0) {
-                    Themkm(kmm, tkm, motaa, phtram, bd, kt);
-                }
-
-            }
-            if (!matontai.equals("")) {
-                JOptionPane.showMessageDialog(this, "Không thêm được mã km : " + matontai + "vì mã đã tồn tại trong dữ liệu");
-                matontai = "";
+            Connection con = ConnectDB.KetnoiDB();
+            Statement st = con.createStatement();
+            String sql;
+            if (tc == "Sắp xếp tăng") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
+            } else if (tc == "Sắp xếp giảm") {
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+            } else {
+                load_km();
                 return;
             }
 
+            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\cafe\\baocaoquanli\\report1.jrxml");
+
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(sql);
+
+            jdesign.setQuery(updateQuery);
+            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, con);
+            JasperViewer.viewReport(jprint);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 //    private String getCellValueAsString(Cell cell) {
 //        switch (cell.getCellType()) {
@@ -836,7 +823,7 @@ public class km extends javax.swing.JFrame {
             int lc = fc.showOpenDialog(this);
             if (lc == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-//                txtTenfile.setText(file.getPath());
+                //                txtTenfile.setText(file.getPath());
                 String tenfile = file.getName();
                 if (tenfile.endsWith(".xlsx")) {    //endsWith chọn file có phần kết thúc ...
                     ReadExcel(file.getPath());
@@ -849,6 +836,74 @@ public class km extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void kmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmMouseClicked
+        //        them.setEnabled(false);
+        //        sua.setEnabled(true);
+        //        xoa.setEnabled(true);
+        //        int i = km.getSelectedRow();
+        //        DefaultTableModel tb = (DefaultTableModel)km.getModel();
+        //        makm.setText(tb.getValueAt(i, 0).toString());
+        //        makm.setEnabled(false);
+        //        tenkm.setText(tb.getValueAt(i, 1).toString());
+        //        phantg.setText(tb.getValueAt(i, 2).toString());
+        //        String ngay = tb.getValueAt(i, 3).toString();
+        //        java.util.Date bd;
+        //        try {
+            //            bd = new SimpleDateFormat("yyyy-MM-dd").parse(ngay);
+            //            ngaybd.setDate(bd);
+            //        } catch (Exception e) {
+            //            e.printStackTrace();
+            //        }
+        //        String ngay2 = tb.getValueAt(i, 4).toString();
+        //        java.util.Date kt;
+        //        try {
+            //            kt = new SimpleDateFormat("yyyy-MM-dd").parse(ngay2);
+            //            ngaykt.setDate(kt);
+            //        } catch (Exception e) {
+            //            e.printStackTrace();
+            //        }
+        //        mota.setText(tb.getValueAt(i, 5).toString());
+
+        int i;
+        i = km.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) km.getModel();
+        //
+        String ma = model.getValueAt(i, 0).toString();
+        String ten = model.getValueAt(i, 1).toString();
+        String bd = model.getValueAt(i, 3).toString();
+        String kt = model.getValueAt(i, 4).toString();
+        String phantram = model.getValueAt(i, 2).toString();
+        String mot = model.getValueAt(i, 5).toString();
+
+        suakm tk = new suakm(this);
+        tk.setData(ma, ten, bd, kt, phantram, mot);
+        tk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        tk.setVisible(true);
+        //        tk.addWindowListener(new java.awt.event.WindowAdapter() {
+            //            @Override
+            //            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                //                load_km(); // Gọi hàm load_km() khi suakm đóng
+                //            }
+            //        });
+    // Hiển thị form suakm
+
+    //        try {
+        //            String ma = model.getValueAt(i, 0).toString();
+        //            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        //            if (confirm == 0) {
+            //                Connection con = ConnectDB.KetnoiDB();
+            //                String sql = "Delete from khuyenmai where makm='" + ma + "' ";
+            //                Statement st = con.createStatement();
+            //                st.executeUpdate(sql);
+            //                con.close();
+            //                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            //                load_km();
+            //            }
+        //        } catch (Exception e) {
+        //            e.printStackTrace();
+        //        }
+    }//GEN-LAST:event_kmMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String tc = jComboBox1.getSelectedItem().toString();
@@ -887,93 +942,57 @@ public class km extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
-
-    }//GEN-LAST:event_txttimkiemMouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String tc = jComboBox1.getSelectedItem().toString();
+    private void timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timkiemActionPerformed
         String txt = txttimkiem.getText().trim();
         try {
             Connection con = ConnectDB.KetnoiDB();
             Statement st = con.createStatement();
-            String sql;
-            if (tc == "Sắp xếp tăng") {
-                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
-            } else if (tc == "Sắp xếp giảm") {
-                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
-            } else {
-                load_km();
-                return;
+            String sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'";
+            ResultSet rs = st.executeQuery(sql);
+            //   tbLoaiSach.removeAll();
+            String[] arr = {"Mã Km", "Tên Km", "Phần trăm giảm", "Ngày bắt đầu", "Ngày kết thúc", "Mô tả"};
+            DefaultTableModel model = new DefaultTableModel(arr, 0);
+            int i = 0;
+            while (rs.next()) {
+                i = 1;
+                Vector v = new Vector();
+                v.add(rs.getString("makm"));
+                v.add(rs.getString("tenkhuyenmai"));
+                v.add(rs.getString("phantramgiam"));
+                v.add(rs.getString("ngaybatdau"));
+                v.add(rs.getString("ngayketthuc"));
+                v.add(rs.getString("mota"));
+                model.addRow(v);
             }
-
-            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\cafe\\baocaoquanli\\report1.jrxml");
-
-            JRDesignQuery updateQuery = new JRDesignQuery();
-            updateQuery.setText(sql);
-
-            jdesign.setQuery(updateQuery);
-            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, con);
-            JasperViewer.viewReport(jprint);
+            if (i == 0) {
+                Vector v = new Vector();
+                v.add("Không có dữ liệuuuuuuu");
+                model.addRow(v);
+            }
+            km.setModel(model);
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất", "Xác nhận", JOptionPane.YES_NO_OPTION);
-        if (confirm == 0) {
-            login gg = new login();
-            gg.show();
-            dispose();
-        }
-    }//GEN-LAST:event_soMouseClicked
-
-    private void txttimkiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyPressed
-
-    }//GEN-LAST:event_txttimkiemKeyPressed
+    }//GEN-LAST:event_timkiemActionPerformed
 
     private void txttimkiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyTyped
 
     }//GEN-LAST:event_txttimkiemKeyTyped
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        main m = new main();
-        m.show();
-        dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        m.user(tk, vt);
-    }//GEN-LAST:event_jLabel13MouseClicked
+    private void txttimkiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyPressed
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        Dashboard d = new Dashboard();
-        d.show();
-        dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        d.user(tk, vt);
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_txttimkiemKeyPressed
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        sp s = new sp();
-        s.show();
-        dispose();
-    }//GEN-LAST:event_jLabel9MouseClicked
+    private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
 
-    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        Dashboard d = new Dashboard();
-        d.show();
-        dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        d.user(tk, vt);
-    }//GEN-LAST:event_jLabel14MouseClicked
+    }//GEN-LAST:event_txttimkiemMouseClicked
 
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel15MouseClicked
+    private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
+        themkm kk = new themkm(this);
+        kk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        kk.show();
+    }//GEN-LAST:event_themActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1026,6 +1045,7 @@ public class km extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MainContent;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1042,6 +1062,7 @@ public class km extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable km;
