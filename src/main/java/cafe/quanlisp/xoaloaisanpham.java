@@ -22,23 +22,22 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class sualoaisanpham extends javax.swing.JDialog {
+public class xoaloaisanpham extends javax.swing.JDialog {
 
     /**
      * Creates new form suathongtin
      */
-    public sualoaisanpham(java.awt.Frame parent, boolean modal) {
+    public xoaloaisanpham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
     private formloaisanpham parentForm;
 
-    public sualoaisanpham(formloaisanpham parentForm) {
-        
-        this.parentForm = parentForm; // Lưu tham chiếu form cha
+    public xoaloaisanpham() {
+        this.parentForm = parentForm; // Lưu tham chiếu vào biến
         initComponents();
-        this.setLocationRelativeTo(null); // Căn giữa cửa sổ
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -60,7 +59,7 @@ public class sualoaisanpham extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         tltxt = new javax.swing.JTextField();
         mltxt = new javax.swing.JTextField();
-        buttonsua = new javax.swing.JButton();
+        buttonxoa = new javax.swing.JButton();
         buttonhuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,7 +68,7 @@ public class sualoaisanpham extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(562, 60));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Sửa thông tin loại sản phẩm");
+        jLabel1.setText("Xóa thông tin loại sản phẩm");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -77,15 +76,15 @@ public class sualoaisanpham extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(375, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(251, 251, 251))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(256, 256, 256))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
@@ -122,16 +121,16 @@ public class sualoaisanpham extends javax.swing.JDialog {
             }
         });
 
-        buttonsua.setBackground(new java.awt.Color(153, 204, 255));
-        buttonsua.setText("Sửa thông tin");
-        buttonsua.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonxoa.setBackground(new java.awt.Color(153, 204, 255));
+        buttonxoa.setText("Xóa thông tin");
+        buttonxoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonsuaMouseClicked(evt);
+                buttonxoaMouseClicked(evt);
             }
         });
-        buttonsua.addActionListener(new java.awt.event.ActionListener() {
+        buttonxoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonsuaActionPerformed(evt);
+                buttonxoaActionPerformed(evt);
             }
         });
 
@@ -154,21 +153,21 @@ public class sualoaisanpham extends javax.swing.JDialog {
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
+                                .addGap(96, 96, 96)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panel1Layout.createSequentialGroup()
                                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(80, 80, 80)
+                                            .addComponent(jLabel3))
+                                        .addGap(69, 69, 69)
                                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(mltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addComponent(buttonsua, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126)
+                        .addGap(380, 380, 380)
+                        .addComponent(buttonxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111)
                         .addComponent(buttonhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
@@ -178,23 +177,19 @@ public class sualoaisanpham extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(30, 30, 30)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonsua, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(248, Short.MAX_VALUE))))
+                .addGap(27, 27, 27)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,10 +200,7 @@ public class sualoaisanpham extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -221,44 +213,50 @@ public class sualoaisanpham extends javax.swing.JDialog {
     public void setLoaiSanPhamInfo(String maloai, String tenloai) {
         mltxt.setText(maloai);
         tltxt.setText(tenloai);
-        lockMaLSP(); // Khóa mã loại sau khi load dữ liệu
+
     }
 
+    public xoaloaisanpham(String maloai, String tenloai) {
+        mltxt.setText(maloai);
+        tltxt.setText(tenloai);
+        
+    }
 
-    private void buttonsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsuaActionPerformed
-        String maloai = mltxt.getText().trim();
-        String tenloai = tltxt.getText().trim();
-
-        //kiểm tra dữ liệu trước khi truy cập
-        if (maloai.isEmpty() || tenloai.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
-            return;
-        }
-
-        try {
-
+    public xoaloaisanpham(JFrame parent, String maloai, String tenloai){
+        super(parent, true); // Gọi constructor của JDialog với form cha
+        initComponents();
+        
+        //hiển thị dữ liệu sản phẩm lên form
+        mltxt.setText(maloai);
+        tltxt.setText(tenloai);
+      
+    }
+    private void buttonxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonxoaActionPerformed
+         try {
+            String mlsp = mltxt.getText().trim();
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Update loaisanpham Set tenloai=N'" + tenloai + "' where maloai='" + maloai + "' ";
-            Statement st = con.createStatement();
-
-            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (confirm == 0) {
+                String sql = "Delete from loaisanpham where maloai='" + mlsp + "' ";
+                Statement st = con.createStatement();
                 st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(this, "Xóa sản phẩm thành công!");
                 con.close();
                 dispose();
                 if (parentForm != null) {
                     parentForm.load_themloaisanpham();// Gọi hàm load_km() từ form gốc
                 }
             }
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-            dispose();
-            formloaisanpham sp = new formloaisanpham();
-            sp.setVisible(true);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Xóa không thành công");
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật thông tin sản phẩm:" + e.getMessage());
         }
-    }//GEN-LAST:event_buttonsuaActionPerformed
+       
+       this.dispose();
+       formloaisanpham form222 = new formloaisanpham();
+       form222.setVisible(true);
+        
+    }//GEN-LAST:event_buttonxoaActionPerformed
 
     public void lockMaLSP() {
         mltxt.setEditable(false); // Khóa ô mã sản phẩm để không cho chỉnh sửa
@@ -270,22 +268,10 @@ public class sualoaisanpham extends javax.swing.JDialog {
         ls.setVisible(true);
     }//GEN-LAST:event_buttonhuyActionPerformed
 
-      public sualoaisanpham(JFrame parent, String maloai, String tenloai){
-        super(parent, true); // Gọi constructor của JDialog với form cha
-        initComponents();
-        
-        //hiển thị dữ liệu sản phẩm lên form
-        mltxt.setText(maloai);
-        tltxt.setText(tenloai);
-       
-        mltxt.setEditable(false); // khóa mã sản phẩm không cho chỉnh sửa
-    }
-   
-
-    private void buttonsuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonsuaMouseClicked
+    private void buttonxoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonxoaMouseClicked
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_buttonsuaMouseClicked
+    }//GEN-LAST:event_buttonxoaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,21 +290,23 @@ public class sualoaisanpham extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(sualoaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoaloaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(sualoaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoaloaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(sualoaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoaloaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(sualoaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoaloaisanpham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                sualoaisanpham dialog = new sualoaisanpham(new javax.swing.JFrame(), true);
+                xoaloaisanpham dialog = new xoaloaisanpham(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -332,7 +320,7 @@ public class sualoaisanpham extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonhuy;
-    private javax.swing.JButton buttonsua;
+    private javax.swing.JButton buttonxoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -39,19 +39,19 @@ import static org.apache.commons.compress.harmony.pack200.PackingOptions.PASS;
  *
  * @author Admin
  */
-public class suathongtin extends javax.swing.JDialog {
+public class xoathongtin extends javax.swing.JDialog {
 
     /**
      * Creates new form themsanpham
      */
-    public suathongtin(java.awt.Frame parent, boolean modal) {
+    public xoathongtin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     private formsanpham parentForm;
     private JLabel lblImage;
     private File selectedFile;
-    public suathongtin(formsanpham parent) {
+    public xoathongtin(formsanpham parent) {
         this.parentForm = parent; // Lưu tham chiếu vào biến
         initComponents();
         this.setLocationRelativeTo(null);
@@ -157,7 +157,7 @@ public class suathongtin extends javax.swing.JDialog {
         anhtxt = new javax.swing.JTextField();
         giasptxt = new javax.swing.JTextField();
         tensptxt = new javax.swing.JTextField();
-        buttonsua = new javax.swing.JButton();
+        buttonxoa = new javax.swing.JButton();
         maloai = new javax.swing.JLabel();
         masptxt = new javax.swing.JTextField();
         buttonhuy = new javax.swing.JButton();
@@ -179,7 +179,7 @@ public class suathongtin extends javax.swing.JDialog {
 
         jLabel2.setBackground(new java.awt.Color(153, 204, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nhập thông tin sửa");
+        jLabel2.setText(" Thông tin xóa");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -237,13 +237,13 @@ public class suathongtin extends javax.swing.JDialog {
             }
         });
 
-        buttonsua.setBackground(new java.awt.Color(177, 151, 125));
-        buttonsua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonsua.setForeground(new java.awt.Color(255, 255, 255));
-        buttonsua.setText("Sửa");
-        buttonsua.addActionListener(new java.awt.event.ActionListener() {
+        buttonxoa.setBackground(new java.awt.Color(177, 151, 125));
+        buttonxoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonxoa.setForeground(new java.awt.Color(255, 255, 255));
+        buttonxoa.setText("Xóa");
+        buttonxoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonsuaActionPerformed(evt);
+                buttonxoaActionPerformed(evt);
             }
         });
 
@@ -281,7 +281,7 @@ public class suathongtin extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel3.setText("Sửa thông tin sản phẩm");
+        jLabel3.setText("Xóa thông tin sản phẩm");
 
         soluong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         soluong.setText("Số lượng");
@@ -327,7 +327,7 @@ public class suathongtin extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(anhlabble, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(125, 125, 125)
-                        .addComponent(buttonsua)
+                        .addComponent(buttonxoa)
                         .addGap(70, 70, 70)
                         .addComponent(buttonhuy))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -373,7 +373,6 @@ public class suathongtin extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(maloaicombobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(masp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tensp1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(tensptxt))
@@ -412,7 +411,7 @@ public class suathongtin extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonsua, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buttonhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(anhlabble, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
@@ -476,12 +475,12 @@ public void showImage(String imagePath) {
         }
     }
 public void opensuathongtin(String ma, String tensp, String maloai, String gia, String mota, String ha, String tt, String macongty, String soluong){
-    suathongtin formsua = new suathongtin(ma, tensp, maloai, gia, mota, ha, tt, macongty, soluong);
+    xoathongtin formsua = new xoathongtin(ma, tensp, maloai, gia, mota, ha, tt, macongty, soluong);
     formsua.setVisible(true);
     
 }
 
-public suathongtin(String ma , String tensp, String maloai, String gia, String mota, String ha, String tt, String macongty, String soluong){
+public xoathongtin(String ma , String tensp, String maloai, String gia, String mota, String ha, String tt, String macongty, String soluong){
         masptxt.setText(ma);
         maloaicombobox1.setSelectedItem(maloai);
         tensptxt.setText(tensp);
@@ -523,60 +522,35 @@ public suathongtin(String ma , String tensp, String maloai, String gia, String m
         // TODO add your handling code here:
     }//GEN-LAST:event_masptxtActionPerformed
 
-    private void buttonsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsuaActionPerformed
+    private void buttonxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonxoaActionPerformed
         // TODO add your handling code here:
-         String masp = masptxt.getText().trim();
-        String tensp = tensptxt.getText().trim();
-        String maloai = (String) maloaicombobox1.getSelectedItem();
-        if(maloai == null){
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn mã loại.");
-            return;
-        }
-        String gia = giasptxt.getText().trim();
-        String mota = motatxt.getText().trim();
-        String trangthai = (String) jComboBox1.getSelectedItem();
-        String hinhanh = anhtxt.getText();
-        String macongty = mancc.getText().trim();
-        String soluong = soluongtxt.getText().trim();
-        
-        //kiểm tra dữ liệu trước khi truy cập
-        if (masp.isEmpty() || tensp.isEmpty() || maloai.isEmpty() || mota.isEmpty() || trangthai.isEmpty() || hinhanh.isEmpty() || macongty.isEmpty() || soluong.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
-            return;
-        }
-
-        try {
-            Connection conn = ConnectDB.KetnoiDB();
-            String check = "select maloai from loaisanpham";
-            Statement tt = conn.createStatement();
-            ResultSet rs = tt.executeQuery(check);
-
+       try {
+            String sp = masptxt.getText().trim();
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Update sanpham Set tensanpham=N'" + tensp + "',maloai='" + maloai + "',gia='" + gia + "',mota=N'" + mota + "',hinhanh='" + hinhanh + "','"+ macongty +"','"+ soluong +"' where masp='" + masp + "' ";
-            Statement st = con.createStatement();
-
-            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == 0) {
+                String sql = "Delete from sanpham where masp='" + sp + "' ";
+                Statement st = con.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(this, "Cập nhâtj dữ liệu thành công.");
+                JOptionPane.showMessageDialog(this, "Xóa sản phẩm thành công!");
                 con.close();
                 dispose();
                 if (parentForm != null) {
                     parentForm.load_themsanpham();// Gọi hàm load_km() từ form gốc
                 }
             }
-            dispose();
-            formsanpham sp = new formsanpham();
-            sp.setVisible(true);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Xóa không thành công");
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật thông tin sản phẩm:" + e.getMessage());
         }
        
+       this.dispose();
+       formsanpham form222 = new formsanpham();
+       form222.setVisible(true);
         
-    }//GEN-LAST:event_buttonsuaActionPerformed
+    }//GEN-LAST:event_buttonxoaActionPerformed
 
-    public suathongtin(JFrame parent, String masp, String maloai, String tensp, String mota, String gia, String hinhanh, String trangthai, String macongty, String soluong){
+    public xoathongtin(JFrame parent, String masp, String maloai, String tensp, String mota, String gia, String hinhanh, String trangthai, String macongty, String soluong){
         super(parent, true); // Gọi constructor của JDialog với form cha
         initComponents();
         
@@ -642,14 +616,16 @@ public suathongtin(String ma , String tensp, String maloai, String gia, String m
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(suathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(suathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(suathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(suathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(xoathongtin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -657,7 +633,7 @@ public suathongtin(String ma , String tensp, String maloai, String gia, String m
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                suathongtin dialog = new suathongtin(new javax.swing.JFrame(), true);
+                xoathongtin dialog = new xoathongtin(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -673,7 +649,7 @@ public suathongtin(String ma , String tensp, String maloai, String gia, String m
     private javax.swing.JLabel anhlabble;
     private javax.swing.JTextField anhtxt;
     private javax.swing.JButton buttonhuy;
-    private javax.swing.JButton buttonsua;
+    private javax.swing.JButton buttonxoa;
     private javax.swing.JButton chonanhbutton;
     private javax.swing.JLabel giabansanpham1;
     private javax.swing.JTextField giasptxt;

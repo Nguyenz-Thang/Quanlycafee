@@ -35,7 +35,11 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -47,167 +51,155 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="hinhanh" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="masp" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tensp1" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="giabansanpham1" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="motasp1" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="tennhacungcap1" min="-2" pref="175" max="-2" attributes="0"/>
-                      <Component id="trangthaisp" min="-2" pref="175" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="chonanhbutton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="giasptxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
-                      <Component id="motatxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
-                      <Component id="tenncctxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="masptxt" min="-2" pref="140" max="-2" attributes="0"/>
+                              <Component id="hinhanh" min="-2" pref="135" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="maloai" min="-2" pref="82" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="maloaicombobox" min="-2" pref="146" max="-2" attributes="0"/>
+                              <Component id="chonanhbutton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="tensptxt" min="-2" pref="466" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="masp" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tensp1" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="giabansanpham1" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="soluong" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="motasp1" alignment="1" min="-2" pref="175" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="trangthaisp" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Component id="tennhacungcap1" min="-2" pref="175" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="81" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jComboBox1" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="anhtxt" min="-2" pref="466" max="-2" attributes="0"/>
+                          <Component id="maloai1" min="-2" pref="154" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="anhlabble" min="-2" pref="204" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                          <Component id="buttonluu" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="buttonluu1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="motatxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="giasptxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tensptxt" alignment="0" pref="466" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                  <Component id="anhlabble" min="-2" pref="204" max="-2" attributes="0"/>
+                                  <Component id="masptxt" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="maloai" min="-2" pref="82" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="maloaicombobox1" min="-2" pref="146" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="buttonluu" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonluu1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="tenncctxt" alignment="0" min="-2" pref="466" max="-2" attributes="0"/>
+                          <Component id="soluongtxt" alignment="1" min="-2" pref="466" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="anhtxt" min="-2" pref="466" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="mancc" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="80" max="32767" attributes="0"/>
+                  <EmptySpace pref="121" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLabel3" min="-2" pref="195" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="400" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="masp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="maloai" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="masptxt" alignment="3" pref="33" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="maloaicombobox" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tensp1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="tensptxt" alignment="3" pref="33" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="giabansanpham1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="giasptxt" alignment="3" pref="33" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="motasp1" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="motatxt" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tennhacungcap1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="tenncctxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="trangthaisp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="masptxt" alignment="3" max="32767" attributes="0"/>
+                              <Component id="maloai" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="16" max="32767" attributes="0"/>
-                          <Component id="buttonluu" min="-2" pref="38" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonluu1" min="-2" pref="38" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="anhtxt" max="32767" attributes="0"/>
-                              <Component id="chonanhbutton" min="-2" max="-2" attributes="0"/>
-                              <Component id="hinhanh" pref="33" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="anhlabble" min="-2" pref="150" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="maloaicombobox1" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="masp" min="-2" pref="33" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="tensp1" pref="33" max="32767" attributes="0"/>
+                      <Component id="tensptxt" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="giabansanpham1" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="giasptxt" min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="soluong" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="soluongtxt" min="-2" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="motasp1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="motatxt" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="maloai1" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="mancc" min="-2" pref="32" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tenncctxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="tennhacungcap1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="trangthaisp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="hinhanh" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="chonanhbutton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="anhtxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="buttonluu" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="buttonluu1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="anhlabble" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel2">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="7d" green="97" red="b1" type="rgb"/>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="205" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="351" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" pref="48" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="24" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m s&#x1ea3;n ph&#x1ea9;m"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -306,6 +298,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tenncctxt">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tenncctxtActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="motatxt">
           <Events>
@@ -313,6 +308,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="anhtxt">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anhtxtActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="giasptxt">
         </Component>
@@ -365,16 +363,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonluu1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="maloaicombobox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="chonanhbutton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n &#x1ea3;nh"/>
@@ -393,11 +381,55 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="anhlabble">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="3"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Th&#xea;m s&#x1ea3;n ph&#x1ea9;m"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="soluong">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="soluongtxt">
+        </Component>
+        <Component class="javax.swing.JLabel" name="maloai1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe0; cung c&#x1ea5;p"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="maloaicombobox1">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maloaicombobox1ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="mancc">
         </Component>
       </SubComponents>
     </Container>
