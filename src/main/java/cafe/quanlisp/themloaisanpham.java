@@ -38,7 +38,7 @@ public class themloaisanpham extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    private loaisanpham parentForm;
+    private formloaisanpham parentForm;
 
 
     public themloaisanpham() {
@@ -74,10 +74,9 @@ public class themloaisanpham extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(177, 151, 125));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Thêm loại sản phẩm");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -227,7 +226,7 @@ public class themloaisanpham extends javax.swing.JDialog {
     private void buttonhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonhuyActionPerformed
 
         dispose();
-        loaisanpham lsp = new loaisanpham();
+        formloaisanpham lsp = new formloaisanpham();
         lsp.setVisible(true);
     }//GEN-LAST:event_buttonhuyActionPerformed
 
@@ -262,7 +261,7 @@ public class themloaisanpham extends javax.swing.JDialog {
 
         //dong form them san pham sau khi luu thanh cong
         this.dispose();
-        loaisanpham sp = new loaisanpham();
+        formloaisanpham sp = new formloaisanpham();
         sp.setVisible(true);
 
     }//GEN-LAST:event_buttonluuActionPerformed
