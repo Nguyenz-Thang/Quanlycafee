@@ -394,7 +394,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
             // Set the model for your JTable
             danhSachHoaDon.setModel(model);
-
+//
             // Close the connection
             con.close();
 
