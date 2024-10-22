@@ -775,11 +775,10 @@ public class km extends javax.swing.JFrame {
             } else if (tc == "Sắp xếp giảm") {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
             } else {
-                load_km();
-                return;
+                sql = "Select * from khuyenmai";
             }
 
-            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\cafe\\baocaoquanli\\report1.jrxml");
+            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\Acer\\Documents\\NetBeansProjects\\Quanlycafee\\src\\main\\java\\cafe\\baocaoquanli\\kmm.jrxml");
 
             JRDesignQuery updateQuery = new JRDesignQuery();
             updateQuery.setText(sql);

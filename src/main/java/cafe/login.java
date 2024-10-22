@@ -10,9 +10,11 @@ import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.suakh;
 import cafe.quanlinhanvien.nv;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +29,9 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ImageIcon logo = new ImageIcon(getClass().getResource("/icon/coffee.png"));
+        setIconImage(logo.getImage());
+        setTitle("Đăng nhập");
     }
 
     /**
