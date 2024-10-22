@@ -494,6 +494,46 @@ public class formsanpham extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jComboBoxsapxepActionPerformed
+    private void Themkm(String masp, String tensp, String maloai, String gia, String mota, String hinhanh, String trangthai, String macongty, String soluong) {
+
+        // Chuyển đổi ngày thành định dạng chuỗi SQL
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String sql = "INSERT into sanpham Values('" + masp + "',N'" + tensp + "',N'" + maloai + "','" + gia + "','" + mota + "','" + hinhanh + "','" + trangthai + "','" + macongty + "','" + soluong + "')";
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(this, "Nhập thành công");
+            load_themsanpham();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    int i = 0;
+    String matontai = "";
+
+    private void ktmasp(String kmsp) {
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String check = "select masp from sanpham";
+            Statement tt = conn.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+            while (rs.next()) {
+                String m = rs.getString("masp");
+                if (m.equals(kmsp)) {
+                    i = 1;
+                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
+                    matontai = matontai + kmsp + " + ";
+                    System.out.println("Ma ton tai" + matontai);
+                    return;
+                } else {
+                    i = 0;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }
     private void ReadExcel(String tenfilepath) {
 
         try {
@@ -559,48 +599,9 @@ public class formsanpham extends javax.swing.JFrame {
         }
     }
 
-    private void Themkm(String masp, String tensp, String maloai, String gia, String mota, String hinhanh, String trangthai, String macongty, String soluong) {
+    
 
-        // Chuyển đổi ngày thành định dạng chuỗi SQL
-        try {
-            Connection conn = ConnectDB.KetnoiDB();
-            String sql = "INSERT into sanpham Values('" + masp + "',N'" + tensp + "',N'" + maloai + "','" + gia + "','" + mota + "','" + hinhanh + "','" + trangthai + "','" + macongty + "','" + soluong + "')";
-            Statement st = conn.createStatement();
-            st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(this, "Nhập thành công");
-            load_themsanpham();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "loi");
-        }
-    }
-
-    int i = 0;
-    String matontai = "";
-
-    private void ktmasp(String kmsp) {
-        try {
-            Connection conn = ConnectDB.KetnoiDB();
-            String check = "select masp from sanpham";
-            Statement tt = conn.createStatement();
-            ResultSet rs = tt.executeQuery(check);
-            while (rs.next()) {
-                String m = rs.getString("masp");
-                if (m.equals(kmsp)) {
-                    i = 1;
-                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
-                    matontai = matontai + kmsp + " + ";
-                    System.out.println("Ma ton tai" + matontai);
-                    return;
-                } else {
-                    i = 0;
-                }
-            }
-        } catch (Exception e) {
-        }
-
-    }
+    
 
     private static CellStyle DinhdangHeader(XSSFSheet sheet) {
         // Create font
@@ -718,11 +719,11 @@ public class formsanpham extends javax.swing.JFrame {
             String tc = jComboBoxsapxep.getSelectedItem().toString();
             String txt = timkiemtxt.getText().trim();
             if (tc == "Sắp xếp tăng") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N'%" + txt + "%' or trangthai'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong like N'%";
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or trangthai N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong";
             } else if (tc == "Sắp xếp giảm") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N'%" + txt + "%' or trangthai'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong like N'% desc";
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or trangthai N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong desc";
             } else {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong like N'%";
+                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong";
 
             }
             PreparedStatement st = con.prepareStatement(sql);
@@ -776,11 +777,11 @@ public class formsanpham extends javax.swing.JFrame {
 
                 cell = row.createCell(8);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue("macongty");
+                cell.setCellValue(rs.getString("macongty"));
 
                 cell = row.createCell(9);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue("soluong");
+                cell.setCellValue(rs.getString("soluong"));
 
                 i++;
             }
@@ -791,7 +792,7 @@ public class formsanpham extends javax.swing.JFrame {
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
             File f = new File("E:\\filesanphamxuatbaocao\\nhapfile\\" + filename + ".xlsx");
-            
+            //File f = new File("C:\\\\Users\\\\Acer\\\\Desktop\\\\" + filename + ".xlsx");
             if (!f.getParentFile().exists()) {
                 JOptionPane.showMessageDialog(this, "Thư mục không tồn tại");
                 return;
