@@ -59,7 +59,6 @@ public class Dashboard extends javax.swing.JFrame {
                     + "FROM hoadon hd "
                     + "JOIN khachhang kh ON hd.makh = kh.makh "
                     + "JOIN nhanvien nv ON hd.manv = nv.manv";
-
             ResultSet rs = st.executeQuery(sql);
 
             // Define column names for the JTable
@@ -83,7 +82,6 @@ public class Dashboard extends javax.swing.JFrame {
 
             // Close the connection
             con.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -540,7 +538,7 @@ public class Dashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Nimbus look and feel */  
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) "> 
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
