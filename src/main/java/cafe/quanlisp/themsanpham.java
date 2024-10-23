@@ -44,6 +44,7 @@ public class themsanpham extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         loadCombobox();
+        loadmacongty();
     }
     private formsanpham parentForm;
 
@@ -54,6 +55,7 @@ public class themsanpham extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         loadCombobox();
+        loadmacongty();
     }
 
     /**
@@ -93,7 +95,7 @@ public class themsanpham extends javax.swing.JDialog {
         soluongtxt = new javax.swing.JTextField();
         maloai1 = new javax.swing.JLabel();
         maloaicombobox1 = new javax.swing.JComboBox<>();
-        mancc = new javax.swing.JTextField();
+        mancc = new javax.swing.JComboBox<>();
 
         jButton1.setText("jButton1");
 
@@ -161,7 +163,7 @@ public class themsanpham extends javax.swing.JDialog {
             }
         });
 
-        buttonluu.setBackground(new java.awt.Color(177, 151, 125));
+        buttonluu.setBackground(new java.awt.Color(153, 204, 255));
         buttonluu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonluu.setForeground(new java.awt.Color(255, 255, 255));
         buttonluu.setText("Thêm");
@@ -180,7 +182,7 @@ public class themsanpham extends javax.swing.JDialog {
             }
         });
 
-        buttonluu1.setBackground(new java.awt.Color(177, 151, 125));
+        buttonluu1.setBackground(new java.awt.Color(153, 204, 255));
         buttonluu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonluu1.setForeground(new java.awt.Color(255, 255, 255));
         buttonluu1.setText("Hủy");
@@ -213,9 +215,17 @@ public class themsanpham extends javax.swing.JDialog {
         maloai1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         maloai1.setText("Mã nhà cung cấp");
 
+        maloaicombobox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
         maloaicombobox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 maloaicombobox1ActionPerformed(evt);
+            }
+        });
+
+        mancc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        mancc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manccActionPerformed(evt);
             }
         });
 
@@ -269,8 +279,8 @@ public class themsanpham extends javax.swing.JDialog {
                         .addComponent(soluongtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(anhtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mancc, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addComponent(mancc, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(109, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,10 +322,13 @@ public class themsanpham extends javax.swing.JDialog {
                     .addComponent(motasp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(motatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maloai1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mancc, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(maloai1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(mancc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tenncctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tennhacungcap1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -343,7 +356,10 @@ public class themsanpham extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,9 +415,8 @@ public class themsanpham extends javax.swing.JDialog {
         giasptxt.setText(gia);
         motatxt.setText(mota);
         jComboBox1.setSelectedItem(trangthai); // combo box trạng thái
-        mancc.setText(macongty);
+        mancc.setSelectedItem(macongty);
         soluongtxt.setText(soluong);
-        
 
     }
 
@@ -432,10 +447,9 @@ public class themsanpham extends javax.swing.JDialog {
         //lay gia tri duoc chon trong JCOmbobox
         String ml = (String) maloaicombobox1.getSelectedItem();
 
-        String tthai = (String)jComboBox1.getSelectedItem().toString();
-         String mncc = mancc.getText().trim();
+        String tthai = (String) jComboBox1.getSelectedItem().toString();
+        String mncc = (String) mancc.getSelectedItem().toString();
         String soluong = soluongtxt.getText().trim();
-       
 
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ảnh trước khi lưu!");
@@ -508,10 +522,8 @@ public class themsanpham extends javax.swing.JDialog {
 
     private void tenncctxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenncctxtActionPerformed
         // TODO add your handling code here:
-//        String tenCongTy = tenncctxt.getText().trim();
-//        if (!tenCongTy.isEmpty()) {
-//            updateMaCongTy(tenCongTy);
-//        }
+
+
     }//GEN-LAST:event_tenncctxtActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -523,76 +535,107 @@ public class themsanpham extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_maloaicombobox1ActionPerformed
 
-    // Cập nhật tên công ty dựa trên mã công ty
-    private void updateTenCongTy(String maCongTy) {
-        try {
-            // Kết nối tới cơ sở dữ liệu
-            Connection conn = ConnectDB.KetnoiDB();
-            String query = "SELECT tencongty FROM nhacungcap WHERE macongty = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, maCongTy);
+    private void manccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manccActionPerformed
+        // TODO add your handling code here:
+        String macongty_1 = (String) mancc.getSelectedItem(); // Lấy mã khách hàng đã chọn
+        String tencongty_1 = layThongTinNhacungcap(macongty_1); // Lấy tên khách hàng
+        tenncctxt.setEnabled(false);
 
-            ResultSet rs = stmt.executeQuery();
+        if (tencongty_1 != null) {
+            tenncctxt.setText(tencongty_1); // Cập nhật tên khách hàng vào JTextField
+        } else {
+            tenncctxt.setText(""); // Nếu không tìm thấy, làm trống trường tên
+
+        }
+    }//GEN-LAST:event_manccActionPerformed
+
+    private String layThongTinNhacungcap(String macongty) {
+        String ten = null; // Khởi tạo tên nha cung cấp
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "SELECT tencongty FROM nhacungcap WHERE macongty = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, macongty); // Đặt mã công ty vào truy vấn
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                tenncctxt.setText(rs.getString("tenCongTy"));
-            } else {
-                tenncctxt.setText("Không tìm thấy tên công ty");
+                ten = rs.getString("tencongty"); // Lấy tên công ty
             }
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return ten; // Trả về tên khách hàng
     }
 
-    public void YourFormConstructor() {
-    initComponents();
-    
-    // Lắng nghe sự kiện cho trường nhập liệu
-    tenncctxt.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String tenCongTy = tenncctxt.getText().trim();
-            if (!tenCongTy.isEmpty()) {
-                updateMaCongTy(tenCongTy);
-            }
-        }
-    });
-
-    mancc.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String maCongTy = mancc.getText().trim();
-            if (!maCongTy.isEmpty()) {
-                updateTenCongTy(maCongTy);
-            }
-        }
-    });
-    }
+    // Cập nhật tên công ty dựa trên mã công ty
+//    private void updateTenCongTy(String maCongTy) {
+//        try {
+//            // Kết nối tới cơ sở dữ liệu
+//            Connection conn = ConnectDB.KetnoiDB();
+//            String query = "SELECT tencongty FROM nhacungcap WHERE macongty = ?";
+//            PreparedStatement stmt = conn.prepareStatement(query);
+//            stmt.setString(1, maCongTy);
+//
+//            ResultSet rs = stmt.executeQuery();
+//            if (rs.next()) {
+//                tenncctxt.setText(rs.getString("tenCongTy"));
+//            } else {
+//                tenncctxt.setText("Không tìm thấy tên công ty");
+//            }
+//            rs.close();
+//            stmt.close();
+//            conn.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//    public void YourFormConstructor() {
+//    initComponents();
+//    
+//    // Lắng nghe sự kiện cho trường nhập liệu
+//    tenncctxt.addActionListener(new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            String tenCongTy = tenncctxt.getText().trim();
+//            if (!tenCongTy.isEmpty()) {
+//                updateMaCongTy(tenCongTy);
+//            }
+//        }
+//    });
+//
+//    mancc.addActionListener(new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            String maCongTy = mancc.getText().trim();
+//            if (!maCongTy.isEmpty()) {
+//                updateTenCongTy(maCongTy);
+//            }
+//        }
+//    });
+//    }
     // Cập nhật mã công ty dựa trên tên công ty
-    private void updateMaCongTy(String tenCongTy) {
-        try {
-            // Kết nối tới cơ sở dữ liệu
-            Connection conn = ConnectDB.KetnoiDB();
-            String query = "SELECT macongty FROM nhacungcap WHERE tencongty = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, tenCongTy);
-
-            ResultSet rs = stmt.executeQuery();
-              if (rs.next()) {
-                mancc.setText(rs.getString("maCongTy"));
-            } else {
-                mancc.setText("Không tìm thấy mã công ty");
-            }
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
+//    private void updateMaCongTy(String tenCongTy) {
+//        try {
+//            // Kết nối tới cơ sở dữ liệu
+//            Connection conn = ConnectDB.KetnoiDB();
+//            String query = "SELECT macongty FROM nhacungcap WHERE tencongty = ?";
+//            PreparedStatement stmt = conn.prepareStatement(query);
+//            stmt.setString(1, tenCongTy);
+//
+//            ResultSet rs = stmt.executeQuery();
+//              if (rs.next()) {
+//                mancc.setText(rs.getString("maCongTy"));
+//            } else {
+//                mancc.setText("Không tìm thấy mã công ty");
+//            }
+//            rs.close();
+//            stmt.close();
+//            conn.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
     public void loadCombobox() {
 
         try {
@@ -603,6 +646,23 @@ public class themsanpham extends javax.swing.JDialog {
             while (rs.next()) {
                 String ml = rs.getString("maloai");
                 maloaicombobox1.addItem(ml); //them truc tiep ma loai vao combobox
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadmacongty() {
+
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sqlloai = "SELECT macongty FROM nhacungcap";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sqlloai);
+            while (rs.next()) {
+                String mncc = rs.getString("macongty");
+                mancc.addItem(mncc); //them truc tiep ma loai vao combobox
             }
             con.close();
         } catch (SQLException e) {
@@ -671,7 +731,7 @@ public class themsanpham extends javax.swing.JDialog {
     private javax.swing.JLabel maloai;
     private javax.swing.JLabel maloai1;
     private javax.swing.JComboBox<String> maloaicombobox1;
-    private javax.swing.JTextField mancc;
+    private javax.swing.JComboBox<String> mancc;
     private javax.swing.JLabel masp;
     private javax.swing.JTextField masptxt;
     private javax.swing.JLabel motasp1;
