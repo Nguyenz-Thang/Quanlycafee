@@ -89,8 +89,8 @@ public class formsanpham extends javax.swing.JFrame {
 
                 //chỉ hiển thị tên ảnh 
                 String hinhanh = rs.getString("hinhanh");
-                String tenAnh = new File(hinhanh).getName();
-                v.add(tenAnh);
+               // String tenAnh = new File(hinhanh).getName();
+                v.add(hinhanh);
 
                 v.add(rs.getString("macongty"));
                 v.add(rs.getString("soluong"));
