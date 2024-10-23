@@ -4,6 +4,7 @@
  */
 package cafe;
 
+import cafe.User;
 import cafe.baocaoquanli.bao;
 import cafe.baocaoquanli.km;
 import cafe.quanlihoadon.Dashboard;
@@ -12,6 +13,7 @@ import cafe.quanlikh.suakh;
 import cafe.quanlinhanvien.nv;
 import java.awt.Toolkit;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
@@ -21,6 +23,7 @@ import javax.swing.JOptionPane;
  *
  * @author Acer
  */
+
 public class login extends javax.swing.JFrame {
 
     /**
@@ -114,75 +117,126 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         String tkk = tk.getText().trim();
         String mkk = mk.getText().trim();
         try {
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "select chucvu,tennhanvien from nhanvien where taikhoan='" + tkk + "' and matkhau='" + mkk + "'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+
+            // Truy vấn để lấy thông tin nhân viên theo tài khoản và mật khẩu
+            String sql = "select manv, tennhanvien, chucvu, sodienthoai, taikhoan, matkhau from nhanvien where taikhoan=? and matkhau=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, tkk);
+            pst.setString(2, mkk);
+            ResultSet rs = pst.executeQuery();
+
+            // Kiểm tra xem có kết quả trả về không
             if (rs.next()) {
-                String vaitro = rs.getString("chucvu");
+                // Lấy thông tin nhân viên từ kết quả truy vấn
+                String manv = rs.getString("manv");
                 String ten = rs.getString("tennhanvien");
+                String vaitro = rs.getString("chucvu");
+                String sodienthoai = rs.getString("sodienthoai");
+                String taikhoan = rs.getString("taikhoan");
+                String matkhau = rs.getString("matkhau");
+
+                // Tạo một đối tượng User và lưu thông tin vào đó
+                User user = new User(manv, ten, vaitro, sodienthoai, taikhoan, matkhau);
+
+                // Kiểm tra vai trò của người dùng
                 if (vaitro.equals("Admin") || vaitro.equals("Quản lý")) {
                     nv tkh = new nv();
-                    tkh.user(tkk, vaitro);
+                    tkh.user(user.getTaikhoan(), user.getChucvu()); // Sử dụng thông tin từ class User
                     tkh.show();
-                    dispose();
+                    dispose(); // Đóng màn hình đăng nhập
                 } else {
-//                    bao tkh = new bao();
-//                    tkh.show();
-//                    dispose();
                     Dashboard d = new Dashboard();
                     d.show();
-                    d.user(tkk, vaitro);
-                    dispose();
-
+                    d.user(user.getTaikhoan(), user.getChucvu()); // Sử dụng thông tin từ class User
+                    dispose(); // Đóng màn hình đăng nhập
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Thông tin đăng nhập không đúng");
             }
+
+            // Đóng kết nối sau khi sử dụng
+            rs.close();
+            pst.close();
             con.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        String tkk = tk.getText().trim();
+//        String mkk = mk.getText().trim();
+//        try {
+//            Connection con = ConnectDB.KetnoiDB();
+//            String sql = "select chucvu,tennhanvien from nhanvien where taikhoan='" + tkk + "' and matkhau='" + mkk + "'";
+//            Statement st = con.createStatement();
+//            ResultSet rs = st.executeQuery(sql);
+//            if (rs.next()) {
+//                String vaitro = rs.getString("chucvu");
+//                String ten = rs.getString("tennhanvien");
+//                if (vaitro.equals("Admin") || vaitro.equals("Quản lý")) {
+//                    nv tkh = new nv();
+//                    tkh.user(tkk, vaitro);
+//                    tkh.show();
+//                    dispose();
+//                } else {
+////                    bao tkh = new bao();
+////                    tkh.show();
+////                    dispose();
+//                    Dashboard d = new Dashboard();
+//                    d.show();
+//                    d.user(tkk, vaitro);
+//                    dispose();
+//
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Thông tin đăng nhập không đúng");
+//            }
+//            con.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new login().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new login().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
