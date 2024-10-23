@@ -68,6 +68,7 @@ public class xoaloaisanpham extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(562, 60));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
         jLabel1.setText("Xóa thông tin loại sản phẩm");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -76,8 +77,8 @@ public class xoaloaisanpham extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(375, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(256, 256, 256))
+                .addComponent(jLabel1)
+                .addGap(236, 236, 236))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +122,8 @@ public class xoaloaisanpham extends javax.swing.JDialog {
             }
         });
 
-        buttonxoa.setBackground(new java.awt.Color(153, 204, 255));
+        buttonxoa.setBackground(new java.awt.Color(177, 151, 125));
+        buttonxoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash.png"))); // NOI18N
         buttonxoa.setText("Xóa thông tin");
         buttonxoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,7 +137,8 @@ public class xoaloaisanpham extends javax.swing.JDialog {
         });
 
         buttonhuy.setBackground(new java.awt.Color(153, 204, 255));
-        buttonhuy.setText("Hủy");
+        buttonhuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
+        buttonhuy.setText(" Hủy");
         buttonhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonhuyActionPerformed(evt);
@@ -166,8 +169,8 @@ public class xoaloaisanpham extends javax.swing.JDialog {
                                             .addComponent(mltxt, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(380, 380, 380)
-                        .addComponent(buttonxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111)
+                        .addComponent(buttonxoa)
+                        .addGap(102, 102, 102)
                         .addComponent(buttonhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );

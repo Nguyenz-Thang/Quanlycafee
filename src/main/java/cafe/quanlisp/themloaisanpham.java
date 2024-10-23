@@ -77,6 +77,7 @@ public class themloaisanpham extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-product.png"))); // NOI18N
         jLabel1.setText("Thêm loại sản phẩm");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -125,6 +126,7 @@ public class themloaisanpham extends javax.swing.JDialog {
         buttonluu.setBackground(new java.awt.Color(177, 151, 125));
         buttonluu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonluu.setForeground(new java.awt.Color(255, 255, 255));
+        buttonluu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
         buttonluu.setText("Thêm");
         buttonluu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +140,8 @@ public class themloaisanpham extends javax.swing.JDialog {
         buttonhuy.setBackground(new java.awt.Color(177, 151, 125));
         buttonhuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonhuy.setForeground(new java.awt.Color(255, 255, 255));
-        buttonhuy.setText("Hủy");
+        buttonhuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
+        buttonhuy.setText(" Hủy");
         buttonhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonhuyActionPerformed(evt);
@@ -173,7 +176,7 @@ public class themloaisanpham extends javax.swing.JDialog {
                 .addComponent(buttonluu)
                 .addGap(168, 168, 168)
                 .addComponent(buttonhuy)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
