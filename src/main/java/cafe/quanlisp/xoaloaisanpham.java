@@ -68,7 +68,6 @@ public class xoaloaisanpham extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(562, 60));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
         jLabel1.setText("Xóa thông tin loại sản phẩm");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -76,7 +75,7 @@ public class xoaloaisanpham extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(375, Short.MAX_VALUE)
+                .addContainerGap(403, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(236, 236, 236))
         );
@@ -123,7 +122,6 @@ public class xoaloaisanpham extends javax.swing.JDialog {
         });
 
         buttonxoa.setBackground(new java.awt.Color(177, 151, 125));
-        buttonxoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash.png"))); // NOI18N
         buttonxoa.setText("Xóa thông tin");
         buttonxoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,7 +135,6 @@ public class xoaloaisanpham extends javax.swing.JDialog {
         });
 
         buttonhuy.setBackground(new java.awt.Color(153, 204, 255));
-        buttonhuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
         buttonhuy.setText(" Hủy");
         buttonhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
