@@ -1,5 +1,6 @@
 package cafe.baocaoquanli;
 
+import cafe.User;
 import cafe.login;
 import cafe.nhacungcap.nhacungcap;
 import cafe.quanlihoadon.Dashboard;
@@ -61,7 +62,16 @@ public class km extends javax.swing.JFrame {
         initComponents();
         load_km();
         this.setLocationRelativeTo(null);
+        txtduongdan.setEnabled(false);
     }
+//    public void setUser(User user) {
+//        this.user = user;
+//        
+//        // Sử dụng thông tin từ đối tượng User
+//        String chucvu = user.getChucvu();
+//        String taikhoan = user.getTaikhoan();
+//        
+//    }
 
     public void user(String tk, String vaitroo) {
         taik.setText(tk);
@@ -134,6 +144,9 @@ public class km extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        browse = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtduongdan = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -391,6 +404,15 @@ public class km extends javax.swing.JFrame {
             }
         });
 
+        browse.setText("Browse");
+        browse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(txtduongdan);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -401,9 +423,13 @@ public class km extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addComponent(jButton1)
-                            .addGap(230, 230, 230)
+                            .addGap(18, 18, 18)
                             .addComponent(jButton2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(browse)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButton11))
                         .addComponent(jScrollPane1)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -422,11 +448,17 @@ public class km extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton11)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton11)
+                            .addComponent(jButton2))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(browse)))
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout MainContentLayout = new javax.swing.GroupLayout(MainContent);
@@ -491,7 +523,9 @@ public class km extends javax.swing.JFrame {
         cellStyle.setBorderBottom(BorderStyle.THIN);
         cellStyle.setWrapText(true);
         return cellStyle;
-    }    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
+    }
+
+    private void Themkm(String kmm, String tkm, String motaa, int phtram, java.util.Date bdau, java.util.Date kett) {
 //        Date bd = new Date();
 //        Date kt = new Date();
         // Chuyển đổi ngày thành định dạng chuỗi SQL
@@ -623,12 +657,17 @@ public class km extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        
+
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
-
+            String duongdan = txtduongdan.getText().trim();
+            if(duongdan.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nơi lưu file trước khi xuất!");
+                browse.requestFocus();
+                return;
+            }
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet spreadsheet = workbook.createSheet("tacgia");
             // register the columns you wish to track and compute the column width
@@ -685,6 +724,8 @@ public class km extends javax.swing.JFrame {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
             } else if (tc == "Sắp xếp giảm") {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
+            }else{
+                sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'";
             }
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -752,15 +793,15 @@ public class km extends javax.swing.JFrame {
                 spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
-            File f = new File("C:\\Users\\Acer\\Desktop\\" + filename + ".xlsx");
-                FileOutputStream out = new FileOutputStream(f);
-                workbook.write(out);
-                out.close();
-                JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
-                e.printStackTrace();
-            }
+            File f = new File(duongdan +"\\"+ filename + ".xlsx");
+            FileOutputStream out = new FileOutputStream(f);
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra trong đường dẫn đã chọn !");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -849,19 +890,19 @@ public class km extends javax.swing.JFrame {
         //        String ngay = tb.getValueAt(i, 3).toString();
         //        java.util.Date bd;
         //        try {
-            //            bd = new SimpleDateFormat("yyyy-MM-dd").parse(ngay);
-            //            ngaybd.setDate(bd);
-            //        } catch (Exception e) {
-            //            e.printStackTrace();
-            //        }
+        //            bd = new SimpleDateFormat("yyyy-MM-dd").parse(ngay);
+        //            ngaybd.setDate(bd);
+        //        } catch (Exception e) {
+        //            e.printStackTrace();
+        //        }
         //        String ngay2 = tb.getValueAt(i, 4).toString();
         //        java.util.Date kt;
         //        try {
-            //            kt = new SimpleDateFormat("yyyy-MM-dd").parse(ngay2);
-            //            ngaykt.setDate(kt);
-            //        } catch (Exception e) {
-            //            e.printStackTrace();
-            //        }
+        //            kt = new SimpleDateFormat("yyyy-MM-dd").parse(ngay2);
+        //            ngaykt.setDate(kt);
+        //        } catch (Exception e) {
+        //            e.printStackTrace();
+        //        }
         //        mota.setText(tb.getValueAt(i, 5).toString());
 
         int i;
@@ -880,25 +921,25 @@ public class km extends javax.swing.JFrame {
         tk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         tk.setVisible(true);
         //        tk.addWindowListener(new java.awt.event.WindowAdapter() {
-            //            @Override
-            //            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                //                load_km(); // Gọi hàm load_km() khi suakm đóng
-                //            }
-            //        });
-    // Hiển thị form suakm
+        //            @Override
+        //            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        //                load_km(); // Gọi hàm load_km() khi suakm đóng
+        //            }
+        //        });
+        // Hiển thị form suakm
 
-    //        try {
+        //        try {
         //            String ma = model.getValueAt(i, 0).toString();
         //            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
         //            if (confirm == 0) {
-            //                Connection con = ConnectDB.KetnoiDB();
-            //                String sql = "Delete from khuyenmai where makm='" + ma + "' ";
-            //                Statement st = con.createStatement();
-            //                st.executeUpdate(sql);
-            //                con.close();
-            //                JOptionPane.showMessageDialog(this, "Xóa thành công");
-            //                load_km();
-            //            }
+        //                Connection con = ConnectDB.KetnoiDB();
+        //                String sql = "Delete from khuyenmai where makm='" + ma + "' ";
+        //                Statement st = con.createStatement();
+        //                st.executeUpdate(sql);
+        //                con.close();
+        //                JOptionPane.showMessageDialog(this, "Xóa thành công");
+        //                load_km();
+        //            }
         //        } catch (Exception e) {
         //            e.printStackTrace();
         //        }
@@ -993,6 +1034,18 @@ public class km extends javax.swing.JFrame {
         kk.show();
     }//GEN-LAST:event_themActionPerformed
 
+    private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Để chọn thư mục, nếu bạn muốn chọn file thì dùng FILES_ONLY
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            txtduongdan.setText(selectedFile.getAbsolutePath()); // Hiển thị đường dẫn lên JTextPane
+            txtduongdan.setEnabled(false);
+        }
+    }//GEN-LAST:event_browseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1045,6 +1098,7 @@ public class km extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainContent;
+    private javax.swing.JButton browse;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1063,6 +1117,7 @@ public class km extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable km;
     private javax.swing.JLabel nen;
@@ -1070,6 +1125,7 @@ public class km extends javax.swing.JFrame {
     private javax.swing.JLabel taik;
     private javax.swing.JButton them;
     private javax.swing.JButton timkiem;
+    private javax.swing.JTextPane txtduongdan;
     private javax.swing.JTextPane txttimkiem;
     private javax.swing.JLabel vaitro;
     // End of variables declaration//GEN-END:variables
