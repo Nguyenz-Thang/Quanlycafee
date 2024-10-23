@@ -228,7 +228,6 @@ public class suathongtin extends javax.swing.JDialog {
         buttonsua.setBackground(new java.awt.Color(153, 204, 255));
         buttonsua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonsua.setForeground(new java.awt.Color(255, 255, 255));
-        buttonsua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/maintenance.png"))); // NOI18N
         buttonsua.setText(" Sửa");
         buttonsua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +247,6 @@ public class suathongtin extends javax.swing.JDialog {
         buttonhuy.setBackground(new java.awt.Color(153, 204, 255));
         buttonhuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonhuy.setForeground(new java.awt.Color(255, 255, 255));
-        buttonhuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
         buttonhuy.setText(" Hủy");
         buttonhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +269,6 @@ public class suathongtin extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/modification.png"))); // NOI18N
         jLabel3.setText("Sửa thông tin sản phẩm");
 
         soluong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -347,7 +344,7 @@ public class suathongtin extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jLabel3)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
