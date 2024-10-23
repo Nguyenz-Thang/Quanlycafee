@@ -69,6 +69,7 @@ public class sualoaisanpham extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(562, 60));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/modification.png"))); // NOI18N
         jLabel1.setText("Sửa thông tin loại sản phẩm");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -77,8 +78,8 @@ public class sualoaisanpham extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(374, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(252, 252, 252))
+                .addComponent(jLabel1)
+                .addGap(239, 239, 239))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +124,8 @@ public class sualoaisanpham extends javax.swing.JDialog {
         });
 
         buttonsua.setBackground(new java.awt.Color(153, 204, 255));
-        buttonsua.setText("Sửa thông tin");
+        buttonsua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/maintenance.png"))); // NOI18N
+        buttonsua.setText(" Sửa thông tin");
         buttonsua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonsuaMouseClicked(evt);
@@ -136,6 +138,7 @@ public class sualoaisanpham extends javax.swing.JDialog {
         });
 
         buttonhuy.setBackground(new java.awt.Color(153, 204, 255));
+        buttonhuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
         buttonhuy.setText("Hủy");
         buttonhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,8 +170,8 @@ public class sualoaisanpham extends javax.swing.JDialog {
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(342, 342, 342)
-                        .addComponent(buttonsua, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126)
+                        .addComponent(buttonsua)
+                        .addGap(118, 118, 118)
                         .addComponent(buttonhuy, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );

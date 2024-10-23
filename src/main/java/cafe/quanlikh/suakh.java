@@ -108,6 +108,7 @@ public class suakh extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/wrench.png"))); // NOI18N
         jLabel1.setText("Sửa khách hàng");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -184,7 +185,7 @@ public class suakh extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(jLabel1)))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,8 +317,6 @@ public class suakh extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-       
         txtgioitinh.setSelectedItem(gioitinh);
         txtsdt.setText(sodienthoai);
         txtdiachi.setText(diachi);
