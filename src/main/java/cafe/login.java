@@ -7,10 +7,14 @@ package cafe;
 import cafe.User;
 import cafe.baocaoquanli.bao;
 import cafe.baocaoquanli.km;
+import cafe.nhacungcap.nhacungcap;
 import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.ConnectDB;
+import cafe.quanlikh.main;
 import cafe.quanlikh.suakh;
 import cafe.quanlinhanvien.nv;
+import cafe.quanlisp.sp;
+import cafe.thongke.thongke;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -150,9 +154,17 @@ public class login extends javax.swing.JFrame {
                     tkh.show();
                     dispose(); // Đóng màn hình đăng nhập
                 } else {
-                    Dashboard d = new Dashboard();
+                    km d = new km();
+                    nhacungcap n = new nhacungcap();
+                    Dashboard a = new Dashboard();
+                    main m = new main();
+                    nv v = new nv();
+                    sp p = new sp();
+                    thongke k = new thongke();
+                    d.setuser(user);
                     d.show();
-                    d.user(user.getTaikhoan(), user.getChucvu()); // Sử dụng thông tin từ class User
+                    //a.setuser(user);
+                    //d.user(user.getTaikhoan(), user.getChucvu()); // Sử dụng thông tin từ class User
                     dispose(); // Đóng màn hình đăng nhập
                 }
             } else {

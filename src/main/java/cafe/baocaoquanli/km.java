@@ -74,10 +74,14 @@ public class km extends javax.swing.JFrame {
 //    }
 
     public void user(String tk, String vaitroo) {
-        taik.setText(tk);
-        vaitro.setText(vaitroo);
+        
     }
+    
+    
 
+    public void setuser(User user){
+        taik.setText(user.getTaikhoan());
+    }
     public void load_km() {
         try {
             Connection con;
@@ -663,7 +667,7 @@ public class km extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
             String duongdan = txtduongdan.getText().trim();
-            if(duongdan.isEmpty()){
+            if (duongdan.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn nơi lưu file trước khi xuất!");
                 browse.requestFocus();
                 return;
@@ -724,7 +728,7 @@ public class km extends javax.swing.JFrame {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
             } else if (tc == "Sắp xếp giảm") {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam desc";
-            }else{
+            } else {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'";
             }
             PreparedStatement st = con.prepareStatement(sql);
@@ -793,7 +797,7 @@ public class km extends javax.swing.JFrame {
                 spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
-            File f = new File(duongdan +"\\"+ filename + ".xlsx");
+            File f = new File(duongdan + "\\" + filename + ".xlsx");
             FileOutputStream out = new FileOutputStream(f);
             workbook.write(out);
             out.close();
