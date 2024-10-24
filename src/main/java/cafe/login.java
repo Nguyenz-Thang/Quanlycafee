@@ -151,7 +151,7 @@ public class login extends javax.swing.JFrame {
                 // Kiểm tra vai trò của người dùng
                 if (vaitro.equals("Admin") || vaitro.equals("Quản lý")) {
                     nv tkh = new nv();
-                    tkh.user(user.getTaikhoan(), user.getChucvu()); // Sử dụng thông tin từ class User
+                    tkh.setuser(user); // Sử dụng thông tin từ class User
                     tkh.show();
                     dispose(); // Đóng màn hình đăng nhập
                 } else {

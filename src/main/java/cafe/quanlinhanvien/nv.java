@@ -4,6 +4,7 @@
  */
 package cafe.quanlinhanvien;
 
+import cafe.User;
 import cafe.baocaoquanli.km;
 import cafe.login;
 import cafe.nhacungcap.nhacungcap;
@@ -47,15 +48,18 @@ public class nv extends javax.swing.JFrame {
     /**
      * Creates new form nv
      */
+    User userzz = new User();
+    public void setuser(User user){
+        taik.setText(user.getTaikhoan());
+        chucvu.setText(user.getChucvu());
+        userzz=user;
+    }
     public nv() {
         initComponents();
         load_quanlybancafe();
         this.setLocationRelativeTo(null);
     }
-    public void user(String tk, String vaitroo) {
-        taik.setText(tk);
-        vaitro.setText(vaitroo);
-    }
+    
     public void load_quanlybancafe() {
         try {
             Connection con;
@@ -94,6 +98,7 @@ public class nv extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        chucvu = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -102,7 +107,6 @@ public class nv extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         so = new javax.swing.JLabel();
         taik = new javax.swing.JLabel();
-        vaitro = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -129,6 +133,11 @@ public class nv extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        chucvu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chucvu.setForeground(new java.awt.Color(255, 255, 255));
+        chucvu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(chucvu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -219,11 +228,6 @@ public class nv extends javax.swing.JFrame {
         taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
         taik.setText("  ");
         jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
-
-        vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        vaitro.setForeground(new java.awt.Color(255, 255, 255));
-        vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 210, 830));
@@ -702,36 +706,42 @@ public class nv extends javax.swing.JFrame {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         thongke d = new thongke();
         d.show();
+        d.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         nhacungcap c = new nhacungcap();
         c.show();
+        c.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         Dashboard d = new Dashboard();
         d.show();
+        d.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         sp s = new sp();
         s.show();
+        s.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         km m = new km();
         m.show();
+        m.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         main m = new main();
         m.show();
+        m.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
@@ -771,6 +781,7 @@ public class nv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel chucvu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -794,6 +805,5 @@ public class nv extends javax.swing.JFrame {
     private javax.swing.JLabel taik;
     private javax.swing.JButton timkiem;
     private javax.swing.JTextPane txttimkiem;
-    private javax.swing.JLabel vaitro;
     // End of variables declaration//GEN-END:variables
 }
