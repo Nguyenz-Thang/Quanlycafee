@@ -14,6 +14,8 @@ import cafe.quanlikh.main;
 import cafe.quanlikh.themkh;
 import cafe.quanlisp.sp;
 import cafe.thongke.thongke;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -22,6 +24,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -53,11 +56,28 @@ public class nv extends javax.swing.JFrame {
         taik.setText(user.getTaikhoan());
         chucvu.setText(user.getChucvu());
         userzz=user;
+        if (user.getChucvu().equals("Admin") || user.getChucvu().equals("Quản lý")) {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/icon/add-user.png"));
+            butnhanvien.setIcon(icon);
+            butnhanvien.setText("Nhân viên");
+            butnhanvien.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    nv v = new nv();
+                    v.show();
+                    v.setuser(user);
+                    dispose();
+                }
+            });
+        }
     }
     public nv() {
         initComponents();
         load_quanlybancafe();
         this.setLocationRelativeTo(null);
+        ImageIcon logo = new ImageIcon(getClass().getResource("/icon/coffee.png"));
+        setIconImage(logo.getImage());
+        setTitle("Nhân viên");
     }
     
     public void load_quanlybancafe() {
@@ -98,6 +118,7 @@ public class nv extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        butnhanvien = new javax.swing.JLabel();
         chucvu = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -133,6 +154,16 @@ public class nv extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        butnhanvien.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        butnhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        butnhanvien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        butnhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butnhanvienMouseClicked(evt);
+            }
+        });
+        jPanel1.add(butnhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 20));
 
         chucvu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         chucvu.setForeground(new java.awt.Color(255, 255, 255));
@@ -745,6 +776,10 @@ public class nv extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
+    private void butnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butnhanvienMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_butnhanvienMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -781,6 +816,7 @@ public class nv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel butnhanvien;
     private javax.swing.JLabel chucvu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
