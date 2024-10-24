@@ -67,7 +67,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
         maKhuyenMai = new javax.swing.JTextPane();
         jScrollPane8 = new javax.swing.JScrollPane();
         ngayLapHoaDon = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
+        inHoaDon = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,10 +138,10 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
 
         jScrollPane8.setViewportView(ngayLapHoaDon);
 
-        jButton1.setText("in hóa đơn");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        inHoaDon.setText("in hóa đơn");
+        inHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                inHoaDonActionPerformed(evt);
             }
         });
 
@@ -175,7 +175,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton1)
+                                        .addComponent(inHoaDon)
                                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(27, 27, 27))
         );
@@ -214,7 +214,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(inHoaDon)
                 .addGap(41, 41, 41))
         );
 
@@ -244,9 +244,9 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void inHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inHoaDonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_inHoaDonActionPerformed
 
     public void setData(String mahd, String tenkhachhang, String tennhanvien, String ngaylap, String tongtien, String makhuyenmai) {
         try {
@@ -342,7 +342,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton inHoaDon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

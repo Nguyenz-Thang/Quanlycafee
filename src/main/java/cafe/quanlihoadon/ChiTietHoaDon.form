@@ -127,8 +127,11 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jScrollPane5" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
                                       <Component id="jScrollPane4" min="-2" pref="217" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane6" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
                                       <Component id="jScrollPane8" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="inHoaDon" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane6" min="-2" pref="217" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -181,7 +184,9 @@
                       </Group>
                       <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="112" max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <Component id="inHoaDon" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -326,10 +331,15 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextPane" name="ngayLapHoaDon">
+            <Component class="javax.swing.JTextPane" name="tongTien1">
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="inHoaDon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="in h&#xf3;a &#x111;&#x1a1;n"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
