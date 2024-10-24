@@ -11,13 +11,17 @@ import cafe.login;
 import cafe.nhacungcap.nhacungcap;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.main;
+import cafe.quanlinhanvien.nv;
 import cafe.quanlisp.sp;
 import cafe.thongke.thongke;
 import com.mysql.cj.xdevapi.Statement;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -38,15 +42,32 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dashboard
      */
     User userzz = new User();
-    public void setuser(User user){
+
+    public void setuser(User user) {
         taik.setText(user.getTaikhoan());
         chucvu.setText(user.getChucvu());
-        userzz=user;
+        userzz = user;
+         if (user.getChucvu().equals("Admin") || user.getChucvu().equals("Quản lý")) {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/icon/add-user.png"));
+            butnhanvien.setIcon(icon);
+            butnhanvien.setText("Nhân viên");
+            butnhanvien.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    nv v = new nv();
+                    v.show();
+                    v.setuser(user);
+                    dispose();
+                }
+            });
+        }
     }
+
     public Dashboard() {
         initComponents();
         load_hd();
         this.setLocationRelativeTo(null);
+
     }
 
     public void load_hd() {
@@ -103,6 +124,7 @@ public class Dashboard extends javax.swing.JFrame {
         nhapExcel = new javax.swing.JButton();
         sapXep = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
+        butnhanvien = new javax.swing.JLabel();
         taik = new javax.swing.JLabel();
         chucvu = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -221,6 +243,16 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        butnhanvien.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        butnhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        butnhanvien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        butnhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butnhanvienMouseClicked(evt);
+            }
+        });
+        jPanel1.add(butnhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 20));
 
         taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         taik.setForeground(new java.awt.Color(255, 255, 255));
@@ -370,6 +402,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void themHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themHoaDonActionPerformed
         ThemHoaDon themHoaDon = new ThemHoaDon(this);
+        themHoaDon.setMaNhanVien(userzz);
         themHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         themHoaDon.show();
     }//GEN-LAST:event_themHoaDonActionPerformed
@@ -445,7 +478,8 @@ public class Dashboard extends javax.swing.JFrame {
         String ngayLap = model.getValueAt(i, 3).toString();
         String tongTien = model.getValueAt(i, 4).toString();
         String maKhuyenMai = model.getValueAt(i, 5).toString();
-
+        
+        
         ChiTietHoaDon cthd = new ChiTietHoaDon(this);
         cthd.setData(maHoaDon, tenKhachHang, tenNhanVien, ngayLap, tongTien, maKhuyenMai);
         cthd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -580,6 +614,10 @@ public class Dashboard extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
+    private void butnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butnhanvienMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_butnhanvienMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -617,6 +655,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel butnhanvien;
     private javax.swing.JLabel chucvu;
     private javax.swing.JTable danhSachHoaDon;
     private javax.swing.JLabel jLabel1;
