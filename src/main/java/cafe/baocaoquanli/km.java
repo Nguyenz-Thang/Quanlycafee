@@ -8,6 +8,7 @@ import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.main;
 import cafe.quanlikh.suakh;
 import cafe.quanlisp.sp;
+import cafe.thongke.thongke;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -122,14 +123,14 @@ public class km extends javax.swing.JFrame {
 
         jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
-        so = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        taik = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        so = new javax.swing.JLabel();
+        taik = new javax.swing.JLabel();
         vaitro = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -158,16 +159,41 @@ public class km extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        so.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        so.setForeground(new java.awt.Color(255, 255, 255));
-        so.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        so.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
-        so.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/description.png"))); // NOI18N
+        jLabel11.setText("Thống kê");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                soMouseClicked(evt);
+                jLabel11MouseClicked(evt);
             }
         });
-        jPanel1.add(so, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 210, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/supplier.png"))); // NOI18N
+        jLabel15.setText("Nhà cung cấp");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
+        jLabel14.setText("Tạo hóa đơn");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -181,30 +207,16 @@ public class km extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 210, -1));
 
-        taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        taik.setForeground(new java.awt.Color(255, 255, 255));
-        taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
-        taik.setText("  ");
-        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
-        jLabel11.setText("Tạo hóa đơn");
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, -1));
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/shopping-online.png"))); // NOI18N
         jLabel12.setText("Khuyến mãi");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 210, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -219,29 +231,23 @@ public class km extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 210, -1));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/description.png"))); // NOI18N
-        jLabel14.setText("Thống kê");
-        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+        so.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        so.setForeground(new java.awt.Color(255, 255, 255));
+        so.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        so.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
+        so.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel14MouseClicked(evt);
+                soMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, -1));
+        jPanel1.add(so, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 210, -1));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/supplier.png"))); // NOI18N
-        jLabel15.setText("Nhà cung cấp");
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel15MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, -1));
+        taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        taik.setForeground(new java.awt.Color(255, 255, 255));
+        taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
+        taik.setText("  ");
+        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
 
         vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         vaitro.setForeground(new java.awt.Color(255, 255, 255));
@@ -626,43 +632,6 @@ public class km extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_soMouseClicked
-
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        main m = new main();
-        m.show();
-        dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        m.user(tk, vt);
-    }//GEN-LAST:event_jLabel13MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        Dashboard d = new Dashboard();
-        d.show();
-        dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        d.user(tk, vt);
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        sp s = new sp();
-        s.show();
-        dispose();
-    }//GEN-LAST:event_jLabel9MouseClicked
-
-    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        Dashboard d = new Dashboard();
-        d.show();
-        dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        d.user(tk, vt);
-    }//GEN-LAST:event_jLabel14MouseClicked
-
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-
-    }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
@@ -1049,6 +1018,42 @@ public class km extends javax.swing.JFrame {
             txtduongdan.setEnabled(false);
         }
     }//GEN-LAST:event_browseActionPerformed
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        thongke d = new thongke();
+        d.show();
+        dispose();
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        nhacungcap c = new nhacungcap();
+        c.show();
+        dispose();
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        Dashboard d = new Dashboard();
+        d.show();
+        dispose();
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        sp s = new sp();
+        s.show();
+        dispose();
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        km m = new km();
+        m.show();
+        dispose();
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        main m = new main();
+        m.show();
+        dispose();
+    }//GEN-LAST:event_jLabel13MouseClicked
 
     /**
      * @param args the command line arguments

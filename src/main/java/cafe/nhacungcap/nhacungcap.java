@@ -10,6 +10,7 @@ import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.main;
 import cafe.quanlisp.sp;
+import cafe.thongke.thongke;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -365,29 +366,27 @@ public class nhacungcap extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        Dashboard d = new Dashboard();
+        thongke d = new thongke();
         d.show();
         dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        d.user(tk, vt);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         main m = new main();
         m.show();
         dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        m.user(tk, vt);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        // TODO add your handling code here:
+        Dashboard d = new Dashboard();
+        d.show();
+        dispose();
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        // TODO add your handling code here:
+        nhacungcap c = new nhacungcap();
+        c.show();
+        dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
@@ -514,9 +513,6 @@ public class nhacungcap extends javax.swing.JFrame {
         km m = new km();
         m.show();
         dispose();
-        String tk = taik.getText().trim();
-        String vt = vaitro.getText().trim();
-        m.user(tk, vt);
     }//GEN-LAST:event_jLabel12MouseClicked
 
     /**
