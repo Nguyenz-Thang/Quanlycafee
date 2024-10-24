@@ -93,7 +93,7 @@
                           <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
                           <Component id="huyHoaDon" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
-                          <Component id="themHoaDon" min="-2" max="-2" attributes="0"/>
+                          <Component id="thanhToan" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
@@ -245,7 +245,7 @@
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="themHoaDon" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="thanhToan" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="huyHoaDon" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -373,18 +373,18 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="themHoaDon">
+        <Component class="javax.swing.JButton" name="thanhToan">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/add.png"/>
+              <Image iconType="3" name="/icon/bill.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+            <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="themHoaDonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="thanhToanActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="huyHoaDon">
@@ -393,7 +393,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/add.png"/>
+              <Image iconType="3" name="/icon/cancel.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
           </Properties>
@@ -549,7 +549,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/add.png"/>
+              <Image iconType="3" name="/icon/modification.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="s&#x1eed;a s&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
           </Properties>

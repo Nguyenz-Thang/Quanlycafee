@@ -58,7 +58,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
         chonSanPham = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         sanPhamDuocThem = new javax.swing.JTable();
-        themHoaDon = new javax.swing.JButton();
+        thanhToan = new javax.swing.JButton();
         huyHoaDon = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tongTienHoaDon = new javax.swing.JTextPane();
@@ -156,17 +156,17 @@ public class ThemHoaDon extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(sanPhamDuocThem);
 
-        themHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        themHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
-        themHoaDon.setText("Thêm");
-        themHoaDon.addActionListener(new java.awt.event.ActionListener() {
+        thanhToan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        thanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
+        thanhToan.setText("Thanh toán");
+        thanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                themHoaDonActionPerformed(evt);
+                thanhToanActionPerformed(evt);
             }
         });
 
         huyHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        huyHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
+        huyHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
         huyHoaDon.setText("Hủy");
         huyHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,7 +244,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
         jScrollPane9.setViewportView(ngayLapHoaDon);
 
         suaSoLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        suaSoLuong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
+        suaSoLuong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/modification.png"))); // NOI18N
         suaSoLuong.setText("sửa số lượng");
         suaSoLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,7 +262,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
                         .addGap(207, 207, 207)
                         .addComponent(huyHoaDon)
                         .addGap(320, 320, 320)
-                        .addComponent(themHoaDon))
+                        .addComponent(thanhToan))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,7 +375,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(themHoaDon)
+                    .addComponent(thanhToan)
                     .addComponent(huyHoaDon))
                 .addGap(45, 45, 45))
         );
@@ -415,11 +415,9 @@ public class ThemHoaDon extends javax.swing.JFrame {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
-//        maKhachHang.removeAllItems();
             while (rs.next()) {
                 String maKhach = rs.getString("makh");
                 String tenKhachHang = rs.getString("tenkhachhang");
-//                String gopMaTen = maKhach + " - " + tenKhachHang; 
                 maKhachHang.addItem(maKhach + " - " + tenKhachHang);
             }
             this.tenSanPhamDuocChon.setEnabled(false);
@@ -447,11 +445,6 @@ public class ThemHoaDon extends javax.swing.JFrame {
             String formattedDateTime = now.format(formatter);
             ngayLapHoaDon.setText(formattedDateTime);
             ngayLapHoaDon.setEnabled(false);
-            // Chuyển đổi sang java.sql.Date để lưu vào cơ sở dữ liệu
-            java.sql.Date sqlDate = java.sql.Date.valueOf(now.toLocalDate());
-            // Sau đó lưu sqlDate vào cột ngày lập hóa đơn trong cơ sở dữ liệu
-//            psHoaDon.setDate(3, sqlDate);
-            // Các phần khác trong mã của bạn...
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + e.getMessage());
@@ -479,7 +472,23 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
 
     private void xoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaSanPhamActionPerformed
-        xoaSanPhamTuBang();
+        int selectedRow = sanPhamDuocThem.getSelectedRow(); // Lấy chỉ số hàng được chọn
+        if (selectedRow >= 0) { // Kiểm tra xem có hàng nào được chọn không
+            int confirm = JOptionPane.showConfirmDialog(this,
+                    "Bạn có chắc chắn muốn xóa sản phẩm này?",
+                    "Xác nhận xóa",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) { // Nếu người dùng chọn "Có"
+                DefaultTableModel model = (DefaultTableModel) sanPhamDuocThem.getModel();
+                model.removeRow(selectedRow); // Xóa hàng được chọn
+                // Gọi phương thức tính tổng tiền sau khi xóa sản phẩm
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+        tinhTongTien();
     }//GEN-LAST:event_xoaSanPhamActionPerformed
 
 
@@ -498,14 +507,31 @@ public class ThemHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_chonSanPhamActionPerformed
 
 
-    private void themHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themHoaDonActionPerformed
+    private void thanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhToanActionPerformed
         // TODO add your handling code here:
-
         try {
             // Lấy dữ liệu từ giao diện
-            String maKhachHang_1 = maKhachHang.getSelectedItem().toString();
-            String maNhanVien_1 = maNhanVien.getText().toString();
+            String maKhachHangGiaoDien = maKhachHang.getSelectedItem().toString();
+            String str1[] = maKhachHangGiaoDien.split(" - "); // tách
+            String maKhachHang_1 = str1[0];
+            //
+            String maNhanVienGiapDien = maNhanVien.getText().toString();
+            String str2[] = maNhanVienGiapDien.split(" - "); // tách
+            String maNhanVien_1 = str2[0];
+            //
+            String ngayLapHoaDon_1 = this.ngayLapHoaDon.getText();
+
+            //
+            String khuyenMaiGiaoDien = this.khuyenMai.getSelectedItem().toString();
+            String str3[] = khuyenMaiGiaoDien.split(" - "); // tách
+            String khuyenMai_1 = str3[0];
+            //
             String tongTienText = tongTienHoaDonKhuyenMai.getText().trim(); // Lấy và trim chuỗi tổng tiền
+
+            // Chuyển đổi sang java.sql.Timestamp để lưu vào cơ sở dữ liệu
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime localDateTime = LocalDateTime.parse(ngayLapHoaDon_1, formatter);
+            java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(localDateTime);
 
             // Kiểm tra ràng buộc
             if (maKhachHang_1.equals("Mã khách hàng") || maKhachHang_1.isEmpty()) {
@@ -517,7 +543,8 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn ít nhất một sản phẩm");
                 return;
             }
-            // Chuyển đổi tổng tiền từ chuỗi sang số khi có >= 1 sản phâm được chọn 
+
+            // Chuyển đổi tổng tiền từ chuỗi sang số khi có >= 1 sản phẩm được chọn 
             double tongTienHoaDon_1 = Double.parseDouble(tongTienText);
 
             // Kết nối với cơ sở dữ liệu
@@ -525,13 +552,14 @@ public class ThemHoaDon extends javax.swing.JFrame {
             con.setAutoCommit(false);  // Tắt auto commit để thực hiện nhiều lệnh cùng lúc
 
             // Thêm hóa đơn vào bảng `hoadon`
-            String sqlInsertHoaDon = "INSERT INTO hoadon (makh, manv, ngaylap, tongtien, trangthai) VALUES (?, ?, ?, ?, ?)";
+            String sqlInsertHoaDon = "INSERT INTO hoadon (makh, manv, ngaylap, tongtien, makm) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement psHoaDon = con.prepareStatement(sqlInsertHoaDon, Statement.RETURN_GENERATED_KEYS);
-
+            System.out.println(khuyenMai_1);
             psHoaDon.setString(1, maKhachHang_1);
             psHoaDon.setString(2, maNhanVien_1);
-//            psHoaDon.setDate(3, sqlDate); // Sử dụng java.sql.Date đã chuyển đổi
+            psHoaDon.setTimestamp(3, sqlTimestamp); // Sử dụng java.sql.Timestamp đã chuyển đổi
             psHoaDon.setDouble(4, tongTienHoaDon_1);
+            psHoaDon.setString(5, khuyenMai_1);
 
             // Thực hiện lệnh thêm hóa đơn
             psHoaDon.executeUpdate();
@@ -568,20 +596,25 @@ public class ThemHoaDon extends javax.swing.JFrame {
             System.out.println("Giao dịch thành công");
 
             // Hiển thị thông báo thành công
-            JOptionPane.showMessageDialog(this, "Thêm hóa đơn và chi tiết hóa đơn thành công!");
+            JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công ,vui lòng thanh toán !");
 
             // Đóng kết nối
             psHoaDon.close();
             psChiTietHD.close();
             con.close();
             das.load_hd();
+
+            ThanhToanHoaDon tthd = new ThanhToanHoaDon(this);
+            tthd.setData(String.valueOf(maHoaDon_1), str1[1], str2[1], ngayLapHoaDon_1, tongTienText, str3[0]);
+            tthd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            tthd.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm hóa đơn: " + e.getMessage());
         }
 
 
-    }//GEN-LAST:event_themHoaDonActionPerformed
+    }//GEN-LAST:event_thanhToanActionPerformed
 
     private void huyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_huyHoaDonActionPerformed
         this.dispose();
@@ -653,16 +686,6 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_themSanPhamActionPerformed
-
-    private void khuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khuyenMaiActionPerformed
-        String tenKhuyenMaiDuocChon = (String) khuyenMai.getSelectedItem();
-        String str1[] = tenKhuyenMaiDuocChon.split(" - ");
-        String maKhuyenMaiDaTach = str1[2];
-        String str2[] = maKhuyenMaiDaTach.split("%");
-        String phanTramDaTach = str2[0];
-        tinhTongTienKhuyenMai(Integer.parseInt(phanTramDaTach));
-
-    }//GEN-LAST:event_khuyenMaiActionPerformed
     private void loadMaKhuyenMai() {
         try {
             Connection con = ConnectDB.KetnoiDB();
@@ -683,6 +706,15 @@ public class ThemHoaDon extends javax.swing.JFrame {
         }
 
     }
+    private void khuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khuyenMaiActionPerformed
+        String tenKhuyenMaiDuocChon = (String) khuyenMai.getSelectedItem();
+        String str1[] = tenKhuyenMaiDuocChon.split(" - ");
+        String maKhuyenMaiDaTach = str1[2];
+        String str2[] = maKhuyenMaiDaTach.split("%");
+        String phanTramDaTach = str2[0];
+        tinhTongTienKhuyenMai(Integer.parseInt(phanTramDaTach));
+
+    }//GEN-LAST:event_khuyenMaiActionPerformed
 
     private void tinhTongTienKhuyenMai(int phanTram) {
         DefaultTableModel model = (DefaultTableModel) sanPhamDuocThem.getModel();
@@ -823,7 +855,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
     private javax.swing.JButton suaSoLuong;
     private javax.swing.JLabel tbkm;
     private javax.swing.JTextPane tenSanPhamDuocChon;
-    private javax.swing.JButton themHoaDon;
+    private javax.swing.JButton thanhToan;
     private javax.swing.JButton themSanPham;
     private javax.swing.JTextPane tongTienHoaDon;
     private javax.swing.JTextPane tongTienHoaDonKhuyenMai;
@@ -864,26 +896,6 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
     }
 
-    private void xoaSanPhamTuBang() {
-        // Lấy mô hình bảng từ JTable
-        int selectedRow = sanPhamDuocThem.getSelectedRow(); // Lấy chỉ số hàng được chọn
-        if (selectedRow >= 0) { // Kiểm tra xem có hàng nào được chọn không
-            int confirm = JOptionPane.showConfirmDialog(this,
-                    "Bạn có chắc chắn muốn xóa sản phẩm này?",
-                    "Xác nhận xóa",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (confirm == JOptionPane.YES_OPTION) { // Nếu người dùng chọn "Có"
-                DefaultTableModel model = (DefaultTableModel) sanPhamDuocThem.getModel();
-                model.removeRow(selectedRow); // Xóa hàng được chọn
-                // Gọi phương thức tính tổng tiền sau khi xóa sản phẩm
-
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        }
-        tinhTongTien();
-    }
 
     private void tinhTongTien() {
         DefaultTableModel model = (DefaultTableModel) sanPhamDuocThem.getModel();
