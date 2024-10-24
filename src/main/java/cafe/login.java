@@ -9,6 +9,7 @@ import cafe.baocaoquanli.bao;
 import cafe.baocaoquanli.km;
 import cafe.nhacungcap.nhacungcap;
 import cafe.quanlihoadon.Dashboard;
+import cafe.quanlihoadon.ThemHoaDon;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.main;
 import cafe.quanlikh.suakh;
@@ -161,8 +162,10 @@ public class login extends javax.swing.JFrame {
                     nv v = new nv();
                     sp p = new sp();
                     thongke k = new thongke();
+                    ThemHoaDon b = new ThemHoaDon();
                     d.setuser(user);
                     d.show();
+                    b.setMaNhanVien(user);
                     //a.setuser(user);
                     //d.user(user.getTaikhoan(), user.getChucvu()); // Sử dụng thông tin từ class User
                     dispose(); // Đóng màn hình đăng nhập
