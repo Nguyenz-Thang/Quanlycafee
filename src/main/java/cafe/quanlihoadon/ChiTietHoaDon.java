@@ -66,7 +66,8 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         maKhuyenMai = new javax.swing.JTextPane();
         jScrollPane8 = new javax.swing.JScrollPane();
-        ngayLapHoaDon = new javax.swing.JTextPane();
+        tongTien1 = new javax.swing.JTextPane();
+        inHoaDon = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +136,9 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
 
         jScrollPane7.setViewportView(maKhuyenMai);
 
-        jScrollPane8.setViewportView(ngayLapHoaDon);
+        jScrollPane8.setViewportView(tongTien1);
+
+        inHoaDon.setText("in hóa đơn");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,8 +168,10 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(inHoaDon)
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,7 +208,9 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(inHoaDon)
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,10 +283,10 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         khachHang.setText(tenkhachhang);
         khachHang.setEnabled(false);
         // Xử lý định dạng ngày tháng
-        ngayLapHoaDon.setText(ngaylap);
-        ngayLapHoaDon.setEnabled(false);
+        tongTien1.setText(ngaylap);
+        tongTien1.setEnabled(false);
 
-        ngayLapHoaDon.setEnabled(false);
+        tongTien1.setEnabled(false);
         tongTien.setText(tongtien);
         tongTien.setEnabled(false);
         nhanVienLapHoaDon.setText(tennhanvien);
@@ -332,6 +339,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton inHoaDon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -354,9 +362,9 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JTable loadThongTinSanPham;
     private javax.swing.JTextPane maHoaDon;
     private javax.swing.JTextPane maKhuyenMai;
-    private javax.swing.JTextPane ngayLapHoaDon;
     private javax.swing.JTextPane nhanVienLapHoaDon;
     private javax.swing.JTextPane tongTien;
+    private javax.swing.JTextPane tongTien1;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -129,7 +129,7 @@
                                       <Component id="jScrollPane4" min="-2" pref="217" max="-2" attributes="0"/>
                                       <Component id="jScrollPane8" alignment="1" min="-2" pref="218" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="inHoaDon" min="-2" max="-2" attributes="0"/>
                                           <Component id="jScrollPane6" min="-2" pref="217" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -185,7 +185,7 @@
                       <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="42" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="inHoaDon" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -335,12 +335,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="inHoaDon">
           <Properties>
             <Property name="text" type="java.lang.String" value="in h&#xf3;a &#x111;&#x1a1;n"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inHoaDonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

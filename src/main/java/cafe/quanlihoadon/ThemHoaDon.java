@@ -543,6 +543,11 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn ít nhất một sản phẩm");
                 return;
             }
+            
+            if (khuyenMai_1.equals("Khuyến mại")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn mã khuyến mại");
+                return;
+            }
 
             // Chuyển đổi tổng tiền từ chuỗi sang số khi có >= 1 sản phẩm được chọn 
             double tongTienHoaDon_1 = Double.parseDouble(tongTienText);
