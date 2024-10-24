@@ -79,9 +79,11 @@ public class km extends javax.swing.JFrame {
     }
     
     
-
+    User userzz = new User();
     public void setuser(User user){
         taik.setText(user.getTaikhoan());
+        chucvu.setText(user.getChucvu());
+        userzz=user;
     }
     public void load_km() {
         try {
@@ -131,7 +133,7 @@ public class km extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         so = new javax.swing.JLabel();
         taik = new javax.swing.JLabel();
-        vaitro = new javax.swing.JLabel();
+        chucvu = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         MainContent = new javax.swing.JPanel();
@@ -249,10 +251,10 @@ public class km extends javax.swing.JFrame {
         taik.setText("  ");
         jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
 
-        vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        vaitro.setForeground(new java.awt.Color(255, 255, 255));
-        vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
+        chucvu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chucvu.setForeground(new java.awt.Color(255, 255, 255));
+        chucvu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(chucvu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 210, 840));
@@ -1022,36 +1024,42 @@ public class km extends javax.swing.JFrame {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         thongke d = new thongke();
         d.show();
+        d.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         nhacungcap c = new nhacungcap();
         c.show();
+        c.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         Dashboard d = new Dashboard();
         d.show();
+        d.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         sp s = new sp();
         s.show();
+        s.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         km m = new km();
         m.show();
+        m.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         main m = new main();
         m.show();
+        m.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
@@ -1108,6 +1116,7 @@ public class km extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainContent;
     private javax.swing.JButton browse;
+    private javax.swing.JLabel chucvu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1136,7 +1145,6 @@ public class km extends javax.swing.JFrame {
     private javax.swing.JButton timkiem;
     private javax.swing.JTextPane txtduongdan;
     private javax.swing.JTextPane txttimkiem;
-    private javax.swing.JLabel vaitro;
     // End of variables declaration//GEN-END:variables
 
 }

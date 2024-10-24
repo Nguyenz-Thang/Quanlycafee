@@ -4,6 +4,7 @@
  */
 package cafe.thongke;
 
+import cafe.User;
 import cafe.baocaoquanli.km;
 import cafe.login;
 import cafe.nhacungcap.nhacungcap;
@@ -30,12 +31,19 @@ public class thongke extends javax.swing.JFrame {
     /**
      * Creates new form thongke
      */
+    User userzz = new User();
+    public void setuser(User user){
+        taik.setText(user.getTaikhoan());
+        chucvu.setText(user.getChucvu());
+        userzz=user;
+    }
     public thongke() {
         initComponents();
         load_combonv();
         load_thongke();
+        this.setLocationRelativeTo(null);
     }
-
+    
     public void load_thongke() {
         String comboboxnv = (String) Combonv.getSelectedItem();
         String timkiem = txttimkiem.getText().trim();
@@ -201,6 +209,7 @@ public class thongke extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        chucvu = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -209,7 +218,6 @@ public class thongke extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         so = new javax.swing.JLabel();
         taik = new javax.swing.JLabel();
-        vaitro = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -218,8 +226,6 @@ public class thongke extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txttimkiem = new javax.swing.JTextPane();
         buttontk = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
         txttong = new javax.swing.JLabel();
         txtsl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -233,6 +239,11 @@ public class thongke extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        chucvu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chucvu.setForeground(new java.awt.Color(255, 255, 255));
+        chucvu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(chucvu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -324,11 +335,6 @@ public class thongke extends javax.swing.JFrame {
         taik.setText("  ");
         jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
 
-        vaitro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        vaitro.setForeground(new java.awt.Color(255, 255, 255));
-        vaitro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(vaitro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
-
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 840));
 
@@ -369,8 +375,6 @@ public class thongke extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Tính tổng ");
-
         txttong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtsl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -395,10 +399,7 @@ public class thongke extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(117, 117, 117)
-                                .addComponent(jButton2)
-                                .addGap(31, 31, 31)
+                                .addGap(409, 409, 409)
                                 .addComponent(txttong, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtsl, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -434,8 +435,8 @@ public class thongke extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Combonv, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(buttontk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)))
+                        .addComponent(buttontk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -444,10 +445,8 @@ public class thongke extends javax.swing.JFrame {
                     .addComponent(ngay1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txttong, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(txtsl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(75, 75, 75))
@@ -455,7 +454,7 @@ public class thongke extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(34, 34, 34)
                     .addComponent(jLabel2)
-                    .addContainerGap(706, Short.MAX_VALUE)))
+                    .addContainerGap(699, Short.MAX_VALUE)))
         );
 
         jLabel3.setBackground(new java.awt.Color(51, 153, 255));
@@ -475,19 +474,21 @@ public class thongke extends javax.swing.JFrame {
                         .addGap(401, 401, 401)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -517,36 +518,42 @@ public class thongke extends javax.swing.JFrame {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         thongke d = new thongke();
         d.show();
+        d.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         nhacungcap c = new nhacungcap();
         c.show();
+        c.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         Dashboard d = new Dashboard();
         d.show();
+        d.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         sp s = new sp();
         s.show();
+        s.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         km m = new km();
         m.show();
+        m.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         main m = new main();
         m.show();
+        m.setuser(userzz);
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
@@ -588,8 +595,7 @@ public class thongke extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Combonv;
     private javax.swing.JButton buttontk;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel chucvu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -613,6 +619,5 @@ public class thongke extends javax.swing.JFrame {
     private javax.swing.JLabel txtsl;
     private javax.swing.JTextPane txttimkiem;
     private javax.swing.JLabel txttong;
-    private javax.swing.JLabel vaitro;
     // End of variables declaration//GEN-END:variables
 }
