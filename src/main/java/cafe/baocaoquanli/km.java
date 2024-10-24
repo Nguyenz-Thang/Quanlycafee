@@ -7,8 +7,12 @@ import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlikh.main;
 import cafe.quanlikh.suakh;
+import cafe.quanlinhanvien.nv;
 import cafe.quanlisp.sp;
 import cafe.thongke.thongke;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,6 +26,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -64,6 +69,9 @@ public class km extends javax.swing.JFrame {
         load_km();
         this.setLocationRelativeTo(null);
         txtduongdan.setEnabled(false);
+        ImageIcon logo = new ImageIcon(getClass().getResource("/icon/coffee.png"));
+        setIconImage(logo.getImage());
+        setTitle("Quản lý khuyến mãi");
     }
 //    public void setUser(User user) {
 //        this.user = user;
@@ -75,16 +83,31 @@ public class km extends javax.swing.JFrame {
 //    }
 
     public void user(String tk, String vaitroo) {
-        
+
     }
-    
-    
+
     User userzz = new User();
-    public void setuser(User user){
+
+    public void setuser(User user) {
         taik.setText(user.getTaikhoan());
         chucvu.setText(user.getChucvu());
-        userzz=user;
+        userzz = user;
+        if (user.getChucvu().equals("Admin") || user.getChucvu().equals("Quản lý")) {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/icon/add-user.png"));
+            butnhanvien.setIcon(icon);
+            butnhanvien.setText("Nhân viên");
+            butnhanvien.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    nv v = new nv();
+                    v.show();
+                    v.setuser(user);
+                    dispose();
+                }
+            });
+        }
     }
+
     public void load_km() {
         try {
             Connection con;
@@ -125,6 +148,7 @@ public class km extends javax.swing.JFrame {
 
         jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
+        butnhanvien = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -160,6 +184,16 @@ public class km extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        butnhanvien.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        butnhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        butnhanvien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        butnhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butnhanvienMouseClicked(evt);
+            }
+        });
+        jPanel1.add(butnhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 20));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -1063,6 +1097,10 @@ public class km extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
+    private void butnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butnhanvienMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_butnhanvienMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1116,6 +1154,7 @@ public class km extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainContent;
     private javax.swing.JButton browse;
+    private javax.swing.JLabel butnhanvien;
     private javax.swing.JLabel chucvu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
