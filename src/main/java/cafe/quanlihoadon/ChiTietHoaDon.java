@@ -65,7 +65,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         loadThongTinSanPham = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
-        trangThai = new javax.swing.JTextPane();
+        maKhuyenMai = new javax.swing.JTextPane();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,7 +117,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         jScrollPane6.setViewportView(nhanVienLapHoaDon);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("Trạng thái");
+        jLabel10.setText("Mã khuyến mại");
 
         loadThongTinSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,7 +132,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(loadThongTinSanPham);
 
-        jScrollPane7.setViewportView(trangThai);
+        jScrollPane7.setViewportView(maKhuyenMai);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,7 +230,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setData(String mahd, String tenkhachhang, String tennhanvien, String ngaylap, String tongtien, String trangthai) {
+    public void setData(String mahd, String tenkhachhang, String tennhanvien, String ngaylap, String tongtien, String makhuyenmai) {
         try {
             Connection con = ConnectDB.KetnoiDB();
             java.sql.Statement st = con.createStatement();
@@ -260,6 +260,7 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
                 model.addRow(v);
             }
             loadThongTinSanPham.setModel(model);
+            loadThongTinSanPham.setEnabled(false);
             // Đóng kết nối
             rs.close();
             con.close();
@@ -279,11 +280,13 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        ngayLapHoaDon.setEnabled(false);
         tongTien.setText(tongtien);
         tongTien.setEnabled(false);
         nhanVienLapHoaDon.setText(tennhanvien);
         nhanVienLapHoaDon.setEnabled(false);
-        trangThai.setText(trangthai);
+        maKhuyenMai.setText(makhuyenmai);
+        maKhuyenMai.setEnabled(false);
 
     }
 
@@ -350,10 +353,10 @@ public class ChiTietHoaDon extends javax.swing.JFrame {
     private javax.swing.JTextPane khachHang;
     private javax.swing.JTable loadThongTinSanPham;
     private javax.swing.JTextPane maHoaDon;
+    private javax.swing.JTextPane maKhuyenMai;
     private com.toedter.calendar.JDateChooser ngayLapHoaDon;
     private javax.swing.JTextPane nhanVienLapHoaDon;
     private javax.swing.JTextPane tongTien;
-    private javax.swing.JTextPane trangThai;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -4,8 +4,6 @@ package cafe.quanlihoadon;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 import cafe.baocaoquanli.km;
 import cafe.baocaoquanli.suakm;
 import cafe.login;
@@ -45,7 +43,6 @@ public class Dashboard extends javax.swing.JFrame {
     public void user(String tk, String vaitroo) {
         taik.setText(tk);
         vaitro.setText(vaitroo);
-        
     }
 
     public void load_hd() {
@@ -54,15 +51,14 @@ public class Dashboard extends javax.swing.JFrame {
             con = ConnectDB.KetnoiDB();
             java.sql.Statement st = con.createStatement();
 
-            // Fixed the SQL query: added a space before "from hoadon hd"
-            String sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai "
+            String sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.makm "
                     + "FROM hoadon hd "
                     + "JOIN khachhang kh ON hd.makh = kh.makh "
-                    + "JOIN nhanvien nv ON hd.manv = nv.manv";
+                    + "JOIN nhanvien nv ON hd.manv = nv.manv ";
             ResultSet rs = st.executeQuery(sql);
 
             // Define column names for the JTable
-            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
+            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền(KM)", "Mã KM"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
 
             // Populate the table model with data from the ResultSet
@@ -73,7 +69,7 @@ public class Dashboard extends javax.swing.JFrame {
                 v.add(rs.getString("tennhanvien"));  // Employee Name
                 v.add(rs.getString("ngaylap"));      // Date of invoice
                 v.add(rs.getString("tongtien"));     // Total amount
-                v.add(rs.getString("trangthai"));    // Status of the invoice
+                v.add(rs.getString("makm"));    // Status of the invoice
                 model.addRow(v);
             }
 
@@ -355,21 +351,21 @@ public class Dashboard extends javax.swing.JFrame {
             java.sql.Statement st = con.createStatement();
 
             // Fixed the SQL query: added a space before "from hoadon hd"
-            String sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai  "
+            String sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.makm "
                     + "from hoadon hd "
                     + "join nhanvien nv on hd.manv = nv.manv "
                     + "join khachhang kh on hd.makh = kh.makh "
                     + "where mahd like '%" + txt + "%' "
                     + "or tenkhachhang like N'%" + txt + "%' "
-                    + "or tennhanvien like '%" + txt + "%' "
+                    + "or tennhanvien like N'%" + txt + "%' "
                     + "or ngaylap like '%" + txt + "%' "
                     + "or tongtien like '%" + txt + "%' "
-                    + "or trangthai like N'%" + txt + "%'";
+                    + "or makm like '%" + txt + "%'";
 
             ResultSet rs = st.executeQuery(sql);
 
             // Define column names for the JTable
-            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
+            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền(KM)", "Mã KM"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
 
             // Populate the table model with data from the ResultSet
@@ -382,7 +378,7 @@ public class Dashboard extends javax.swing.JFrame {
                 v.add(rs.getString("tennhanvien"));  // Employee Name
                 v.add(rs.getString("ngaylap"));      // Date of invoice
                 v.add(rs.getString("tongtien"));     // Total amount
-                v.add(rs.getString("trangthai"));    // Status of the invoice
+                v.add(rs.getString("makm"));    // Status of the invoice
                 model.addRow(v);
             }
             if (check) {
@@ -413,10 +409,10 @@ public class Dashboard extends javax.swing.JFrame {
         String tenNhanVien = model.getValueAt(i, 2).toString();
         String ngayLap = model.getValueAt(i, 3).toString();
         String tongTien = model.getValueAt(i, 4).toString();
-        String trangThai = model.getValueAt(i, 5).toString();
+        String maKhuyenMai = model.getValueAt(i, 5).toString();
 
         ChiTietHoaDon cthd = new ChiTietHoaDon(this);
-        cthd.setData(maHoaDon, tenKhachHang, tenNhanVien, ngayLap, tongTien, trangThai);
+        cthd.setData(maHoaDon, tenKhachHang, tenNhanVien, ngayLap, tongTien, maKhuyenMai);
         cthd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cthd.setVisible(true);
     }//GEN-LAST:event_danhSachHoaDonMouseClicked
@@ -455,14 +451,14 @@ public class Dashboard extends javax.swing.JFrame {
 
             // Xây dựng câu truy vấn SQL với điều kiện sắp xếp và tìm kiếm
             if (tc.equals("sắp xếp tăng")) {
-                sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai "
+                sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.makm "
                         + "FROM hoadon hd "
                         + "JOIN khachhang kh ON hd.makh = kh.makh "
                         + "JOIN nhanvien nv ON hd.manv = nv.manv "
                         //                        
                         + "ORDER BY hd.tongtien ASC";  // Sắp xếp tăng dần theo tổng tiền
             } else if (tc.equals("sắp xếp giảm")) {
-                sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.trangthai "
+                sql = "SELECT hd.mahd, kh.tenkhachhang, nv.tennhanvien, hd.ngaylap, hd.tongtien, hd.makm "
                         + "FROM hoadon hd "
                         + "JOIN khachhang kh ON hd.makh = kh.makh "
                         + "JOIN nhanvien nv ON hd.manv = nv.manv "
@@ -476,7 +472,7 @@ public class Dashboard extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
 
             // Cấu trúc bảng hiển thị
-            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền", "Trạng thái"};
+            String[] arr = {"Mã hóa đơn", "Tên khách hàng", "Nhân viên lập hóa đơn", "Ngày lập hóa đơn", "Tổng tiền(KM)", "Mã KM"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
 
             // Thêm dữ liệu vào bảng
@@ -487,7 +483,7 @@ public class Dashboard extends javax.swing.JFrame {
                 v.add(rs.getString("tennhanvien"));
                 v.add(rs.getString("ngaylap"));
                 v.add(rs.getString("tongtien"));
-                v.add(rs.getString("trangthai"));
+                v.add(rs.getString("makm"));
                 model.addRow(v);
             }
             danhSachHoaDon.setModel(model);  // Thiết lập model cho JTable
@@ -513,7 +509,7 @@ public class Dashboard extends javax.swing.JFrame {
         dispose();
         String tk = taik.getText().trim();
         String vt = vaitro.getText().trim();
-        
+
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
@@ -538,7 +534,7 @@ public class Dashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */  
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) "> 
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
