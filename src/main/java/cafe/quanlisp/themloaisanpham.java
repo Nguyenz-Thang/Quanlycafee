@@ -76,7 +76,8 @@ public class themloaisanpham extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/campaign.png"))); // NOI18N
         jLabel1.setText("Thêm loại sản phẩm");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -122,9 +123,10 @@ public class themloaisanpham extends javax.swing.JDialog {
         tensp1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tensp1.setText("Tên mã loại sản phẩm");
 
-        buttonluu.setBackground(new java.awt.Color(177, 151, 125));
+        buttonluu.setBackground(new java.awt.Color(153, 204, 255));
         buttonluu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonluu.setForeground(new java.awt.Color(255, 255, 255));
+        buttonluu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/guest-list.png"))); // NOI18N
         buttonluu.setText("Thêm");
         buttonluu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,9 +137,10 @@ public class themloaisanpham extends javax.swing.JDialog {
         maloai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         maloai.setText("Mã loại sản phẩm ");
 
-        buttonhuy.setBackground(new java.awt.Color(177, 151, 125));
+        buttonhuy.setBackground(new java.awt.Color(153, 204, 255));
         buttonhuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonhuy.setForeground(new java.awt.Color(255, 255, 255));
+        buttonhuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
         buttonhuy.setText(" Hủy");
         buttonhuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,11 +172,11 @@ public class themloaisanpham extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(322, 322, 322)
+                .addGap(373, 373, 373)
                 .addComponent(buttonluu)
-                .addGap(168, 168, 168)
+                .addGap(117, 117, 117)
                 .addComponent(buttonhuy)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
