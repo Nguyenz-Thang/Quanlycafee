@@ -377,6 +377,22 @@ public class themsanpham extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean Checktrungmasanpham(String masp){
+        boolean kq = false;
+        try{
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "Select * From sanpham Where masp='"+ masp +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(!rs.next()){
+                kq=true;
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return kq;
+    }
+    
     private void chonanhbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chonanhbuttonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Chọn ảnh sản phẩm");
@@ -456,6 +472,11 @@ public class themsanpham extends javax.swing.JDialog {
         String mncc = (String) mancc.getSelectedItem().toString();
         String soluong = soluongtxt.getText().trim();
 
+        if(!Checktrungmasanpham(masp)){
+            JOptionPane.showMessageDialog(this, "Trùng mã sản phẩm!");
+            return;
+        }
+        
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ảnh trước khi lưu!");
             return;
@@ -502,6 +523,7 @@ public class themsanpham extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
 
         //truyền dữ liệu sản phẩm mới về form sản phẩm
 //        if (this.getParent() instanceof formsanpham) {

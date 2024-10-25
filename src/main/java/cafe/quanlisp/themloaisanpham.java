@@ -217,6 +217,22 @@ public class themloaisanpham extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     
+    private boolean Checktrungmaloaisp(String ml){
+        boolean kq = false;
+        try{
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "Select * From loaisanpham Where maloai='"+ ml +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(!rs.next()){
+                kq=true;
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return kq;
+    }
+    
      public void setSanPhamInfo(String maloai, String tenloai) {
         // Set các thông tin sản phẩm vào form
         nhapmaloaitxt.setText(maloai);
@@ -239,6 +255,11 @@ public class themloaisanpham extends javax.swing.JDialog {
         String maloai = nhapmaloaitxt.getText().trim();
         String tenloai = tenmltxt.getText().trim();
      
+        if(!Checktrungmaloaisp(maloai)){
+            JOptionPane.showMessageDialog(this, "Trùng mã loại!");
+            return;
+        }
+        
          if (maloai.isEmpty() || tenloai.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin mã loại và tên loại sản phẩm!");
         return;
