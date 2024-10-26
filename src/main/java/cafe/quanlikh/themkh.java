@@ -86,7 +86,7 @@ public class themkh extends javax.swing.JFrame {
 
         jScrollPane6.setViewportView(txthoten);
 
-        txtgioitinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Chọn giới tính-", "Nam", "Nữ", "Không muốn nói", " " }));
+        txtgioitinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Chọn giới tính-", "Nam", "Nữ", " ", " " }));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus (1).png"))); // NOI18N
         jButton1.setText("Thêm");
@@ -217,16 +217,18 @@ public class themkh extends javax.swing.JFrame {
         if(mkh.isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng !");
             return;
+        
+        }
+        if(ht.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ tên !");
+            return;
         }
         if (txtns.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh");
             return;
         }
         Date ns = new Date(txtns.getDate().getTime());
-        if(ht.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ tên !");
-            return;
-        }
+        
         if(gt.equals("-Chọn giới tính-")){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập giới tính !");
             return;
