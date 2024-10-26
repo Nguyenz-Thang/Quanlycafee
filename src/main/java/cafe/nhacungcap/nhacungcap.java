@@ -780,7 +780,7 @@ public class nhacungcap extends javax.swing.JFrame {
             row = spreadsheet.createRow((short) 2);
             row.setHeight((short) 500);
             cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue("DANH SÁCH KHÁCH HÀNG");
+            cell.setCellValue("DANH SÁCH NHÀ CUNG CẤP");
 
             //Tạo dòng tiêu đều của bảng
             // create CellStyle
@@ -789,35 +789,29 @@ public class nhacungcap extends javax.swing.JFrame {
             row.setHeight((short) 500);
             cell = row.createCell(0, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("STT");
+            cell.setCellValue("Mã công ty");
 
             cell = row.createCell(1, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Mã khách hàng");
+            cell.setCellValue("Tên công ty");
 
             cell = row.createCell(2, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Họ tên");
+            cell.setCellValue("Địa chỉ");
 
             cell = row.createCell(3, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Năm sinh");
+            cell.setCellValue("Số điện thoại");
 
             cell = row.createCell(4, CellType.STRING);
             cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Giới tính");
+            cell.setCellValue("Email");
 
-            cell = row.createCell(5, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Số điện thoại");
-
-            cell = row.createCell(6, CellType.STRING);
-            cell.setCellStyle(cellStyle_Head);
-            cell.setCellValue("Địa chỉ");
+           
 
             //Kết nối DB
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Select * From khachhang";
+            String sql = "Select * From nhacungcap";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             //Đổ dữ liệu từ rs vào các ô trong excel
@@ -841,33 +835,31 @@ public class nhacungcap extends javax.swing.JFrame {
 
                 cell = row.createCell(1);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("makh"));
+                cell.setCellValue(rs.getString("mact"));
 
                 cell = row.createCell(2);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("tenkhachhang"));
+                cell.setCellValue(rs.getString("tenct"));
 
-                java.sql.Date bd = new java.sql.Date(rs.getDate("ngaysinh").getTime());
+                
                 CellStyle cellStyle = workbook.createCellStyle();
-                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+                
                 cellStyle.setBorderLeft(BorderStyle.THIN);
                 cellStyle.setBorderRight(BorderStyle.THIN);
                 cellStyle.setBorderBottom(BorderStyle.THIN);
+                
+
                 cell = row.createCell(3);
-                cell.setCellValue(bd);
-                cell.setCellStyle(cellStyle);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("diachi"));
 
                 cell = row.createCell(4);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("gioitinh"));
+                cell.setCellValue(rs.getString("sdt"));
 
                 cell = row.createCell(5);
                 cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("sodienthoai"));
-
-                cell = row.createCell(6);
-                cell.setCellStyle(cellStyle_data);
-                cell.setCellValue(rs.getString("diachi"));
+                cell.setCellValue(rs.getString("email"));
 
                 i++;
             }
@@ -908,15 +900,15 @@ public class nhacungcap extends javax.swing.JFrame {
     }
     int i = 0;
     String matontai = "";
-    private void ktmact(String mkh) {
+    private void ktmact(String mact) {
         try {
             Connection conn = ConnectDB.KetnoiDB();
-            String check = "select makh from khachhang";
+            String check = "select mact from nhacungcap";
             Statement tt = conn.createStatement();
             ResultSet rs = tt.executeQuery(check);
             while (rs.next()) {
-                String m = rs.getString("makh");
-                if (m.equals(mkh)) {
+                String m = rs.getString("mact");
+                if (m.equals(mact)) {
                     i = 1;
                     //tbkm.setText("Mã khuyến mãi đã tồn tại");
                     
@@ -989,7 +981,7 @@ public class nhacungcap extends javax.swing.JFrame {
                 
             }
             if (!matontai.equals("")) {
-                JOptionPane.showMessageDialog(this, "Không thêm được mã km : " + matontai + "vì mã đã tồn tại trong dữ liệu");
+                JOptionPane.showMessageDialog(this, "Không thêm được nhà cung cấp : " + matontai + "vì nhà cung cấp đã tồn tại trong dữ liệu");
                 matontai = "";
                 return;
             }
