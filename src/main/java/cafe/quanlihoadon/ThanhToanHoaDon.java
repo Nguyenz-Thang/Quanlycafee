@@ -138,8 +138,8 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
 
         jScrollPane8.setViewportView(ngayLapHoaDon);
 
-        inHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bill.png"))); // NOI18N
-        inHoaDon.setText("in hóa đơn");
+        inHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/left-arrow.png"))); // NOI18N
+        inHoaDon.setText("Quay lại");
         inHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inHoaDonActionPerformed(evt);
@@ -215,8 +215,8 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(inHoaDon)
-                .addGap(41, 41, 41))
+                .addComponent(inHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,7 +246,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inHoaDonActionPerformed
-        // TODO add your handling code here:
+               this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_inHoaDonActionPerformed
 
     public void setData(String mahd, String tenkhachhang, String tennhanvien, String ngaylap, String tongtien, String makhuyenmai) {
