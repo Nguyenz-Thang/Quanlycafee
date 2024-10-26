@@ -39,6 +39,33 @@ public class login extends javax.swing.JFrame {
         ImageIcon logo = new ImageIcon(getClass().getResource("/icon/coffee.png"));
         setIconImage(logo.getImage());
         setTitle("Đăng nhập");
+        txtTaiKhoan.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_TAB) {
+                    txtMatKhau.requestFocus();
+                    evt.consume(); // Ngăn chặn sự kiện Tab mặc định
+                }
+            }
+        });
+        // Thêm sự kiện Enter cho txttaikhoan
+        txtTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDangNhapActionPerformed(evt);
+            }
+        });
+
+        // Thêm sự kiện Enter cho txtmatkhau
+        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDangNhapActionPerformed(evt);
+            }
+        });
+    }
+
+    private void setFocusTraversal() {
+        txtTaiKhoan.setNextFocusableComponent(txtMatKhau);
+        txtMatKhau.setNextFocusableComponent(txtTaiKhoan);
     }
 
     /**
@@ -51,19 +78,28 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        txtTaiKhoan = new javax.swing.JTextField();
+        txtShow = new javax.swing.JLabel();
+        txtMatKhau = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        mk = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tk = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
+        buttonDangNhap = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(txtTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 290, 330, 30));
+
+        txtShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/unseen.png"))); // NOI18N
+        txtShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtShowMouseClicked(evt);
+            }
+        });
+        jPanel1.add(txtShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 360, 30, 30));
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 360, 330, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -71,32 +107,22 @@ public class login extends javax.swing.JFrame {
         jLabel1.setText("Mật khẩu:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, -1, -1));
 
-        mk.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane1.setViewportView(mk);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 360, 330, 30));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/id-card.png"))); // NOI18N
         jLabel2.setText("Tên đăng nhập:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, -1, -1));
 
-        tk.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jScrollPane2.setViewportView(tk);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 290, 330, 30));
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/enter.png"))); // NOI18N
-        jButton1.setText("   Đăng nhập");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonDangNhap.setForeground(new java.awt.Color(0, 102, 51));
+        buttonDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/enter.png"))); // NOI18N
+        buttonDangNhap.setText("   Đăng nhập");
+        buttonDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonDangNhapActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 490, -1, -1));
+        jPanel1.add(buttonDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 490, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,10 +146,11 @@ public class login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDangNhapActionPerformed
 
-        String tkk = tk.getText().trim();
-        String mkk = mk.getText().trim();
+        String tkk = txtTaiKhoan.getText().trim();
+        char[] password = txtMatKhau.getPassword();
+        String mkk = new String(password);
         try {
             Connection con = ConnectDB.KetnoiDB();
 
@@ -215,7 +242,26 @@ public class login extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonDangNhapActionPerformed
+    private boolean isPasswordVisible = false;
+    private void txtShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtShowMouseClicked
+        if (isPasswordVisible) {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/icon/unseen.png"));
+            txtShow.setIcon(icon);
+            // Nếu mật khẩu đang được hiển thị, chuyển về dạng ẩn
+            txtMatKhau.setEchoChar('*'); // Đặt lại ký tự hiển thị thành '*'
+            txtShow.setText("Hiện mật khẩu"); // Thay đổi tiêu đề nút
+        } else {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/icon/eye.png"));
+            txtShow.setIcon(icon);
+            // Nếu mật khẩu đang bị ẩn, hiển thị mật khẩu
+            txtMatKhau.setEchoChar((char) 0); // Đặt ký tự hiển thị thành không có ký tự nào
+            txtShow.setText("Ẩn mật khẩu"); // Thay đổi tiêu đề nút
+        }
+
+        isPasswordVisible = !isPasswordVisible; // Chuyển đổi trạng thái hiển thị
+
+    }//GEN-LAST:event_txtShowMouseClicked
 
     /**
      * @param args the command line arguments
@@ -253,15 +299,14 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonDangNhap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane mk;
-    private javax.swing.JTextPane tk;
+    private javax.swing.JPasswordField txtMatKhau;
+    private javax.swing.JLabel txtShow;
+    private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }
