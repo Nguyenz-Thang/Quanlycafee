@@ -60,6 +60,7 @@ public class suathongtin extends javax.swing.JDialog {
         add(lblImage);
         loadCombobox();
         loadmacongty();
+        anhtxt.setEnabled(false); //kkhojg cho nhap
     }
 
     public void loadCombobox() {
@@ -96,30 +97,6 @@ public class suathongtin extends javax.swing.JDialog {
         }
     }
 
-//    private JTextField txtMaloai;
-//    private JTextField txtTensp;
-//    private JTextField txtMasp;
-//    private JTextField txtGia;
-//    private JTextField txtMota;
-//    private JTextField txtMCT;
-//    private JTextField txtSoluong;
-//    private JTextField txtAnh;
-//    private JTextField txtTrangthai;
-//
-    //phuong thức để nhận dữ liệu sản phẩm từ form sản phẩm
-//    public void setProductData(String masp, String maloai, String tensp, String gia, String mota, String trangthai, String hinhanh, String macongty, String soluong) {
-//        masptxt.setText(masp);
-//        maloaicombobox1.setSelectedItem(maloai);
-//        tensptxt.setText(tensp);
-//        giasptxt.setText(gia);
-//        motatxt.setText(mota);
-//        jComboBox1.setSelectedItem(trangthai);
-//        anhtxt.setText(hinhanh);//gán đường dẫn hình ảnh vào ô text
-//        anhlabble.setIcon(new ImageIcon(hinhanh)); //hiển thị hình ảnh
-//        mancc1.setSelectedItem(macongty);
-//        soluongtxt.setText(soluong);
-//
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -506,8 +483,9 @@ public class suathongtin extends javax.swing.JDialog {
         String macongty = mancc1.getSelectedItem().toString();
         String soluong = soluongtxt.getText().trim();
 
-         if (selectedFile == null) {
+        if (hinhanh == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ảnh trước khi lưu!");
+
             return;
         }
         // Đường dẫn thư mục lưu ảnh trong thư mục của dự án (ví dụ: thư mục "images")
@@ -515,20 +493,30 @@ public class suathongtin extends javax.swing.JDialog {
         if (!destinationDir.exists()) {
             destinationDir.mkdir(); // Tạo thư mục nếu chưa tồn tại
         }
-
         // Đặt tên file đích là mã sản phẩm hoặc một tên riêng biệt
-        String newFileName = masp + "_" + selectedFile.getName();
-        File destinationFile = new File(destinationDir, newFileName);
+        String newFileName = null;
+        File destinationFile = null;
+        if (selectedFile != null) {
+            newFileName = masp + "_" + selectedFile.getName();
+            destinationFile = new File(destinationDir, newFileName);
+        }
 
         try {
             // Sao chép file ảnh vào thư mục "images"
-            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            if (selectedFile != null) {
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
         } catch (IOException ex) {
             Logger.getLogger(themsanpham.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String relativePath = "images/" + newFileName; // Đường dẫn tương đối của ảnh
 
-        
+        String relativePath = null;
+        if (selectedFile != null) {
+            relativePath = "images/" + newFileName; // Đường dẫn tương đối của ảnh
+        } else {
+            relativePath = hinhanh;
+        }
+
         //kiểm tra dữ liệu trước khi truy cập
         if (masp.isEmpty() || tensp.isEmpty() || maloai.isEmpty() || mota.isEmpty() || trangthai.isEmpty() || hinhanh.isEmpty() || macongty.isEmpty() || soluong.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
