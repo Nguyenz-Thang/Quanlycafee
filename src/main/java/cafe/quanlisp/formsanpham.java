@@ -27,6 +27,7 @@ import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -65,6 +66,7 @@ public class formsanpham extends javax.swing.JFrame {
         load_themsanpham();
         themsanpham form = new themsanpham(this);
         suathongtin form1 = new suathongtin(this);
+        txtDuongDan.setEnabled(false);
     }
 
     public void load_themsanpham() {
@@ -89,7 +91,7 @@ public class formsanpham extends javax.swing.JFrame {
 
                 //chỉ hiển thị tên ảnh 
                 String hinhanh = rs.getString("hinhanh");
-               // String tenAnh = new File(hinhanh).getName();
+                // String tenAnh = new File(hinhanh).getName();
                 v.add(hinhanh);
 
                 v.add(rs.getString("macongty"));
@@ -124,6 +126,9 @@ public class formsanpham extends javax.swing.JFrame {
         timkiemtxt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        buttonBrowse = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDuongDan = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,13 +203,13 @@ public class formsanpham extends javax.swing.JFrame {
 
         tablehienthitxt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
         tablehienthitxt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -254,6 +259,15 @@ public class formsanpham extends javax.swing.JFrame {
             }
         });
 
+        buttonBrowse.setText("Browse");
+        buttonBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBrowseActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(txtDuongDan);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,13 +289,17 @@ public class formsanpham extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(94, 94, 94)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(132, 132, 132)
-                        .addComponent(jComboBoxsapxep, 0, 121, Short.MAX_VALUE)
-                        .addGap(149, 149, 149))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jComboBoxsapxep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonBrowse)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 455, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(268, 268, 268))))
         );
@@ -296,10 +314,14 @@ public class formsanpham extends javax.swing.JFrame {
                     .addComponent(timkiemtxt)
                     .addComponent(buttontimkiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton11)
-                    .addComponent(jComboBoxsapxep, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton11)
+                        .addComponent(jComboBoxsapxep, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonBrowse)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -324,7 +346,7 @@ public class formsanpham extends javax.swing.JFrame {
 
 
     private void buttonsuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonsuaMouseClicked
-        
+
         //tìm sản phẩm với mã sản phẩm được chọn
         int selectRow = tablehienthitxt.getSelectedRow();
         String masp = tablehienthitxt.getValueAt(selectRow, 0).toString();
@@ -366,7 +388,6 @@ public class formsanpham extends javax.swing.JFrame {
         xoathongtin xtt = new xoathongtin(this, masp, maloai, tensp, gia, mota, hinhanh, trangthai, macongty, soluong);
         xtt.setVisible(true);
     }//GEN-LAST:event_ButtonxoaMouseClicked
-
 
     private String selectMasp;
 
@@ -465,9 +486,9 @@ public class formsanpham extends javax.swing.JFrame {
             Statement st = con.createStatement();
             String sql;
             if (tc.equals("Sắp xếp tăng")) {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%" + txt + "%' or hinhanh like'%" + txt + "%'or trangthai like N'%" + txt + "%' or macongty like N'%" + txt + " order by soluong ASC";
+                sql = "Select * from sanpham where gia like N'%" + txt + "%' order by gia ASC";
             } else if (tc.equals("Sắp xếp giảm")) {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like N'%" + txt + "%'  or mota like N '%" + txt + "%' or hinhanh like'%" + txt + "%'or trangthai like N'%" + txt + "%' or macongty like N'%" + txt + " order by soluong DESC";
+                sql = "Select * from sanpham where gia like N'%" + txt + "%' order by gia DESC";
             } else {
                 load_themsanpham();
                 return;
@@ -475,12 +496,12 @@ public class formsanpham extends javax.swing.JFrame {
 
             ResultSet rs = st.executeQuery(sql);
             //   tbLoaiSach.removeAll();
-            String[] arr = {"Mã sản phẩm", "Tên Sản Phẩm", "Mã Loại", "Giá", "Mô tả", "Hình Ảnh", "Trạng Thái","Mã công ty","Số lượng"};
+            String[] arr = {"Mã sản phẩm", "Tên Sản Phẩm", "Mã Loại", "Giá", "Mô tả", "Hình Ảnh", "Trạng Thái", "Mã công ty", "Số lượng"};
             DefaultTableModel model = new DefaultTableModel(arr, 0);
             while (rs.next()) {
                 Vector v = new Vector();
                 v.add(rs.getString("masp"));
-                v.add(rs.getString("tensp"));
+                v.add(rs.getString("tensanpham"));
                 v.add(rs.getString("maloai"));
                 v.add(rs.getString("gia"));
                 v.add(rs.getString("mota"));
@@ -536,6 +557,7 @@ public class formsanpham extends javax.swing.JFrame {
         }
 
     }
+
     private void ReadExcel(String tenfilepath) {
 
         try {
@@ -601,10 +623,6 @@ public class formsanpham extends javax.swing.JFrame {
         }
     }
 
-    
-
-    
-
     private static CellStyle DinhdangHeader(XSSFSheet sheet) {
         // Create font
         XSSFFont font = sheet.getWorkbook().createFont();
@@ -627,7 +645,7 @@ public class formsanpham extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             JFileChooser fc = new JFileChooser();
             int lc = fc.showOpenDialog(this);
             if (lc == JFileChooser.APPROVE_OPTION) {
@@ -648,14 +666,19 @@ public class formsanpham extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
         // TODO add your handling code here:
-           // TODO add your handling code here:
-          try {
-
+        // TODO add your handling code here:
+        try {
+            String duongdan = txtDuongDan.getText().trim();
+            if (duongdan.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nơi lưu file trước khi xuất!");
+                buttonBrowse.requestFocus();
+                return;
+            }
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet spreadsheet = workbook.createSheet("tacgia");
             // register the columns you wish to track and compute the column width
@@ -721,12 +744,11 @@ public class formsanpham extends javax.swing.JFrame {
             String tc = jComboBoxsapxep.getSelectedItem().toString();
             String txt = timkiemtxt.getText().trim();
             if (tc == "Sắp xếp tăng") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or trangthai N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong";
+                sql = "Select * from sanpham where gia like '%" + txt + "%' order by gia";
             } else if (tc == "Sắp xếp giảm") {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or trangthai N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong desc";
+                sql = "Select * from sanpham where gia like '%" + txt + "%' order by gia desc";
             } else {
-                sql = "Select * from sanpham where masp like '%" + txt + "%' or tensanpham like N'%" + txt + "%' or maloai like '%" + txt + "%' or gia like '%" + txt + "%'  or mota like N'%" + txt + "%' or macongty like N'%" + txt + "%' order by soluong";
-
+                sql = "Select * from sanpham";
             }
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -793,22 +815,35 @@ public class formsanpham extends javax.swing.JFrame {
                 spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
             }
             String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
-            File f = new File("E:\\filesanphamxuatbaocao\\nhapfile\\" + filename + ".xlsx");
-            //File f = new File("C:\\\\Users\\\\Acer\\\\Desktop\\\\" + filename + ".xlsx");
-            if (!f.getParentFile().exists()) {
-                JOptionPane.showMessageDialog(this, "Thư mục không tồn tại");
-                return;
-            }
-            
+            File f = new File(duongdan + "\\" + filename + ".xlsx");
             FileOutputStream out = new FileOutputStream(f);
             workbook.write(out);
             out.close();
-            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra desktop");
+            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra trong đường dẫn đã chọn !");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton11MouseClicked
+
+    private void buttonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseActionPerformed
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn thư mục lưu trữ"); // Đặt tiêu đề hộp thoại
+        fileChooser.setApproveButtonText("Chọn thư mục"); // Đổi tên nút xác nhận
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Để chọn thư mục, nếu bạn muốn chọn file thì dùng FILES_ONLY
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            txtDuongDan.setText(selectedFile.getAbsolutePath()); // Hiển thị đường dẫn lên JTextPane
+            txtDuongDan.setEnabled(false);
+        }
+    }//GEN-LAST:event_buttonBrowseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -855,6 +890,7 @@ public class formsanpham extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Buttonxoa;
+    private javax.swing.JButton buttonBrowse;
     private javax.swing.JLabel buttonsua;
     private javax.swing.JButton buttontimkiem;
     private javax.swing.JButton jButton1;
@@ -864,11 +900,13 @@ public class formsanpham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel nen;
     private javax.swing.JLabel so;
     private javax.swing.JTable tablehienthitxt;
     private javax.swing.JLabel taik;
     private javax.swing.JTextField timkiemtxt;
+    private javax.swing.JTextPane txtDuongDan;
     private javax.swing.JLabel vaitro;
     // End of variables declaration//GEN-END:variables
 }

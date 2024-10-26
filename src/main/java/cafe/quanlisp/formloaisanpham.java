@@ -345,7 +345,7 @@ public class formloaisanpham extends javax.swing.JFrame {
         try {
             Connection con = ConnectDB.KetnoiDB();
             Statement st = con.createStatement();
-            String sql = "Select * from loaisanpham where maloai like '%" + txt + "%' or tenloai like N'%";
+            String sql = "Select * from loaisanpham where maloai like '%" + txt + "%' or tenloai like N'%" + txt + "%'";
             ResultSet rs = st.executeQuery(sql);
             //   tbLoaiSach.removeAll();
             String[] arr = {"Mã loại sản phẩm", "Tên loại sản phẩm"};

@@ -89,6 +89,7 @@ public class nhacungcap extends javax.swing.JFrame {
         ImageIcon logo = new ImageIcon(getClass().getResource("/icon/coffee.png"));
         setIconImage(logo.getImage());
         setTitle("Nhà cung cấp");
+        txtduongdan.setEnabled(false);
     }
     public void load_nhacungcap() {
         try {

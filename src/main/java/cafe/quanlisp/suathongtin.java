@@ -482,7 +482,19 @@ public class suathongtin extends javax.swing.JDialog {
         String hinhanh = anhtxt.getText();
         String macongty = mancc1.getSelectedItem().toString();
         String soluong = soluongtxt.getText().trim();
-
+        String cboMaLoai = maloaicombobox1.getSelectedItem().toString();
+        if (cboMaLoai.equals("---")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn mã loại !");
+            return;
+        }
+        String maloaiCbo = maloaicombobox1.getSelectedItem().toString();
+        String str1[] = maloaiCbo.split(" - "); // tách
+        String ml = str1[0];
+        String cboCty = mancc1.getSelectedItem().toString();
+        if (cboCty.equals("---")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn mã công ty !");
+            return;
+        }
         if (hinhanh == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ảnh trước khi lưu!");
 

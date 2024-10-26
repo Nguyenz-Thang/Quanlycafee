@@ -44,6 +44,10 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import static org.apache.poi.ss.usermodel.CellType.BOOLEAN;
+import static org.apache.poi.ss.usermodel.CellType.FORMULA;
+import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
+import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -638,7 +642,7 @@ public class km extends javax.swing.JFrame {
                 Row row = itr.next(); // Lấy dòng tiếp theo
                 String kmm = row.getCell(0).getStringCellValue();
                 String tkm = row.getCell(1).getStringCellValue();
-                String motaa = row.getCell(2).getStringCellValue();
+                String motaa = getCellValueAsString(row.getCell(2));
                 int phtram = (int) row.getCell(3).getNumericCellValue();
 
                 java.util.Date bd = row.getCell(4).getDateCellValue(); // Ngày bắt đầu
@@ -660,7 +664,25 @@ public class km extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    private String getCellValueAsString(Cell cell) {
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue();
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    return sdf.format(cell.getDateCellValue());
+                } else {
+                    return String.valueOf(cell.getNumericCellValue());
+                }
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return cell.getCellFormula();
+            default:
+                return "";
+        }
+    }
     private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất", "Xác nhận", JOptionPane.YES_NO_OPTION);
         if (confirm == 0) {

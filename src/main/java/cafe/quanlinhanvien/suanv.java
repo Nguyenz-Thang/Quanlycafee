@@ -249,7 +249,7 @@ public class suanv extends javax.swing.JFrame {
                 st.executeUpdate(deleteSql);
                 JOptionPane.showMessageDialog(this, "Xoá thành công!");
                 con.close();
-                //dispose();
+                dispose();
                 if (parentForm != null) {
                     parentForm.load_quanlybancafe(); // Gọi hàm load từ form cha
                 }
