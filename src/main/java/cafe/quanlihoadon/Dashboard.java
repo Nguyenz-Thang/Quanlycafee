@@ -900,28 +900,22 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             Connection conn = ConnectDB.KetnoiDB();
             String sql = "INSERT into hoadon  Values('" + maHoaDon_1 + "',N'" + sqlTimestamp + "',N'" + makh + "','" + manv + "','" + tongTienKhuyenMai_1 + "','" + maKhuyenMai + "')";
-
-            // Thêm từng chi tiết hóa đơn vào bảng `chitiethoadon`
-            String sqlInsertChiTietHD = "INSERT INTO chitiethoadon (mahd, masp, soluong, gia, machitiethd) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement psChiTietHD = conn.prepareStatement(sqlInsertChiTietHD);
+            java.sql.Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+          
             for (int i = 0; i < maSanPhamTach.length; i++) {
-                
                 String maChiTietHoaDon = "MCHD" + maHoaDon_1 + "" + (i + 1);
-                String maSP = maSanPhamTach[i].toString();  // Lấy mã sản phẩm từ cột 0
+                String maSP = maSanPhamTach[i].toString();
+// Lấy mã sản phẩm từ cột 0
                 int soLuong = Integer.parseInt(soLuongTach[i].toString());  // Lấy số lượng từ cột 2
                 double gia = Double.parseDouble(giaTach[i].toString());  // Lấy giá từ cột 3
                 System.out.println(gia);
-                psChiTietHD.setInt(1, maHoaDon_1);  // Mã hóa đơn
-                psChiTietHD.setString(2, maSP);  // Mã sản phẩm
-                psChiTietHD.setInt(3, soLuong);  // Số lượng
-                psChiTietHD.setDouble(4, gia);  // Giá
-                psChiTietHD.setString(5, maChiTietHoaDon);  // Mã chi tiết hóa đơn
-                psChiTietHD.addBatch();  // Thêm vào batch
+                String sqlInsertChiTietHD = "INSERT INTO chitiethoadon VALUES ('" + maChiTietHoaDon + "' ,'" + maHoaDon_1 + "', '" + maSP + "', '" + soLuong + "', '" + gia + "')";
+                java.sql.Statement stt = conn.createStatement();
+                stt.executeUpdate(sqlInsertChiTietHD);
             }
-//            psChiTietHD.executeBatch();
-            
-            java.sql.Statement st = conn.createStatement();
-            st.executeUpdate(sql);
+            //psChiTietHD.executeBatch();
+
             load_hd();
             conn.close();
         } catch (SQLException e) {
@@ -1027,7 +1021,6 @@ public class Dashboard extends javax.swing.JFrame {
                 String maSanPham = getCellValueAsString(row.getCell(6));
                 String[] maSanPhamTach = maSanPham.split(",");
                 System.out.println(maSanPham);
-      
 
                 // Đọc và tách số lượng
                 String soLuong = getCellValueAsString(row.getCell(7));
