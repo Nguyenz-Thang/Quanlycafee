@@ -228,7 +228,7 @@ public class themkm extends javax.swing.JFrame {
         String motaa = mota.getText().trim();
 
         try {
-            if (km.equals("")) {
+            if (km.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khuyến mại");
                 return;
             }
@@ -249,7 +249,7 @@ public class themkm extends javax.swing.JFrame {
 
             }
 
-            if (tkm.equals("")) {
+            if (tkm.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập tên khuyến mại");
                 return;
             }
@@ -264,7 +264,7 @@ public class themkm extends javax.swing.JFrame {
             Date bdau = new Date(ngaybd.getDate().getTime());
             Date kett = new Date(ngaykt.getDate().getTime());
             try {
-                if (phtram.equals("")) {
+                if (phtram.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Nhập phần trăm giảm");
                     return;
                 }

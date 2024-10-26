@@ -7,7 +7,10 @@ package cafe.nhacungcap;
 import cafe.quanlikh.ConnectDB;
 import cafe.quanlinhanvien.nv;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,10 +26,12 @@ public class themncc extends javax.swing.JFrame {
         initComponents();
     }
     private nhacungcap parentForm;
+
     public themncc(nhacungcap parent) {
         this.parentForm = parent; // Lưu tham chiếu vào biến
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -202,21 +207,61 @@ public class themncc extends javax.swing.JFrame {
     private void txtmactKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmactKeyPressed
 
     }//GEN-LAST:event_txtmactKeyPressed
-
+    public String checkDT(String dt) {
+        String regex = "^(\\+84|0)[0-9]{9}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(dt);
+        if (dt.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nhập số điện thoại !");
+            return null;
+        }
+        if (!m.matches()) {
+            JOptionPane.showMessageDialog(this, "Nhập số điện thoại lỗi! Mời nhập lại");
+            return null;
+        }
+        return dt;
+    }
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         String mact = txtmact.getText().trim();
         String tenct = txttenct.getText().trim();
         String diachi = txtdiachi.getText().trim();
         String sdt = txtsdt.getText().trim();
         String email = txtemail.getText().trim();
-       
+
         try {
+            if (mact.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã Công ty");
+                return;
+            }
+//            if(km==null){
+//                JOptionPane.showMessageDialog(this, "Nhập mã khuyến mãi !");
+//            }
+            Connection conn = ConnectDB.KetnoiDB();
+            String check = "select macongty from nhacungcap";
+            Statement tt = conn.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+            while (rs.next()) {
+                String macongty_1 = rs.getString("macongty");
+                if (macongty_1.equals(mact)) {
+                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
+                    JOptionPane.showMessageDialog(this, "Mã khuyến mãi đã tồn tại");
+                    return;
+                }
+
+            }
+            if (tenct.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên Công ty");
+                return;
+            }
+            if (checkDT(sdt) == null) {
+                return;
+            }
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Insert into nhacungcap values('"+ mact +"', N'"+ tenct +"',N'"+ diachi +"', '"+ sdt +"','"+ email +"')";
+            String sql = "Insert into nhacungcap values('" + mact + "', N'" + tenct + "',N'" + diachi + "', '" + sdt + "','" + email + "')";
             Statement st = con.createStatement();
 
             int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thêm?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-            if(confirm == 0 ){
+            if (confirm == 0) {
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 con.close();

@@ -30,6 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -68,7 +69,7 @@ public class km extends javax.swing.JFrame {
         initComponents();
         load_km();
         this.setLocationRelativeTo(null);
-        txtduongdan.setEnabled(false);
+        txtDuongDan.setEnabled(false);
         ImageIcon logo = new ImageIcon(getClass().getResource("/icon/coffee.png"));
         setIconImage(logo.getImage());
         setTitle("Quản lý khuyến mãi");
@@ -130,7 +131,7 @@ public class km extends javax.swing.JFrame {
 
             }
 
-            km.setModel(model);
+            TableKhuyenMai.setModel(model);
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,19 +166,19 @@ public class km extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        them = new javax.swing.JButton();
+        ButtonThemKhuyenMai = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        txttimkiem = new javax.swing.JTextPane();
-        timkiem = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtTimKiem = new javax.swing.JTextPane();
+        ButtonTimKiem = new javax.swing.JButton();
+        comBoBoxSapXep = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        km = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        browse = new javax.swing.JButton();
+        TableKhuyenMai = new javax.swing.JTable();
+        ButtonNhapExcel = new javax.swing.JButton();
+        ButtonXuatBaoCao = new javax.swing.JButton();
+        ButtonXuatExcel = new javax.swing.JButton();
+        buttonBrowse = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtduongdan = new javax.swing.JTextPane();
+        txtDuongDan = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -337,37 +338,37 @@ public class km extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
-        them.setText("Thêm khuyến mãi");
-        them.addActionListener(new java.awt.event.ActionListener() {
+        ButtonThemKhuyenMai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ButtonThemKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
+        ButtonThemKhuyenMai.setText("Thêm khuyến mãi");
+        ButtonThemKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                themActionPerformed(evt);
+                ButtonThemKhuyenMaiActionPerformed(evt);
             }
         });
 
-        txttimkiem.setToolTipText("");
-        txttimkiem.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtTimKiem.setToolTipText("");
+        txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txttimkiemMouseClicked(evt);
+                txtTimKiemMouseClicked(evt);
             }
         });
-        txttimkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txttimkiemKeyPressed(evt);
+                txtTimKiemKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txttimkiemKeyTyped(evt);
+                txtTimKiemKeyTyped(evt);
             }
         });
-        jScrollPane5.setViewportView(txttimkiem);
+        jScrollPane5.setViewportView(txtTimKiem);
 
-        timkiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        timkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
-        timkiem.setText("Tìm kiếm");
-        timkiem.addActionListener(new java.awt.event.ActionListener() {
+        ButtonTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ButtonTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        ButtonTimKiem.setText("Tìm kiếm");
+        ButtonTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timkiemActionPerformed(evt);
+                ButtonTimKiemActionPerformed(evt);
             }
         });
 
@@ -377,36 +378,36 @@ public class km extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(them)
+                .addComponent(ButtonThemKhuyenMai)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(timkiem)
+                .addComponent(ButtonTimKiem)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(them)
+                .addComponent(ButtonThemKhuyenMai)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(timkiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane5))
                 .addContainerGap())
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Sắp xếp---", "Sắp xếp tăng", "Sắp xếp giảm" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comBoBoxSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Sắp xếp---", "Sắp xếp tăng", "Sắp xếp giảm" }));
+        comBoBoxSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comBoBoxSapXepActionPerformed(evt);
             }
         });
 
-        km.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        km.setModel(new javax.swing.table.DefaultTableModel(
+        TableKhuyenMai.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TableKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -417,47 +418,47 @@ public class km extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
-        km.addMouseListener(new java.awt.event.MouseAdapter() {
+        TableKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                kmMouseClicked(evt);
+                TableKhuyenMaiMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(km);
+        jScrollPane1.setViewportView(TableKhuyenMai);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xls.png"))); // NOI18N
-        jButton1.setText("Nhập File excel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonNhapExcel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ButtonNhapExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xls.png"))); // NOI18N
+        ButtonNhapExcel.setText("Nhập File excel");
+        ButtonNhapExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonNhapExcelActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
-        jButton2.setText("Xuất báo cáo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ButtonXuatBaoCao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
+        ButtonXuatBaoCao.setText("Xuất báo cáo");
+        ButtonXuatBaoCao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ButtonXuatBaoCaoActionPerformed(evt);
             }
         });
 
-        jButton11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel.jpg"))); // NOI18N
-        jButton11.setText("Xuất excel");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        ButtonXuatExcel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ButtonXuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel.jpg"))); // NOI18N
+        ButtonXuatExcel.setText("Xuất excel");
+        ButtonXuatExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                ButtonXuatExcelActionPerformed(evt);
             }
         });
 
-        browse.setText("Browse");
-        browse.addActionListener(new java.awt.event.ActionListener() {
+        buttonBrowse.setText("Browse");
+        buttonBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseActionPerformed(evt);
+                buttonBrowseActionPerformed(evt);
             }
         });
 
-        jScrollPane2.setViewportView(txtduongdan);
+        jScrollPane2.setViewportView(txtDuongDan);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -468,20 +469,20 @@ public class km extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(ButtonNhapExcel)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton2)
+                            .addComponent(ButtonXuatBaoCao)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(browse)
+                            .addComponent(buttonBrowse)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton11))
+                            .addComponent(ButtonXuatExcel))
                         .addComponent(jScrollPane1)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comBoBoxSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -490,20 +491,20 @@ public class km extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comBoBoxSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton11)
-                            .addComponent(jButton2))
+                            .addComponent(ButtonNhapExcel)
+                            .addComponent(ButtonXuatExcel)
+                            .addComponent(ButtonXuatBaoCao))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(browse)))
+                        .addComponent(buttonBrowse)))
                 .addGap(50, 50, 50))
         );
 
@@ -669,12 +670,12 @@ public class km extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_soMouseClicked
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void ButtonXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXuatExcelActionPerformed
         try {
-            String duongdan = txtduongdan.getText().trim();
+            String duongdan = txtDuongDan.getText().trim();
             if (duongdan.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn nơi lưu file trước khi xuất!");
-                browse.requestFocus();
+                buttonBrowse.requestFocus();
                 return;
             }
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -727,8 +728,8 @@ public class km extends javax.swing.JFrame {
 
             Connection con = ConnectDB.KetnoiDB();
             String sql = "";
-            String tc = jComboBox1.getSelectedItem().toString();
-            String txt = txttimkiem.getText().trim();
+            String tc = comBoBoxSapXep.getSelectedItem().toString();
+            String txt = txtTimKiem.getText().trim();
             if (tc == "Sắp xếp tăng") {
                 sql = "Select * from khuyenmai where makm like '%" + txt + "%' or tenkhuyenmai like N'%" + txt + "%' or phantramgiam like '%" + txt + "%' or mota like N'%" + txt + "%'  order by phantramgiam";
             } else if (tc == "Sắp xếp giảm") {
@@ -811,11 +812,11 @@ public class km extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_ButtonXuatExcelActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String tc = jComboBox1.getSelectedItem().toString();
-        String txt = txttimkiem.getText().trim();
+    private void ButtonXuatBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXuatBaoCaoActionPerformed
+        String tc = comBoBoxSapXep.getSelectedItem().toString();
+        String txt = txtTimKiem.getText().trim();
         try {
             Connection con = ConnectDB.KetnoiDB();
             Statement st = con.createStatement();
@@ -840,7 +841,7 @@ public class km extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ButtonXuatBaoCaoActionPerformed
 
 //    private String getCellValueAsString(Cell cell) {
 //        switch (cell.getCellType()) {
@@ -866,7 +867,7 @@ public class km extends javax.swing.JFrame {
 //                return "";
 //        }
 //    }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonNhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonNhapExcelActionPerformed
         try {
             JFileChooser fc = new JFileChooser();
             int lc = fc.showOpenDialog(this);
@@ -884,9 +885,9 @@ public class km extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ButtonNhapExcelActionPerformed
 
-    private void kmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmMouseClicked
+    private void TableKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableKhuyenMaiMouseClicked
         //        them.setEnabled(false);
         //        sua.setEnabled(true);
         //        xoa.setEnabled(true);
@@ -915,8 +916,8 @@ public class km extends javax.swing.JFrame {
         //        mota.setText(tb.getValueAt(i, 5).toString());
 
         int i;
-        i = km.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) km.getModel();
+        i = TableKhuyenMai.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) TableKhuyenMai.getModel();
         //
         String ma = model.getValueAt(i, 0).toString();
         String ten = model.getValueAt(i, 1).toString();
@@ -952,11 +953,11 @@ public class km extends javax.swing.JFrame {
         //        } catch (Exception e) {
         //            e.printStackTrace();
         //        }
-    }//GEN-LAST:event_kmMouseClicked
+    }//GEN-LAST:event_TableKhuyenMaiMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String tc = jComboBox1.getSelectedItem().toString();
-        String txt = txttimkiem.getText().trim();
+    private void comBoBoxSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBoBoxSapXepActionPerformed
+        String tc = comBoBoxSapXep.getSelectedItem().toString();
+        String txt = txtTimKiem.getText().trim();
         try {
             Connection con = ConnectDB.KetnoiDB();
             Statement st = con.createStatement();
@@ -984,15 +985,15 @@ public class km extends javax.swing.JFrame {
                 v.add(rs.getString("mota"));
                 model.addRow(v);
             }
-            km.setModel(model);
+            TableKhuyenMai.setModel(model);
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comBoBoxSapXepActionPerformed
 
-    private void timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timkiemActionPerformed
-        String txt = txttimkiem.getText().trim();
+    private void ButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonTimKiemActionPerformed
+        String txt = txtTimKiem.getText().trim();
         try {
             Connection con = ConnectDB.KetnoiDB();
             Statement st = con.createStatement();
@@ -1018,42 +1019,49 @@ public class km extends javax.swing.JFrame {
                 v.add("Không có dữ liệuuuuuuu");
                 model.addRow(v);
             }
-            km.setModel(model);
+            TableKhuyenMai.setModel(model);
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_timkiemActionPerformed
+    }//GEN-LAST:event_ButtonTimKiemActionPerformed
 
-    private void txttimkiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyTyped
+    private void txtTimKiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyTyped
 
-    }//GEN-LAST:event_txttimkiemKeyTyped
+    }//GEN-LAST:event_txtTimKiemKeyTyped
 
-    private void txttimkiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttimkiemKeyPressed
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
 
-    }//GEN-LAST:event_txttimkiemKeyPressed
+    }//GEN-LAST:event_txtTimKiemKeyPressed
 
-    private void txttimkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txttimkiemMouseClicked
+    private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
 
-    }//GEN-LAST:event_txttimkiemMouseClicked
+    }//GEN-LAST:event_txtTimKiemMouseClicked
 
-    private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
+    private void ButtonThemKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonThemKhuyenMaiActionPerformed
         themkm kk = new themkm(this);
         kk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         kk.show();
-    }//GEN-LAST:event_themActionPerformed
+    }//GEN-LAST:event_ButtonThemKhuyenMaiActionPerformed
 
-    private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
+    private void buttonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseActionPerformed
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn thư mục lưu trữ"); // Đặt tiêu đề hộp thoại
+        fileChooser.setApproveButtonText("Chọn thư mục"); // Đổi tên nút xác nhận
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Để chọn thư mục, nếu bạn muốn chọn file thì dùng FILES_ONLY
         int result = fileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            txtduongdan.setText(selectedFile.getAbsolutePath()); // Hiển thị đường dẫn lên JTextPane
-            txtduongdan.setEnabled(false);
+            txtDuongDan.setText(selectedFile.getAbsolutePath()); // Hiển thị đường dẫn lên JTextPane
+            txtDuongDan.setEnabled(false);
         }
-    }//GEN-LAST:event_browseActionPerformed
+    }//GEN-LAST:event_buttonBrowseActionPerformed
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         thongke d = new thongke();
@@ -1152,14 +1160,17 @@ public class km extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonNhapExcel;
+    private javax.swing.JButton ButtonThemKhuyenMai;
+    private javax.swing.JButton ButtonTimKiem;
+    private javax.swing.JButton ButtonXuatBaoCao;
+    private javax.swing.JButton ButtonXuatExcel;
     private javax.swing.JPanel MainContent;
-    private javax.swing.JButton browse;
+    private javax.swing.JTable TableKhuyenMai;
     private javax.swing.JLabel butnhanvien;
+    private javax.swing.JButton buttonBrowse;
     private javax.swing.JLabel chucvu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comBoBoxSapXep;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1176,14 +1187,11 @@ public class km extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable km;
     private javax.swing.JLabel nen;
     private javax.swing.JLabel so;
     private javax.swing.JLabel taik;
-    private javax.swing.JButton them;
-    private javax.swing.JButton timkiem;
-    private javax.swing.JTextPane txtduongdan;
-    private javax.swing.JTextPane txttimkiem;
+    private javax.swing.JTextPane txtDuongDan;
+    private javax.swing.JTextPane txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
 }
