@@ -6,6 +6,7 @@ package cafe.quanlikh;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -15,12 +16,12 @@ import javax.swing.JOptionPane;
  */
 public class themkh extends javax.swing.JFrame {
 
-    
     public themkh() {
         initComponents();
     }
-    
+
     private main parentForm;
+
     public themkh(main parent) {
         this.parentForm = parent; // Lưu tham chiếu vào biến
         initComponents();
@@ -186,32 +187,67 @@ public class themkh extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean ChecktrungmaKh(String makh) {
+        boolean kq = false;
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "Select * From khachhang Where makh='" + makh + "'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (!rs.next()) {
+                kq = true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return kq;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String mkh = txtmakh.getText().trim();
+        if (!ChecktrungmaKh(mkh)) {
+            JOptionPane.showMessageDialog(this, "Trùng mã khách hàng!");
+            return;
+        }
         String ht = txthoten.getText().trim();
-        Date ns = new Date(txtns.getDate().getTime());
+
         String gt = txtgioitinh.getSelectedItem().toString();
         String dt = txtsdt.getText().trim();
         String dc = txtdiachi.getText().trim();
-
+        
+        if(mkh.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng !");
+            return;
+        }
+        if (txtns.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh");
+            return;
+        }
+        Date ns = new Date(txtns.getDate().getTime());
+        if(ht.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ tên !");
+            return;
+        }
+        if(gt.equals("-Chọn giới tính-")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập giới tính !");
+            return;
+        }
         try {
             Connection con = ConnectDB.KetnoiDB();
-            String sql = "Insert into khachhang values('"+ mkh +"', N'"+ ht +"','"+ dt +"', N'"+ dc +"','"+ gt +"', N'"+ ns +"')";
+            String sql = "Insert into khachhang values('" + mkh + "', N'" + ht + "','" + dt + "', N'" + dc + "','" + gt + "', N'" + ns + "')";
             Statement st = con.createStatement();
-            
+
             int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thêm?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-            if(confirm == 0 ){
+            if (confirm == 0) {
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 con.close();
                 dispose();
-                
+
                 if (parentForm != null) {
-                    
-                parentForm.load_quanlybancafe(); // Gọi hàm load_km() từ form gốc
+
+                    parentForm.load_quanlybancafe(); // Gọi hàm load_km() từ form gốc
                 }
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
