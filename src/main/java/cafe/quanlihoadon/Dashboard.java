@@ -18,16 +18,37 @@ import com.mysql.cj.xdevapi.Statement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -47,7 +68,7 @@ public class Dashboard extends javax.swing.JFrame {
         taik.setText(user.getTaikhoan());
         chucvu.setText(user.getChucvu());
         userzz = user;
-         if (user.getChucvu().equals("Admin") || user.getChucvu().equals("Quản lý")) {
+        if (user.getChucvu().equals("Admin") || user.getChucvu().equals("Quản lý")) {
             ImageIcon icon = new ImageIcon(getClass().getResource("/icon/add-user.png"));
             butnhanvien.setIcon(icon);
             butnhanvien.setText("Nhân viên");
@@ -135,6 +156,9 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         so = new javax.swing.JLabel();
         nen = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDuongDan = new javax.swing.JTextPane();
+        buttonBrowse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -352,6 +376,15 @@ public class Dashboard extends javax.swing.JFrame {
         nen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/no.png"))); // NOI18N
         jPanel1.add(nen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 830));
 
+        jScrollPane2.setViewportView(txtDuongDan);
+
+        buttonBrowse.setText("Browse");
+        buttonBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBrowseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -367,6 +400,10 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(nhapExcel)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(buttonBrowse)
+                                    .addGap(18, 18, 18)
                                     .addComponent(xuatExcel))
                                 .addComponent(jScrollPane1)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -390,9 +427,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nhapExcel)
-                    .addComponent(xuatExcel))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nhapExcel)
+                        .addComponent(xuatExcel)
+                        .addComponent(buttonBrowse))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -478,16 +518,160 @@ public class Dashboard extends javax.swing.JFrame {
         String ngayLap = model.getValueAt(i, 3).toString();
         String tongTien = model.getValueAt(i, 4).toString();
         String maKhuyenMai = model.getValueAt(i, 5).toString();
-        
-        
+
         ChiTietHoaDon cthd = new ChiTietHoaDon(this);
         cthd.setData(maHoaDon, tenKhachHang, tenNhanVien, ngayLap, tongTien, maKhuyenMai);
         cthd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cthd.setVisible(true);
     }//GEN-LAST:event_danhSachHoaDonMouseClicked
 
-    private void xuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatExcelActionPerformed
+    private static CellStyle DinhdangHeader(XSSFSheet sheet) {
+        // Create font
+        XSSFFont font = sheet.getWorkbook().createFont();
+        font.setFontName("Times New Roman");
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 12); // font size
+        font.setColor(IndexedColors.WHITE.getIndex()); // text color
 
+        // Create CellStyle
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        cellStyle.setFont(font);
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.TOP);
+        cellStyle.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
+        cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        cellStyle.setBorderBottom(BorderStyle.THIN);
+        cellStyle.setWrapText(true);
+        return cellStyle;
+    }
+    private void xuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatExcelActionPerformed
+        try {
+            String duongdan = txtDuongDan.getText().trim();
+            if (duongdan.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn nơi lưu file trước khi xuất!");
+                buttonBrowse.requestFocus();
+                return;
+            }
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("hoadon");
+            // register the columns you wish to track and compute the column width
+
+            CreationHelper createHelper = workbook.getCreationHelper();
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("DANH SÁCH HÓA ĐƠN");
+
+            //Tạo dòng tiêu đều của bảng
+            // create CellStyle
+            CellStyle cellStyle_Head = DinhdangHeader(spreadsheet);
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("STT");
+
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mã hóa đơn");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mã khách hàng");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mã nhân viên");
+
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Ngày lập hóa đơn");
+
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Tổng tiền(KM)");
+
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellStyle(cellStyle_Head);
+            cell.setCellValue("Mã KM");
+            //Kết nối DB
+
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "select * from hoadon";
+
+            PreparedStatement st = con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            //Đổ dữ liệu từ rs vào các ô trong excel
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int tongsocot = rsmd.getColumnCount();
+
+            //Đinh dạng Tạo đường kẻ cho ô chứa dữ liệu
+            CellStyle cellStyle_data = spreadsheet.getWorkbook().createCellStyle();
+            cellStyle_data.setBorderLeft(BorderStyle.THIN);
+            cellStyle_data.setBorderRight(BorderStyle.THIN);
+            cellStyle_data.setBorderBottom(BorderStyle.THIN);
+
+            int i = 0;
+            while (rs.next()) {
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+
+                cell = row.createCell(0);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(i + 1);
+
+                cell = row.createCell(1);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("mahd"));
+
+                cell = row.createCell(2);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("makh"));
+
+                cell = row.createCell(3);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("manv"));
+
+                //Định dạng ngày tháng trong excel
+                java.sql.Date bd = new java.sql.Date(rs.getDate("ngaylap").getTime());
+                CellStyle cellStyle = workbook.createCellStyle();
+                cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
+                cellStyle.setBorderLeft(BorderStyle.THIN);
+                cellStyle.setBorderRight(BorderStyle.THIN);
+                cellStyle.setBorderBottom(BorderStyle.THIN);
+                cell = row.createCell(4);
+                cell.setCellValue(bd);
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(5);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("tongtien"));
+
+                cell = row.createCell(6);
+                cell.setCellStyle(cellStyle_data);
+                cell.setCellValue(rs.getString("makm"));
+
+                i++;
+            }
+            //Hiệu chỉnh độ rộng của cộttt
+            for (int col = 0; col < tongsocot; col++) {
+                spreadsheet.autoSizeColumn(col);
+                spreadsheet.setColumnWidth(col, spreadsheet.getColumnWidth(col) + 1000); // Tăng thêm 1000 đơn vị
+            }
+            String filename = JOptionPane.showInputDialog(this, "Nhập tên file để xuất:");
+            File f = new File(duongdan + "\\" + filename + ".xlsx");
+            FileOutputStream out = new FileOutputStream(f);
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(this, "Xuất thành công, vui lòng kiểm tra trong đường dẫn đã chọn !");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xuất file excel");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_xuatExcelActionPerformed
 
     private void nhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nhapExcelActionPerformed
@@ -504,7 +688,6 @@ public class Dashboard extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Phải chọn file excel");
                 }
-
             }
         } catch (Exception e) {
         }
@@ -618,6 +801,25 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_butnhanvienMouseClicked
 
+    private void buttonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseActionPerformed
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn thư mục lưu trữ"); // Đặt tiêu đề hộp thoại
+        fileChooser.setApproveButtonText("Chọn thư mục"); // Đổi tên nút xác nhận
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Để chọn thư mục, nếu bạn muốn chọn file thì dùng FILES_ONLY
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            txtDuongDan.setText(selectedFile.getAbsolutePath()); // Hiển thị đường dẫn lên JTextPane
+            txtDuongDan.setEnabled(false);
+        }
+    }//GEN-LAST:event_buttonBrowseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -656,6 +858,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel butnhanvien;
+    private javax.swing.JButton buttonBrowse;
     private javax.swing.JLabel chucvu;
     private javax.swing.JTable danhSachHoaDon;
     private javax.swing.JLabel jLabel1;
@@ -668,6 +871,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel nen;
     private javax.swing.JButton nhapExcel;
@@ -676,11 +880,177 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel taik;
     private javax.swing.JButton themHoaDon;
     private javax.swing.JButton timKiem;
+    private javax.swing.JTextPane txtDuongDan;
     private javax.swing.JTextPane txtTimKiem;
     private javax.swing.JButton xuatExcel;
     // End of variables declaration//GEN-END:variables
 
-    private void ReadExcel(String path) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void themHoaDon(String maHoaDon, String makh, String manv, String ngayLapHoaDon, String tongTienKhuyenMai, String maKhuyenMai, String maSanPhamTach[], String soLuongTach[], String giaTach[]) {
+        // Chuyển đổi ngày thành định dạng chuỗi SQL
+//        Date ngayLapHoaDon_1 = new Date(ngayLapHoaDon.getTime());
+
+        int maHoaDon_1 = Integer.parseInt(maHoaDon);
+
+        // Chuyển đổi sang java.sql.Timestamp để lưu vào cơ sở dữ liệu
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.parse(ngayLapHoaDon, formatter);
+        java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(localDateTime);
+
+        double tongTienKhuyenMai_1 = Double.parseDouble(tongTienKhuyenMai);
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String sql = "INSERT into hoadon  Values('" + maHoaDon_1 + "',N'" + sqlTimestamp + "',N'" + makh + "','" + manv + "','" + tongTienKhuyenMai_1 + "','" + maKhuyenMai + "')";
+
+            // Thêm từng chi tiết hóa đơn vào bảng `chitiethoadon`
+            String sqlInsertChiTietHD = "INSERT INTO chitiethoadon (mahd, masp, soluong, gia, machitiethd) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement psChiTietHD = conn.prepareStatement(sqlInsertChiTietHD);
+            for (int i = 0; i < maSanPhamTach.length; i++) {
+                
+                String maChiTietHoaDon = "MCHD" + maHoaDon_1 + "" + (i + 1);
+                String maSP = maSanPhamTach[i].toString();  // Lấy mã sản phẩm từ cột 0
+                int soLuong = Integer.parseInt(soLuongTach[i].toString());  // Lấy số lượng từ cột 2
+                double gia = Double.parseDouble(giaTach[i].toString());  // Lấy giá từ cột 3
+                System.out.println(gia);
+                psChiTietHD.setInt(1, maHoaDon_1);  // Mã hóa đơn
+                psChiTietHD.setString(2, maSP);  // Mã sản phẩm
+                psChiTietHD.setInt(3, soLuong);  // Số lượng
+                psChiTietHD.setDouble(4, gia);  // Giá
+                psChiTietHD.setString(5, maChiTietHoaDon);  // Mã chi tiết hóa đơn
+                psChiTietHD.addBatch();  // Thêm vào batch
+            }
+//            psChiTietHD.executeBatch();
+            
+            java.sql.Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            load_hd();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "loi");
+        }
+
+        this.load_hd();
+
     }
+    int i = 0;
+    String maTonTai = "";
+
+    private void kiemTraMaHoaDon(String maHoaDon) {
+        try {
+            Connection conn = ConnectDB.KetnoiDB();
+            String check = "select mahd from hoadon";
+            java.sql.Statement tt = conn.createStatement();
+            ResultSet rs = tt.executeQuery(check);
+            while (rs.next()) {
+                String m = rs.getString("mahd");
+                if (m.equals(maHoaDon)) {
+                    i = 1;
+                    //tbkm.setText("Mã khuyến mãi đã tồn tại");
+                    maTonTai = maTonTai + maHoaDon + " + ";
+                    System.out.println("Ma ton tai" + maTonTai);
+                    return;
+                } else {
+                    i = 0;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    // Hàm đọc dữ liệu từ ô dưới dạng chuỗi
+    private String getCellValueAsString(Cell cell) {
+        if (cell == null) {
+            return "";
+        }
+
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue();
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    return dateFormat.format(cell.getDateCellValue());
+                } else {
+                    return String.valueOf((int) cell.getNumericCellValue());
+                }
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case BLANK:
+                return "";
+            default:
+                return cell.toString(); // Đọc dưới dạng chuỗi nếu kiểu không xác định
+        }
+    }
+
+    private void ReadExcel(String tenFilePath) {
+
+        try {
+            FileInputStream fis = new FileInputStream(tenFilePath);
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+            XSSFSheet sheet = wb.getSheetAt(0);
+            Iterator<Row> itr = sheet.iterator();
+
+            if (itr.hasNext()) {
+                itr.next(); // Bỏ qua dòng đầu tiên
+            }
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            while (itr.hasNext()) {
+                Row row = itr.next();
+                // Đọc mã hóa đơn
+                String maHoaDon = getCellValueAsString(row.getCell(0));
+                System.out.println(maHoaDon);
+
+                // Đọc mã khách hàng
+                String maKhachHang = getCellValueAsString(row.getCell(1));
+                System.out.println(maKhachHang);
+
+                // Đọc mã nhân viên
+                String maNhanVien = getCellValueAsString(row.getCell(2));
+                System.out.println(maNhanVien);
+
+                // Đọc ngày lập hóa đơn
+                String ngayLapHoaDonText = getCellValueAsString(row.getCell(3));
+                System.out.println("Ngày lập hóa đơn: " + ngayLapHoaDonText);
+
+                // Đọc tổng tiền khuyến mãi
+                String tongTienKhuyenMai = getCellValueAsString(row.getCell(4));
+                System.out.println(tongTienKhuyenMai);
+
+                // Đọc mã khuyến mãi
+                String maKhuyenMai = getCellValueAsString(row.getCell(5));
+                System.out.println(maKhuyenMai);
+
+                // Đọc và tách mã sản phẩm
+                String maSanPham = getCellValueAsString(row.getCell(6));
+                String[] maSanPhamTach = maSanPham.split(",");
+                System.out.println(maSanPham);
+      
+
+                // Đọc và tách số lượng
+                String soLuong = getCellValueAsString(row.getCell(7));
+                String[] soLuongTach = soLuong.split(",");
+//                System.out.println("Số lượng: " + Arrays.toString(soLuongTach));
+
+                // Đọc và tách giá
+                String gia = getCellValueAsString(row.getCell(8));
+                String[] giaTach = gia.split(",");
+//      
+                kiemTraMaHoaDon(maHoaDon);
+                if (i == 0) {
+                    themHoaDon(maHoaDon, maKhachHang, maNhanVien, ngayLapHoaDonText, tongTienKhuyenMai, maKhuyenMai, maSanPhamTach, soLuongTach, giaTach);
+                }
+            }
+
+            if (!maTonTai.equals("")) {
+                JOptionPane.showMessageDialog(this, "Không thêm được mã hóa đơn: " + maTonTai + " vì mã đã tồn tại trong dữ liệu");
+                maTonTai = "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

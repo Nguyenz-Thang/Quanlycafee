@@ -279,7 +279,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
                                         .addGap(39, 39, 39)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
-                                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(110, 110, 110)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -299,15 +299,15 @@ public class ThemHoaDon extends javax.swing.JFrame {
                                     .addComponent(jScrollPane8)
                                     .addComponent(khuyenMai, 0, 166, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(94, 94, 94)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(themSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -462,7 +462,8 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
             while (rs.next()) {
                 String tenSanPham = rs.getString("tensanpham");
-                chonSanPham.addItem(tenSanPham);
+                String trangThai  = rs.getString("trangthai");
+                chonSanPham.addItem(tenSanPham + " - " + trangThai);
             }
             con.close();
         } catch (Exception e) {
@@ -499,7 +500,10 @@ public class ThemHoaDon extends javax.swing.JFrame {
     private void chonSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chonSanPhamActionPerformed
 
         soLuong.setText("");
-        String tenSanPhamDuocChon = (String) chonSanPham.getSelectedItem();
+        
+        String tenSanPhamDuocChonChuaTach = (String) chonSanPham.getSelectedItem();
+        String str[] = tenSanPhamDuocChonChuaTach.split(" - ");
+        String tenSanPhamDuocChon = str[0];
         this.tenSanPhamDuocChon.setText(tenSanPhamDuocChon);
 
         String soLuongSanPham = soLuong.getText(); // lay so luong tu giao dien 
