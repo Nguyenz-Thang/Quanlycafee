@@ -233,27 +233,10 @@ public class suakh extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean ChecktrungmaKh(String makh) {
-        boolean kq = false;
-        try {
-            Connection con = ConnectDB.KetnoiDB();
-            String sql = "Select * From khachhang Where makh='" + makh + "'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            if (!rs.next()) {
-                kq = true;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return kq;
-    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String mkh = txtmakh.getText().trim();
-        if (!ChecktrungmaKh(mkh)) {
-            JOptionPane.showMessageDialog(this, "Trùng mã khách hàng!");
-            return;
-        }
+        
         String ht = txthoten.getText().trim();
 
         String gt = txtgioitinh.getSelectedItem().toString();
