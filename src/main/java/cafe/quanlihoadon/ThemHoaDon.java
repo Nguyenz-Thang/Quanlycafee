@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -462,7 +463,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
             while (rs.next()) {
                 String tenSanPham = rs.getString("tensanpham");
-                String trangThai  = rs.getString("trangthai");
+                String trangThai = rs.getString("trangthai");
                 chonSanPham.addItem(tenSanPham + " - " + trangThai);
             }
             con.close();
@@ -500,7 +501,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
     private void chonSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chonSanPhamActionPerformed
 
         soLuong.setText("");
-        
+
         String tenSanPhamDuocChonChuaTach = (String) chonSanPham.getSelectedItem();
         String str[] = tenSanPhamDuocChonChuaTach.split(" - ");
         String tenSanPhamDuocChon = str[0];
@@ -509,6 +510,45 @@ public class ThemHoaDon extends javax.swing.JFrame {
         String soLuongSanPham = soLuong.getText(); // lay so luong tu giao dien 
         sanPham = layThongTinSanPhamDaChon(tenSanPhamDuocChon); // Lấy thông tin sản phẩm
     }//GEN-LAST:event_chonSanPhamActionPerformed
+
+    private void truSoLuongTrongKho(String maSanPham, int soLuong) {
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+
+            // Lấy số lượng trong kho của sản phẩm
+            String sqlLaySoLuong = "SELECT soluong FROM sanpham WHERE masp = ?";
+            PreparedStatement psLaySoLuong = con.prepareStatement(sqlLaySoLuong);
+            psLaySoLuong.setString(1, maSanPham);
+            ResultSet rs = psLaySoLuong.executeQuery();
+
+            int soLuongTrongKhoInt = 0;
+            if (rs.next()) {
+                soLuongTrongKhoInt = rs.getInt("soluong");  // Lấy trực tiếp số lượng dạng int
+            }
+
+            // Đóng ResultSet và PreparedStatement sau khi lấy dữ liệu xong
+            rs.close();
+            psLaySoLuong.close();
+
+            // Kiểm tra và cập nhật số lượng trong kho
+            if (soLuongTrongKhoInt >= soLuong) {
+                String sqlCapNhatSoLuong = "UPDATE sanpham SET soluong = ? WHERE masp = ?";
+                PreparedStatement psCapNhat = con.prepareStatement(sqlCapNhatSoLuong);
+                psCapNhat.setInt(1, soLuongTrongKhoInt - soLuong);
+                psCapNhat.setString(2, maSanPham);
+                psCapNhat.executeUpdate();
+
+                // Đóng PreparedStatement sau khi cập nhật xong
+                psCapNhat.close();
+            } else {
+                System.out.println("Số lượng trong kho không đủ để trừ.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private void thanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhToanActionPerformed
@@ -547,7 +587,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn ít nhất một sản phẩm");
                 return;
             }
-            
+
             if (khuyenMai_1.equals("Khuyến mại")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn mã khuyến mại");
                 return;
@@ -588,6 +628,9 @@ public class ThemHoaDon extends javax.swing.JFrame {
                 String maSP = sanPhamDuocThem.getValueAt(i, 0).toString();  // Lấy mã sản phẩm từ cột 0
                 int soLuong = Integer.parseInt(sanPhamDuocThem.getValueAt(i, 2).toString());  // Lấy số lượng từ cột 2
                 double gia = Double.parseDouble(sanPhamDuocThem.getValueAt(i, 3).toString());  // Lấy giá từ cột 3
+                
+                // Trừ số lượng trong kho khi thêm hóa đơn
+                truSoLuongTrongKho(maSP, soLuong);
 
                 psChiTietHD.setInt(1, maHoaDon_1);  // Mã hóa đơn
                 psChiTietHD.setString(2, maSP);  // Mã sản phẩm
@@ -602,6 +645,7 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
             // Commit transaction
             con.commit();
+
             System.out.println("Giao dịch thành công");
 
             // Hiển thị thông báo thành công
@@ -650,8 +694,45 @@ public class ThemHoaDon extends javax.swing.JFrame {
     private void soLuongKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_soLuongKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_soLuongKeyPressed
+    private String soLuongTrongKho() {
+        String danhSachSoluong = null;
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "SELECT tensanpham,soluong FROM sanpham";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            danhSachSoluong = "Số lượng trong kho: \n";
+            while (rs.next()) {
+                String tenSp = rs.getString("tensanpham");
+                String soLuong = rs.getString("soluong");
+                danhSachSoluong += tenSp + ": " + soLuong + "\n";
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return danhSachSoluong;
+    }
 
-
+    private int kiemTraSoLuong(String tenSanPhamDuocChon, int soLuongNhap) {
+        try {
+            Connection con = ConnectDB.KetnoiDB();
+            String sql = "SELECT soluong FROM sanpham where tensanpham='" + tenSanPhamDuocChon + "'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String soLuongTrongKho = rs.getString("soluong");
+                int soLuongTrongKhoInt = Integer.parseInt(soLuongTrongKho);
+                if (soLuongNhap > soLuongTrongKhoInt) {
+                    return 1;
+                }
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     private void themSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themSanPhamActionPerformed
 
         if (sanPham != null) {
@@ -664,8 +745,8 @@ public class ThemHoaDon extends javax.swing.JFrame {
                     // Nếu sản phẩm đã tồn tại, tăng số lượng lên
                     String soLuongHienTaiString = model.getValueAt(i, 2).toString(); // Lấy số lượng từ cột 2 dưới dạng chuỗi
                     int soLuongHienTai = Integer.parseInt(soLuongHienTaiString); // Chuyển đổi chuỗi sang số nguyên
-                    soLuongHienTai += Integer.parseInt(soLuong.getText()); // Tăng số lượng lên
 
+                    soLuongHienTai += Integer.parseInt(soLuong.getText()); // Tăng số lượng lên
                     model.setValueAt(soLuongHienTai, i, 2); // Cập nhật số lượng
 
                     // Cập nhật giá theo số lượng mới
@@ -679,6 +760,14 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
             // Nếu sản phẩm chưa tồn tại trong bảng thì thêm dòng mới
             if (!sanPhamDaTonTai) {
+                String tenSanPham = tenSanPhamDuocChon.getText().trim();
+                String sLuong = soLuong.getText();
+                int soLuongInt = Integer.parseInt(sLuong);
+                int i = kiemTraSoLuong(tenSanPham, soLuongInt);
+                if (i == 1) {
+                    JOptionPane.showMessageDialog(this, "Số lượng nhập vượt quá số lượng trong kho ! \n" + soLuongTrongKho());
+                    return;
+                }
                 model.addRow(new Object[]{
                     sanPham.getMaSanPham(), // Mã sản phẩm
                     sanPham.getTenSanPham(), // Tên sản phẩm
@@ -745,6 +834,14 @@ public class ThemHoaDon extends javax.swing.JFrame {
 
     private void suaSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaSoLuongActionPerformed
         // Lấy chỉ số hàng được chọn từ JTable
+        String tenSp = tenSanPhamDuocChon.getText().trim();
+        String sLuong = soLuong.getText();
+        int soLuongInt = Integer.parseInt(sLuong);
+        int i = kiemTraSoLuong(tenSp, soLuongInt);
+        if (i == 1) {
+            JOptionPane.showMessageDialog(this, "Số lượng nhập vượt quá số lượng trong kho ! \n" + soLuongTrongKho());
+            return;
+        }
         int selectedRow = sanPhamDuocThem.getSelectedRow(); // Lấy chỉ số hàng được chọn
         if (selectedRow >= 0) { // Kiểm tra xem có hàng nào được chọn không
             DefaultTableModel model = (DefaultTableModel) sanPhamDuocThem.getModel();
@@ -904,7 +1001,6 @@ public class ThemHoaDon extends javax.swing.JFrame {
         sanPhamDuocThem.setModel(model);
 
     }
-
 
     private void tinhTongTien() {
         DefaultTableModel model = (DefaultTableModel) sanPhamDuocThem.getModel();
