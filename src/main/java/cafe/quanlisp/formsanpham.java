@@ -4,13 +4,17 @@
  */
 package cafe.quanlisp;
 
+import cafe.User;
 import cafe.quanlikh.*;
 import cafe.baocaoquanli.km;
 import cafe.baocaoquanli.themkm;
 import cafe.login;
 import cafe.quanlihoadon.Dashboard;
 import cafe.quanlikh.suakh;
+import cafe.quanlinhanvien.nv;
 import cafe.quanlisp.sp;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,6 +28,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -68,7 +73,12 @@ public class formsanpham extends javax.swing.JFrame {
         suathongtin form1 = new suathongtin(this);
         txtDuongDan.setEnabled(false);
     }
-
+    User userzz = new User();
+    public void setuser(User user){
+        taik.setText(user.getTaikhoan());
+        chucvu.setText(user.getChucvu());
+        userzz=user;
+    }
     public void load_themsanpham() {
         try {
 
@@ -111,9 +121,10 @@ public class formsanpham extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        taik = new javax.swing.JLabel();
+        chucvu = new javax.swing.JLabel();
         so = new javax.swing.JLabel();
         buttonsua = new javax.swing.JLabel();
-        taik = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         Buttonxoa = new javax.swing.JLabel();
         vaitro = new javax.swing.JLabel();
@@ -134,6 +145,18 @@ public class formsanpham extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(160, 140, 119));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        taik.setForeground(new java.awt.Color(255, 255, 255));
+        taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
+        taik.setText("  ");
+        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, -1));
+
+        chucvu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chucvu.setForeground(new java.awt.Color(255, 255, 255));
+        chucvu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(chucvu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 30));
 
         so.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         so.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,13 +180,6 @@ public class formsanpham extends javax.swing.JFrame {
             }
         });
         jPanel1.add(buttonsua, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 200, -1));
-
-        taik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        taik.setForeground(new java.awt.Color(255, 255, 255));
-        taik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        taik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/profile.png"))); // NOI18N
-        taik.setText("  ");
-        jPanel1.add(taik, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -333,6 +349,7 @@ public class formsanpham extends javax.swing.JFrame {
     private void soMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soMouseClicked
         dispose();
         sp so1 = new sp();
+        so1.setuser(userzz);
         so1.setVisible(true);
     }//GEN-LAST:event_soMouseClicked
 
@@ -893,6 +910,7 @@ public class formsanpham extends javax.swing.JFrame {
     private javax.swing.JButton buttonBrowse;
     private javax.swing.JLabel buttonsua;
     private javax.swing.JButton buttontimkiem;
+    private javax.swing.JLabel chucvu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JComboBox<String> jComboBoxsapxep;

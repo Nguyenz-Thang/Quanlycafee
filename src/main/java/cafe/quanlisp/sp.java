@@ -476,6 +476,7 @@ public class sp extends javax.swing.JFrame {
     private void sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sanphamMouseClicked
         formsanpham s = new formsanpham();
         s.show();
+        s.setuser(userzz);
         dispose();
     }//GEN-LAST:event_sanphamMouseClicked
 
@@ -483,7 +484,9 @@ public class sp extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         formloaisanpham form = new formloaisanpham();
+        form.setuser(userzz);
         form.setVisible(true);
+        
     }//GEN-LAST:event_loaisanphamMouseClicked
 
     private void thongtin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongtin1MouseClicked
